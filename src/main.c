@@ -42,13 +42,13 @@ int main(int ac, char **av)
     printf("\n");
 int x = 0;
     for (int i = 0; i < arrlen; i++) {
-   /* if (bh_find(&heap, arr[i]) != NULL) {
+    if (bh_find(&heap, arr[i]) != NULL) {
         printf("OULOULOU %d\n", arr[i]);
         x++;
-    }*/
+    }
     }
 
-    if (x != arrlen) {
+    if (x != arrlen-1) {
         printf("KO\n");
 
     }

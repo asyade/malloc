@@ -8,7 +8,7 @@ t_bhnode            *bh_find_recursive(t_bh *heap, size_t index, t_value value)
 
     if ((left = (index * 2) + 1) <= heap->heap_size)
     {
-        if (heap->buffer[left].value > value)
+        if (heap->buffer[left].value < value)
         {
             if ((ret = bh_find_recursive(heap, left, value)))
                 return (ret);
@@ -18,7 +18,7 @@ t_bhnode            *bh_find_recursive(t_bh *heap, size_t index, t_value value)
     }
     if ((right = (index * 2) + 2) <= heap->heap_size)
     {
-        if (heap->buffer[right].value > value)
+        if (heap->buffer[right].value < value)
         {
             if ((ret = bh_find_recursive(heap, right, value)))
                 return (ret);
@@ -31,6 +31,8 @@ t_bhnode            *bh_find_recursive(t_bh *heap, size_t index, t_value value)
 
 t_bhnode            *bh_find(t_bh *heap, t_value value)
 {
+    if (heap->buffer[0].value == value)
+        return &heap->buffer[0];
     return (bh_find_recursive(heap, 0, value));
 }
 
