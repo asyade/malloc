@@ -37,7 +37,7 @@ void                bh_filter_down(t_bh *heap, t_bhnode node, size_t cursor)
     if (
         left < heap->heap_size &&
         bh_cmp(heap->buffer[left].value, node.value) &&
-        bh_cmp(heap->buffer[left].value < heap->buffer[right].value)
+        bh_cmp(heap->buffer[left].value, heap->buffer[right].value)
         )
     {
         heap->buffer[cursor] = heap->buffer[left];
