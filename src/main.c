@@ -3,6 +3,12 @@
 #include<stdlib.h>
 #include<time.h>
 
+int main() {
+    t_subarea area;
+
+    sar_init(&area, 4096);
+
+}
 
 /*int main() {
     t_memheap arena;

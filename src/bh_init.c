@@ -9,9 +9,6 @@ int                 bh_init(t_bh *heap)
         return (-1);
     heap->buffer_size = BH_CHKSZ;
     heap->heap_size = 0;
-
-   // heap->buffer[0].value = BH_DEFVAL;
-   // heap->buffer[0].content = NULL;
     return (0);
 }
 

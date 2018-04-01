@@ -7,7 +7,7 @@
 typedef struct      s_subarea
 {
     t_bh            index;
-    t_memheap       heap;
+    size_t          heap_size;
 }                   t_subarea;
 
 #endif
