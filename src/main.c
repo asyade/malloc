@@ -1,4 +1,5 @@
 #include "memheap.h"
+#include "area.h"
 #include <stdio.h>
 #include<stdlib.h>
 #include<time.h>

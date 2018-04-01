@@ -14,7 +14,7 @@
 # define BH_RCHILD(i) (2 * i + 2)
 # define BH_PARENT(i) ((i - 1) >> 1)
 
-typedef             int t_value;
+typedef             size_t t_value;
 
 typedef struct      s_bhnode {
     void            *content;

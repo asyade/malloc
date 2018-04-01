@@ -6,6 +6,7 @@
 
 typedef struct      s_subarea
 {
+    t_memheap       heap_container;
     t_bh            index;
     size_t          heap_size;
 }                   t_subarea;
