@@ -1,33 +1,40 @@
-#include "arena.h"
+#include "memheap.h"
 #include <stdio.h>
 #include<stdlib.h>
 #include<time.h>
 
-int main() {
-    t_arena arena;
 
-    if (ar_init(&arena, 4096) != 0) {
+/*int main() {
+    t_memheap arena;
+
+    if (mh_init(&arena, 4096) != 0) {
         printf("Can't init arena");
         return 1;
     }
     
     void    *ptr;
-    printf("%zu\n", (ar_reserv_chunk(&arena, 16) - arena.buffer) - 16);
-    printf("%zu\n", ((ptr = ar_reserv_chunk(&arena, 32)) - arena.buffer) - 16);
-    printf("%zu\n", (ar_reserv_chunk(&arena, 16) - arena.buffer) - 16);
-    printf("%zu\n", (ar_reserv_chunk(&arena, 16) - arena.buffer) - 16);
-
-    if (ar_free_chunk(&arena, ptr) != 0) {
+    printf("%zu\n", (mh_reserv_chunk(&arena, 2048) - arena.buffer) - 16);
+    printf("%zu\n", ((ptr = mh_reserv_chunk(&arena, 2048)) - arena.buffer) - 16);
+    printf("%zu\n", (mh_reserv_chunk(&arena, 1024) - arena.buffer) - 16);
+    printf("%zu\n", (mh_reserv_chunk(&arena, 16) - arena.buffer) - 16);
+    printf("%p\n", mh_reserv_chunk(&arena, 16));
+    mh_free_chunk(&arena, mh_reserv_chunk(&arena, 2048 - (sizeof(t_memchunk) * 2) ));
+    printf("%p\n", mh_reserv_chunk(&arena, 2048 - (sizeof(t_memchunk) * 2) ));
+    
+   /* if (mh_free_chunk(&arena, ptr) != 0) {
         printf("Can't free %p", ptr);
     }
-    printf("%zu\n", (ar_reserv_chunk(&arena, 128) - arena.buffer) - 16);
+    printf("%zu\n", (mh_reserv_chunk(&arena, 128) - arena.buffer) - 16);
 }
+*/
+
+
 /*
 int main(int ac, char **av)
 {
     t_bh        heap;
 
-    if (bh_init(&heap) == -1)
+    if (mh_init(&heap) == -1)
     {
         printf("Can't init heap\n");
         return 1;
@@ -51,10 +58,10 @@ int main(int ac, char **av)
     };
     for (int i = 0; i < arrlen; i++) {
         tmp.value = arr[i];
-        bh_insert(&heap, &tmp);
+        mh_insert(&heap, &tmp);
     }
 
-    bh_remove(&heap, 1);
+    mh_remove(&heap, 1);
 
     for (int i = 0; i < heap.heap_size; i++) {
         printf("%d, ", heap.buffer[i].value);
@@ -62,7 +69,7 @@ int main(int ac, char **av)
     printf("\n");
 int x = 0;
     for (int i = 0; i < arrlen; i++) {
-    if (bh_find(&heap, arr[i]) != NULL) {
+    if (mh_find(&heap, arr[i]) != NULL) {
         printf("OULOULOU %d\n", arr[i]);
         x++;
     }
