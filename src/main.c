@@ -1,8 +1,28 @@
-#include "bhp.h"
+#include "arena.h"
 #include <stdio.h>
 #include<stdlib.h>
 #include<time.h>
 
+int main() {
+    t_arena arena;
+
+    if (ar_init(&arena, 4096) != 0) {
+        printf("Can't init arena");
+        return 1;
+    }
+    
+    void    *ptr;
+    printf("%zu\n", (ar_reserv_chunk(&arena, 16) - arena.buffer) - 16);
+    printf("%zu\n", ((ptr = ar_reserv_chunk(&arena, 32)) - arena.buffer) - 16);
+    printf("%zu\n", (ar_reserv_chunk(&arena, 16) - arena.buffer) - 16);
+    printf("%zu\n", (ar_reserv_chunk(&arena, 16) - arena.buffer) - 16);
+
+    if (ar_free_chunk(&arena, ptr) != 0) {
+        printf("Can't free %p", ptr);
+    }
+    printf("%zu\n", (ar_reserv_chunk(&arena, 128) - arena.buffer) - 16);
+}
+/*
 int main(int ac, char **av)
 {
     t_bh        heap;
@@ -56,3 +76,4 @@ int x = 0;
 
 }
 
+*/
