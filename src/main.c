@@ -6,11 +6,29 @@
 #include<time.h>
 
 int main() {
+    t_memheap heap;
+
+    mh_init(&heap, 128*4094);
+    for (int i = 0; i < 2000 ; i ++) {
+    void    *addr[10];
+    for (int i = 0; i < 3; i++)
+    {
+        printf("%p\n", (addr[i] =  mh_reserv_chunk(&heap, 1024)));
+    }
+    for (int i = 0; i < 3; i++)
+    {
+       if ( mh_free_chunk(&heap, addr[i]) != 0)
+        printf("can't freed");
+    }    
+    
+}
+}
+/*int main() {
     t_subarea area;
 
     sar_init(&area, AREA_DEFAULT);
     
-    for (int i = 0; i < 10; i ++) {
+    for (int i = 0; i < 10 ; i ++) {
     void    *addr[10];
     for (int i = 0; i < 3; i++)
     {
@@ -24,7 +42,7 @@ int main() {
     }
     }
 }
-
+*/
 
 
 /*

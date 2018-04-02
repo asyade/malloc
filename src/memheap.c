@@ -2,9 +2,13 @@
 
 int                 mh_init(t_memheap *area, size_t size)
 {
+    t_memchunk *chk;
     area->buffer = mmap(NULL, size, PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
     area->buffer_size = size;
     area->buffer_avail = size;
+    chk = (t_memchunk *)area->buffer;
+    chk->next = 0;
+    chk->size = 0;
     return (area->buffer == (void *)-1);
 }
 
@@ -45,6 +49,7 @@ int                 mh_free_chunk(t_memheap *arena, void *ptr)
 
 void                *mh_reserv_chunk(t_memheap *arena, size_t size)
 {
+    printf("begin");
     t_memchunk       *chunk;
 
     if (size > arena->buffer_avail)
@@ -52,23 +57,25 @@ void                *mh_reserv_chunk(t_memheap *arena, size_t size)
     size = get_size_align(size, AR_ALIGN);
     chunk = (t_memchunk *)arena->buffer;
     while (
-        (size_t)((void *)((size_t)chunk - (size_t)arena->buffer)) < arena->buffer_size &&
+        (size_t)(((size_t)chunk - (size_t)arena->buffer)) < arena->buffer_size &&
         chunk->next != 0
         )
     {
-        if (chunk->size == 0 &&  (size_t)chunk->next - (size_t)chunk - sizeof(t_memchunk) >= size) 
+        if (chunk->size == 0 && (size_t)chunk->next - (size_t)chunk - sizeof(t_memchunk) >= size) 
         {
-            arena->buffer_avail -= ((size_t)chunk->next - (size_t)chunk);
+            printf("Found empty size\n");
             chunk->size = size;
-            chunk->next = (t_memchunk *)((size_t)chunk + size);
+            chunk->next = (t_memchunk *)((size_t)chunk + size + sizeof(t_memchunk));
+            arena->buffer_avail -= ((size_t)chunk->next - (size_t)chunk);
             return ((void *)((size_t)chunk + sizeof(t_memchunk)));
         }
         chunk = chunk->next;
     }
     if ((size_t)((size_t)chunk + sizeof(t_memchunk) - (size_t)arena->buffer) + size <= arena->buffer_size) {
+        printf("$$$$$$$$$$$$$$$$$$$$$$$\n");
         chunk->size = size;
-        arena->buffer_avail -= size + sizeof(t_memchunk);
         chunk->next = (t_memchunk *)((size_t)chunk + size + sizeof(t_memchunk));
+        arena->buffer_avail -= size + sizeof(t_memchunk);
         if ((size_t)chunk->next > (size_t)arena->buffer + arena->buffer_size)
             chunk->next = NULL;
         return ((void *)((size_t)chunk + sizeof(t_memchunk)));
