@@ -25,7 +25,7 @@ t_memheap     *sar_add_chunk(t_subarea *area)
     node.value.min = (size_t)newheap->buffer;
     node.value.max = (size_t)newheap->buffer + newheap->buffer_size;
     bh_insert(&area->index, &node);
-    printf("New map\n");
+    //printf("New map\n");
     return (t_memheap *)node.content;
 }
 
@@ -61,7 +61,7 @@ int         sar_free_chunk(t_subarea *area, void *ptr)
 
     if ((node = bh_find(&area->index, (size_t)ptr)) == NULL)
     {
-        printf("Can't find node\n");
+        //printf("Can't find node\n");
         bh_dump(&area->index);
         return (1);
     }

@@ -24,7 +24,7 @@ void                bh_dump(t_bh *heap)
         z = x * 2;
         while (x-- && i < heap->heap_size)
         {
-            printf("[%zu-%zu], ", (void*)heap->buffer[i].value.min, (void*)heap->buffer[i].value.max);
+            printf("[%p-%p], ", (void*)heap->buffer[i].value.min, (void*)heap->buffer[i].value.max);
             i++;
         }
         printf("\n");
