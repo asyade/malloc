@@ -8,7 +8,6 @@
 
 typedef struct      s_memheap
 {
-    t_bh            tree;//Wtf don't remove it xD
     size_t          buffer_size;
     size_t          buffer_avail;
     void            *buffer;

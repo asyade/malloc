@@ -2,18 +2,20 @@
 
 int                bh_cmp(t_bhnode *a, t_bhnode *b)
 {
-    return (a->value < b->value);
+    //Todo check ok
+    return (a->value.max < b.value.min);
+   // return (a->value < b->value);
 }
 
 void                bh_filter(t_bh *heap, t_bhnode node, size_t cursor)
 {
-    if (cursor > 0 && heap->buffer[cursor].value < heap->buffer[BH_PARENT(cursor)].value)
+    if (cursor > 0 && bh_cmp(&heap->buffer[cursor], &heap->buffer[BH_PARENT(cursor)]))
         bh_filter_up(heap, node, cursor);
     else
         bh_filter_down(heap, node, cursor);
 }
 
-void                bh_filter_up(t_bh *heap, t_bhnode node, size_t cursor)
+size_t                bh_filter_up(t_bh *heap, t_bhnode node, size_t cursor)
 {
     size_t          parent;
 
@@ -25,6 +27,7 @@ void                bh_filter_up(t_bh *heap, t_bhnode node, size_t cursor)
         parent = BH_PARENT(cursor);
     }
     heap->buffer[cursor] = node;
+    return cursor;
 }
 
 void                bh_filter_down(t_bh *heap, t_bhnode node, size_t cursor)

@@ -14,7 +14,12 @@
 # define BH_RCHILD(i) (2 * i + 2)
 # define BH_PARENT(i) ((i - 1) >> 1)
 
-typedef             size_t t_value;
+typedef struct  s_value
+{             
+    size_t      min;
+    size_t      max;
+}
+                t_value;
 
 typedef struct      s_bhnode {
     void            *content;
@@ -37,17 +42,21 @@ int                 bh_init(t_bh *heap);
 
 int                 bh_clear(t_bh *bh);
 
+//0 if equals 1 if a is lower that b
+int                bh_cmp(t_bhnode *a, t_bhnode *b);
+
+
 //
 // Return 0 on success
 // -1 on memory allocation error
 //
-int                 bh_insert(t_bh *heap, t_bhnode *node);
+size_t               bh_insert(t_bh *heap, t_bhnode *node);
 
 int                 bh_remove(t_bh *heap, size_t node);
 
 void                bh_filter_down(t_bh *heap, t_bhnode node, size_t cursor);
 
-void                bh_filter_up(t_bh *heap, t_bhnode node, size_t cursor);
+size_t                bh_filter_up(t_bh *heap, t_bhnode node, size_t cursor);
 
 void                bh_filter(t_bh *heap, t_bhnode node, size_t cursor);
 

@@ -5,7 +5,6 @@ int                 mh_init(t_memheap *arena, size_t size)
     arena->buffer = mmap(NULL, size, PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
     arena->buffer_size = size;
     arena->buffer_avail = size;
-    bzero(arena, 16);
     return (arena->buffer == (void *)-1);
 }
 

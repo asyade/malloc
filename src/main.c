@@ -9,6 +9,10 @@ int main() {
 
     sar_init(&area, 4096);
 
+    for (size_t i = 20000; i > 0; i--)
+    {
+        printf("%p\n", sar_get_chunk(&area, 1024));
+    }
 }
 
 /*int main() {
