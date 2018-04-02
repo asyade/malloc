@@ -1,11 +1,19 @@
 #include "memheap.h"
 
-int                 mh_init(t_memheap *arena, size_t size)
+int                 mh_init(t_memheap *area, size_t size)
 {
-    arena->buffer = mmap(NULL, size, PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
-    arena->buffer_size = size;
-    arena->buffer_avail = size;
-    return (arena->buffer == (void *)-1);
+    area->buffer = mmap(NULL, size, PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
+    area->buffer_size = size;
+    area->buffer_avail = size;
+    return (area->buffer == (void *)-1);
+}
+
+int                 mh_init2(t_memheap *area, size_t size)
+{
+    area->buffer = mmap(NULL, size, PROT_WRITE | PROT_READ, MAP_PRIVATE | PROT_GROWSDOWN | MAP_ANONYMOUS, 0, 0);
+    area->buffer_size = size;
+    area->buffer_avail = size;
+    return (area->buffer == (void *)-1);
 }
 
 size_t              get_size_align(size_t size, size_t alignement)
@@ -13,6 +21,13 @@ size_t              get_size_align(size_t size, size_t alignement)
     if (size <= alignement)
         return (alignement);
     return (alignement * ((size / alignement)));
+}
+
+void                 *mh_growdown(t_memheap *area, size_t new_size)
+{
+    if (new_size <= area->buffer_size)
+        return (area->buffer);
+    return (area->buffer = mremap(area->buffer, area->buffer_size, new_size, MREMAP_MAYMOVE));
 }
 
 int                 mh_free_chunk(t_memheap *arena, void *ptr)

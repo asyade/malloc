@@ -1,18 +1,55 @@
 #include "memheap.h"
+#include "bhp.h"
 #include "area.h"
 #include <stdio.h>
 #include<stdlib.h>
 #include<time.h>
 
 int main() {
-    t_subarea area;
+
+    t_bh    heap;
+
+    bh_init(&heap);
+    
+    t_bhnode node;
+    node.value.min = 10;
+    node.value.max = 20;
+    bh_insert(&heap, &node);
+
+    node.value.min = 31;
+    node.value.max = 40;
+    bh_insert(&heap, &node);
+
+    node.value.min = 41;
+    node.value.max = 50;
+    bh_insert(&heap, &node);
+
+    node.value.min = 21;
+    node.value.max = 30;
+    bh_insert(&heap, &node);
+
+    node.value.min = 8;
+    node.value.max = 9;
+    bh_insert(&heap, &node);
+
+    node.value.min = 101;
+    node.value.max = 300;
+    bh_insert(&heap, &node);
+
+    for(int i = 0; i < heap.heap_size; i++)
+    {
+        printf("%zu-%zu\n", heap.buffer[i].value.min, heap.buffer[i].value.max);
+    }
+
+
+    /*t_subarea area;
 
     sar_init(&area, 4096);
 
     for (size_t i = 20000; i > 0; i--)
     {
         printf("%p\n", sar_get_chunk(&area, 1024));
-    }
+    }*/
 }
 
 /*int main() {

@@ -3,7 +3,7 @@
 int         sar_init(t_subarea *area, size_t heapsize)
 {
     if (bh_init(&area->index) != 0 ||
-        mh_init(&area->heap_container, 1024) != 0)
+        mh_init(&area->heap_container, AREA_HEAPCNT) != 0)
     return (1);
     area->heap_size = heapsize;
     return (0);
@@ -14,9 +14,10 @@ t_memheap     *sar_add_chunk(t_subarea *area)
     t_bhnode    node;
     t_memheap   *newheap;
 
-    node.content = mh_reserv_chunk(&area->heap_container, sizeof(t_memheap));
+    if ((node.content = mh_reserv_chunk(&area->heap_container, sizeof(t_memheap))) == NULL)
+        return (NULL);
     newheap = (t_memheap *)node.content;
-    if (0 != mh_init(newheap, AREA_DEFAULT))
+    if (mh_init(newheap, AREA_DEFAULT) != 0)
         return (NULL);
     node.value.min = (size_t)newheap->buffer;
     node.value.max = (size_t)newheap->buffer + newheap->buffer_size;
@@ -50,7 +51,11 @@ void        *sar_get_chunk(t_subarea *area, size_t size)
     return (mh_reserv_chunk(newheap, size));
 }
 
+int         sar_free_chunk_recursive(t_subarea *area, void *ptr, size_t cursor)
+{
+}
+
 int         sar_free_chunk(t_subarea *area, void *ptr)
 {
-
+    sar_free_chunk_recursive(area, ptr, 0);
 }

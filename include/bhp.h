@@ -67,6 +67,6 @@ void                bh_filter(t_bh *heap, t_bhnode node, size_t cursor);
 //
 int                 bh_ensure_buffer(t_bh *heap, size_t needed);
 
-t_bhnode            *bh_find(t_bh *heap, t_value value);
+t_bhnode            *bh_find(t_bh *heap, size_t value);
 
 #endif

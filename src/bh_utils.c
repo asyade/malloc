@@ -3,7 +3,7 @@
 int                bh_cmp(t_bhnode *a, t_bhnode *b)
 {
     //Todo check ok
-    return (a->value.max < b.value.min);
+    return (a->value.max < b->value.min);
    // return (a->value < b->value);
 }
 
