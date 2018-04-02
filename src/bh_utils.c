@@ -7,6 +7,20 @@ int                bh_cmp(t_bhnode *a, t_bhnode *b)
    // return (a->value < b->value);
 }
 
+void                bh_dump(t_bh *heap)
+{
+    int             i;
+    int             x;
+
+    i = 0;
+    while (i < heap->heap_size)
+    {
+        printf("[%p-%p], ", heap->buffer[i].value.min, heap->buffer[i].value.max);
+        i++;
+    }
+    printf("\n");
+}
+
 void                bh_filter(t_bh *heap, t_bhnode node, size_t cursor)
 {
     if (cursor > 0 && bh_cmp(&heap->buffer[cursor], &heap->buffer[BH_PARENT(cursor)]))

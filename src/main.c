@@ -29,20 +29,24 @@ int main() {
     sar_init(&area, AREA_DEFAULT);
     
     for (int i = 0; i < 1 ; i ++) {
-    void    *addr[30];
-    for (int i = 0; i < 30; i++)
+    void    *addr[40];
+    for (int i = 0; i < 40; i++)
     {
         if ((addr[i] = sar_get_chunk(&area, 4096)) == NULL)
             printf("Can't alloc\n");
-        else
             printf("%p\n", addr[i]);
     }
 
-    printf("\n\n\n");
-    for (int i = 0; i < 30; i++)
+    for (int i = 0; i < 40; i++)
+    {
+      //  memset(addr[i], 42, 4096);
+    }
+
+    for (int i = 0; i < 40; i++)
     {
         if (sar_free_chunk(&area, addr[i]) != 0)
             printf("Can't free %p\n", addr[i]);
+        
     }
     }
 }

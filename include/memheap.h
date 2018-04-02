@@ -55,4 +55,6 @@ int                 mh_free_chunk(t_memheap *arena, void *ptr);
 
 size_t              get_size_align(size_t size, size_t alignement);
 
+void                bh_dump(t_bh *heap);
+
 #endif

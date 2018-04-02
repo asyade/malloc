@@ -16,12 +16,14 @@ t_memheap     *sar_add_chunk(t_subarea *area)
 
     if ((node.content = mh_reserv_chunk(&area->heap_container, sizeof(t_memheap))) == NULL)
         return (NULL);
+    printf("COntent %p\n", node.content);
     newheap = (t_memheap *)node.content;
-    if (mh_init(newheap, AREA_DEFAULT) != 0)
+    if (mh_init(newheap, area->heap_size) != 0)
         return (NULL);
     node.value.min = (size_t)newheap->buffer;
     node.value.max = (size_t)newheap->buffer + newheap->buffer_size;
     bh_insert(&area->index, &node);
+    bh_dump(&area->index);
     return (t_memheap *)node.content;
 }
 
@@ -45,7 +47,6 @@ void        *sar_get_chunk(t_subarea *area, size_t size)
                     return (ret);
         }
     }
-    //printf("@Init new heap\n");
     if ((newheap = sar_add_chunk(area)) == NULL)
         return (NULL);
     return (mh_reserv_chunk(newheap, size));
@@ -57,7 +58,9 @@ int         sar_free_chunk(t_subarea *area, void *ptr)
     t_memheap   *heap;
 
     if ((node = bh_find(&area->index, (size_t)ptr)) == NULL)
+    {
         return (1);
-    //printf("Found node [%p-%p] for %p", node->value.min, node->value.max, ptr);
+    }
+    printf("[%p-%p] for %p\n", node->value.min, node->value.max, ptr);
     return mh_free_chunk(node->content, ptr);
 }
