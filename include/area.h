@@ -4,7 +4,7 @@
 # include "bhp.h"
 # include "memheap.h"
 
-# define AREA_DEFAULT   1024 * 128
+# define AREA_DEFAULT   1024 * 1204
 # define AREA_HEAPCNT   1024 * 128
 
 typedef struct      s_subarea

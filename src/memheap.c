@@ -49,7 +49,6 @@ int                 mh_free_chunk(t_memheap *arena, void *ptr)
 
 void                *mh_reserv_chunk(t_memheap *arena, size_t size)
 {
-    printf("begin");
     t_memchunk       *chunk;
 
     if (size > arena->buffer_avail)
@@ -63,7 +62,6 @@ void                *mh_reserv_chunk(t_memheap *arena, size_t size)
     {
         if (chunk->size == 0 && (size_t)chunk->next - (size_t)chunk - sizeof(t_memchunk) >= size) 
         {
-            printf("Found empty size\n");
             chunk->size = size;
             chunk->next = (t_memchunk *)((size_t)chunk + size + sizeof(t_memchunk));
             arena->buffer_avail -= ((size_t)chunk->next - (size_t)chunk);
@@ -72,7 +70,6 @@ void                *mh_reserv_chunk(t_memheap *arena, size_t size)
         chunk = chunk->next;
     }
     if ((size_t)((size_t)chunk + sizeof(t_memchunk) - (size_t)arena->buffer) + size <= arena->buffer_size) {
-        printf("$$$$$$$$$$$$$$$$$$$$$$$\n");
         chunk->size = size;
         chunk->next = (t_memchunk *)((size_t)chunk + size + sizeof(t_memchunk));
         arena->buffer_avail -= size + sizeof(t_memchunk);

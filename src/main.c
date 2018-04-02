@@ -5,7 +5,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-int main() {
+/*int main() {
     t_memheap heap;
 
     mh_init(&heap, 128*4094);
@@ -22,27 +22,31 @@ int main() {
     }    
     
 }
-}
-/*int main() {
+}*/
+int main() {
     t_subarea area;
 
     sar_init(&area, AREA_DEFAULT);
     
-    for (int i = 0; i < 10 ; i ++) {
-    void    *addr[10];
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 1 ; i ++) {
+    void    *addr[30];
+    for (int i = 0; i < 30; i++)
     {
-        printf("%p\n",(addr[i] = sar_get_chunk(&area, 4096)));
+        if ((addr[i] = sar_get_chunk(&area, 4096)) == NULL)
+            printf("Can't alloc\n");
+        else
+            printf("%p\n", addr[i]);
     }
 
-    for (int i = 0; i < 3; i++)
+    printf("\n\n\n");
+    for (int i = 0; i < 30; i++)
     {
         if (sar_free_chunk(&area, addr[i]) != 0)
-            printf("Can't free %p", addr[i]);
+            printf("Can't free %p\n", addr[i]);
     }
     }
 }
-*/
+
 
 
 /*

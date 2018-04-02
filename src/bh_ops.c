@@ -6,7 +6,7 @@ t_bhnode            *bh_find_recursive(t_bh *heap, size_t index, size_t value)
     size_t          right;
     t_bhnode        *ret;
 
-    if ((left = BH_LCHILD(index)) <= heap->heap_size)
+    if ((left = BH_LCHILD(index)) < heap->heap_size)
     {
         if (value <= heap->buffer[left].value.max &&
             value >= heap->buffer[left].value.min)
@@ -17,7 +17,7 @@ t_bhnode            *bh_find_recursive(t_bh *heap, size_t index, size_t value)
                 return (ret);
         }
     }
-    if ((right = BH_RCHILD(index)) <= heap->heap_size)
+    if ((right = BH_RCHILD(index)) < heap->heap_size)
     {
         if (value <= heap->buffer[right].value.max &&
             value >= heap->buffer[right].value.min)
