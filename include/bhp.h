@@ -56,7 +56,7 @@ int                 bh_remove(t_bh *heap, size_t node);
 
 void                bh_filter_down(t_bh *heap, t_bhnode node, size_t cursor);
 
-size_t                bh_filter_up(t_bh *heap, t_bhnode node, size_t cursor);
+size_t              bh_filter_up(t_bh *heap, t_bhnode node, size_t cursor);
 
 void                bh_filter(t_bh *heap, t_bhnode node, size_t cursor);
 

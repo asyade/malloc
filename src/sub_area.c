@@ -45,17 +45,19 @@ void        *sar_get_chunk(t_subarea *area, size_t size)
                     return (ret);
         }
     }
-    printf("@Init new heap\n");
+    //printf("@Init new heap\n");
     if ((newheap = sar_add_chunk(area)) == NULL)
         return (NULL);
     return (mh_reserv_chunk(newheap, size));
 }
 
-int         sar_free_chunk_recursive(t_subarea *area, void *ptr, size_t cursor)
-{
-}
-
 int         sar_free_chunk(t_subarea *area, void *ptr)
 {
-    sar_free_chunk_recursive(area, ptr, 0);
+    t_bhnode    *node;
+    t_memheap   *heap;
+
+    if ((node = bh_find(&area->index, (size_t)ptr)) == NULL)
+        return (1);
+    //printf("Found node [%p-%p] for %p", node->value.min, node->value.max, ptr);
+    return mh_free_chunk(node->content, ptr);
 }

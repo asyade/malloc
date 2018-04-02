@@ -6,75 +6,25 @@
 #include<time.h>
 
 int main() {
+    t_subarea area;
 
-    t_bh    heap;
-
-    bh_init(&heap);
+    sar_init(&area, AREA_DEFAULT);
     
-    t_bhnode node;
-    node.value.min = 10;
-    node.value.max = 20;
-    bh_insert(&heap, &node);
-
-    node.value.min = 31;
-    node.value.max = 40;
-    bh_insert(&heap, &node);
-
-    node.value.min = 41;
-    node.value.max = 50;
-    bh_insert(&heap, &node);
-
-    node.value.min = 21;
-    node.value.max = 30;
-    bh_insert(&heap, &node);
-
-    node.value.min = 8;
-    node.value.max = 9;
-    bh_insert(&heap, &node);
-
-    node.value.min = 101;
-    node.value.max = 300;
-    bh_insert(&heap, &node);
-
-    for(int i = 0; i < heap.heap_size; i++)
+    for (int i = 0; i < 10; i ++) {
+    void    *addr[10];
+    for (int i = 0; i < 3; i++)
     {
-        printf("%zu-%zu\n", heap.buffer[i].value.min, heap.buffer[i].value.max);
+        printf("%p\n",(addr[i] = sar_get_chunk(&area, 4096)));
     }
 
-
-    /*t_subarea area;
-
-    sar_init(&area, 4096);
-
-    for (size_t i = 20000; i > 0; i--)
+    for (int i = 0; i < 3; i++)
     {
-        printf("%p\n", sar_get_chunk(&area, 1024));
-    }*/
+        if (sar_free_chunk(&area, addr[i]) != 0)
+            printf("Can't free %p", addr[i]);
+    }
+    }
 }
 
-/*int main() {
-    t_memheap arena;
-
-    if (mh_init(&arena, 4096) != 0) {
-        printf("Can't init arena");
-        return 1;
-    }
-    
-    void    *ptr;
-    printf("%zu\n", (mh_reserv_chunk(&arena, 2048) - arena.buffer) - 16);
-    printf("%zu\n", ((ptr = mh_reserv_chunk(&arena, 2048)) - arena.buffer) - 16);
-    printf("%zu\n", (mh_reserv_chunk(&arena, 1024) - arena.buffer) - 16);
-    printf("%zu\n", (mh_reserv_chunk(&arena, 16) - arena.buffer) - 16);
-    printf("%p\n", mh_reserv_chunk(&arena, 16));
-    mh_free_chunk(&arena, mh_reserv_chunk(&arena, 2048 - (sizeof(t_memchunk) * 2) ));
-    printf("%p\n", mh_reserv_chunk(&arena, 2048 - (sizeof(t_memchunk) * 2) ));
-    
-   /* if (mh_free_chunk(&arena, ptr) != 0) {
-        printf("Can't free %p", ptr);
-    }
-    printf("%zu\n", (mh_reserv_chunk(&arena, 128) - arena.buffer) - 16);
-}
-*/
 
 
 /*

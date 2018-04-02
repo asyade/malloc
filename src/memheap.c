@@ -38,6 +38,7 @@ int                 mh_free_chunk(t_memheap *arena, void *ptr)
     if ((size_t)chunk < (size_t)arena->buffer || (size_t)chunk >= (size_t)arena->buffer + arena->buffer_size)
         return (1);
     arena->buffer_avail += (size_t)chunk->next - (size_t)chunk;
+    printf("Size used = %zu\n", arena->buffer_size - arena->buffer_avail);
     chunk->size = 0;
     return (0);
 }
