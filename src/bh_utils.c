@@ -7,18 +7,29 @@ int                bh_cmp(t_bhnode *a, t_bhnode *b)
    // return (a->value < b->value);
 }
 
+#include<stdio.h>
 void                bh_dump(t_bh *heap)
 {
     int             i;
     int             x;
+    int             z;
 
     i = 0;
+    x = 1;
+    z = 1;
+    printf("---- BEGIN DUMP ----\n");    
     while (i < heap->heap_size)
     {
-        printf("[%p-%p], ", heap->buffer[i].value.min, heap->buffer[i].value.max);
-        i++;
+        x = z;
+        z = x * 2;
+        while (x-- && i < heap->heap_size)
+        {
+            printf("[%zu-%zu], ", (void*)heap->buffer[i].value.min, (void*)heap->buffer[i].value.max);
+            i++;
+        }
+        printf("\n");
     }
-    printf("\n");
+    printf("---- END DUMP ----\n");    
 }
 
 void                bh_filter(t_bh *heap, t_bhnode node, size_t cursor)
@@ -34,7 +45,7 @@ size_t                bh_filter_up(t_bh *heap, t_bhnode node, size_t cursor)
     size_t          parent;
 
     parent = BH_PARENT(cursor);    
-    while (cursor && bh_cmp(&node, &heap->buffer[parent]))
+    while (cursor && node.value.min < heap->buffer[parent].value.min)
     {
         heap->buffer[cursor] = heap->buffer[parent];
         cursor = parent;
@@ -45,7 +56,7 @@ size_t                bh_filter_up(t_bh *heap, t_bhnode node, size_t cursor)
 }
 
 void                bh_filter_down(t_bh *heap, t_bhnode node, size_t cursor)
-{
+{//TODO check cmp
     size_t          left;
     size_t          right;
 

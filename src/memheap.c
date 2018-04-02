@@ -25,7 +25,7 @@ size_t              get_size_align(size_t size, size_t alignement)
     if (size % alignement > 0)
         return (alignement * (1 + (size / alignement)));
     else
-        return (alignement);
+        return (size);
 }
 
 void                 *mh_growdown(t_memheap *area, size_t new_size)
@@ -41,15 +41,9 @@ int                 mh_free_chunk(t_memheap *arena, void *ptr)
 
     chunk = (t_memchunk *)((size_t)ptr - sizeof(t_memchunk));
     if ((size_t)chunk < (size_t)arena->buffer)
-    {
-        printf("Chunk %p is not in range (%p-%p) (smaller)\n", chunk,arena->buffer,  (size_t)arena->buffer + arena->buffer_size);        
         return (2);
-    }
     if ((size_t)chunk > (size_t)arena->buffer + arena->buffer_size)
-    {
-        printf("Chunk %p is not in range (%p-%p) (bigger)\n", chunk,arena->buffer,  (size_t)arena->buffer + arena->buffer_size);        
         return (1);
-    }
     arena->buffer_avail += (size_t)chunk->next - (size_t)chunk;
     //printf("Size used = %zu\n", arena->buffer_size - arena->buffer_avail);
     chunk->size = 0;

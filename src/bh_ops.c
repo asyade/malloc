@@ -6,8 +6,10 @@ t_bhnode            *bh_find_recursive(t_bh *heap, size_t index, size_t value)
     size_t          right;
     t_bhnode        *ret;
 
+
     if ((left = BH_LCHILD(index)) <= heap->heap_size)
     {
+       // printf("left\n");
         if (value <= heap->buffer[left].value.max &&
             value >= heap->buffer[left].value.min)
             return (&heap->buffer[left]);
@@ -19,6 +21,8 @@ t_bhnode            *bh_find_recursive(t_bh *heap, size_t index, size_t value)
     }
     if ((right = BH_RCHILD(index)) <= heap->heap_size)
     {
+      //  printf("right\n");
+        
         if (value <= heap->buffer[right].value.max &&
             value >= heap->buffer[right].value.min)
             return (&heap->buffer[right]);
@@ -33,6 +37,7 @@ t_bhnode            *bh_find_recursive(t_bh *heap, size_t index, size_t value)
 
 t_bhnode            *bh_find(t_bh *heap, size_t value)
 {
+    //printf("find\n");
     if (value <= heap->buffer[0].value.max &&
         value >= heap->buffer[0].value.min)
         return &heap->buffer[0];
