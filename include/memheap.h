@@ -31,6 +31,11 @@ int                 mh_init(t_memheap *arena, size_t size);
 
 int                 mh_init2(t_memheap *arena, size_t size);
 
+// Init heap of size aligned on getpagesize() and return buffer addr
+// heap_avail is set to 0
+
+void                *mh_init3(t_memheap *area, size_t size);
+
 // Expande map if new_size is bigger than old_size, do nothing else
 // return mremap return value or buffer addr
 
@@ -38,7 +43,7 @@ void                 *mh_growdown(t_memheap *area, size_t new_size);
 
 // return munmap buffer ...
 
-int                 mh_clear(t_memheap *arena);
+int                 mh_free(t_memheap *area);
 
 //Looking for avaible chunk, if no chunk found return NULL
 

@@ -60,11 +60,7 @@ int         sar_free_chunk(t_subarea *area, void *ptr)
     t_memheap   *heap;
 
     if ((node = bh_find(&area->index, (size_t)ptr)) == NULL)
-    {
-        //printf("Can't find node\n");
-        bh_dump(&area->index);
         return (1);
-    }
     //printf("[%p-%p] for %p\n", node->value.min, node->value.max, ptr);
     return mh_free_chunk(node->content, ptr);
 }

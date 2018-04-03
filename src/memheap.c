@@ -20,6 +20,19 @@ int                 mh_init2(t_memheap *area, size_t size)
     return (area->buffer == (void *)-1);
 }
 
+void                *mh_init3(t_memheap *area, size_t size)
+{
+    area->buffer = mmap(NULL, size, PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
+    area->buffer_size = size;
+    area->buffer_avail = 0;
+    return (area->buffer);
+}
+
+int                 mh_free(t_memheap *area)
+{
+    return (munmap(area->buffer, area->buffer_size));
+}
+
 size_t              get_size_align(size_t size, size_t alignement)
 {
     if (size % alignement > 0)
@@ -56,7 +69,7 @@ void                *mh_reserv_chunk(t_memheap *arena, size_t size)
 
     if (size > arena->buffer_avail)
         return (NULL);
-    size = get_size_align(size, AR_ALIGN);
+    //size = get_size_align(size, AR_ALIGN);
     chunk = (t_memchunk *)arena->buffer;
     while (
         (size_t)(((size_t)chunk - (size_t)arena->buffer)) < arena->buffer_size &&

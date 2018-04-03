@@ -1,6 +1,4 @@
-#include "memheap.h"
-#include "bhp.h"
-#include "area.h"
+#include "malloc.h"
 #include <stdio.h>
 #include<stdlib.h>
 #include<time.h>
@@ -25,20 +23,18 @@
 }*/
 int main() {
 
-    t_area  area;
-
-    ar_init(&area);
     void    *addr[12500];
-    for (int i = 0; i < 1200; i++)
+    for (int i = 0; i < 10; i++)
     {
-        ar_get_chunk(&area, 16);
-        ar_get_chunk(&area, 500);
-        ar_get_chunk(&area, 10);
-        if ((addr[i] = ar_get_chunk(&area, 4096)) == NULL)
-            printf("Can't alloc\n");
-        printf("%p\n", addr[i]);
+       addr[i++] = malloc_(4096);
+       addr[i] = malloc_(128);
     }
-    
+    show_alloc_mem();
+    for (int i = 0; i < 10; i++)
+    {
+        free_(addr[i]);
+    }
+}
 
 /*    
     for (int i = 0; i < 10 ; i ++) {
@@ -59,8 +55,6 @@ int main() {
    
     }
     */
-}
-
 
 
 /*

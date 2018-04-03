@@ -7,12 +7,13 @@ int        ar_init(t_area *area)
         AREA_HEAP_SIZE_MEDIUM,
         AREA_HEAP_SIZE_LARGE
     };
-    int    i;
+    int         i;
+    size_t      page_size;
 
-    i = -1;
-    while (++i < AREA_SUB_COUNT)
-        if (sar_init(&area->subarea[i], sizes[i]) != 0)
-            return (1);
+    page_size = getpagesize();
+    sar_init(&area->subarea[0], AREA_HEAP_SIZE_SMALL * page_size);
+    sar_init(&area->subarea[1], AREA_HEAP_SIZE_MEDIUM * page_size);
+    sarb_init(&area->subarea[2]);
     return (0);
 }
 
@@ -41,6 +42,8 @@ void    *ar_get_chunk(t_area *area, size_t size)
     size = get_size_align(size, AR_ALIGN);
     if ((i = ar_which(size)) == -1)
         return (NULL);
+    if (i == 2)
+        return sarb_get_chunk(&area->subarea[i], size);
     return sar_get_chunk(&area->subarea[i], size);
 }
 
@@ -49,10 +52,10 @@ int      ar_free_chunk(t_area *area, void *ptr)
     int i;
 
     i = 0;
-    while (i < AREA_SUB_COUNT)
+    while (i < AREA_SUB_COUNT - 1)
     {
         if (sar_free_chunk(&area->subarea[i++], ptr) == 0)
             return (0);
     }
-    return (1);
+    return (sarb_free_chunk(&area->subarea[2], ptr));
 }
