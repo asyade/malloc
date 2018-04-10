@@ -45,7 +45,10 @@ void                 *mh_growdown(t_memheap *area, size_t new_size)
 {
     if (new_size <= area->buffer_size)
         return (area->buffer);
-    return (area->buffer = mremap(area->buffer, area->buffer_size, new_size, MREMAP_MAYMOVE));
+    area->buffer_size = new_size;
+    area->buffer = mremap(area->buffer, area->buffer_size, new_size, MREMAP_MAYMOVE);
+    area->buffer_size = new_size;
+    return (area->buffer_size);
 }
 
 int                 mh_free_chunk(t_memheap *arena, void *ptr)

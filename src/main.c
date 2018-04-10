@@ -4,10 +4,21 @@
 #include "bhp.h"
 #include<time.h>
 
+#define LEN 1000
+
 int main() {
     t_subarea area;
-    sar_init(&area, 4096*1024);
-    sar_get_chunk(&area, 1024);
+    sar_init(&area, 4096);
+
+    void   *arr[LEN];
+    for (int i = 0; i < LEN; i++)
+    {
+        arr[i] = sar_get_chunk(&area, 1024);
+    }
+    for (int i = 0; i < LEN; i++)
+    {
+        sar_free_chunk(&area, arr[i]);
+    }
 }
 
 /*int main()

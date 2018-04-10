@@ -2,8 +2,9 @@
 
 int         sar_init(t_subarea *area, size_t heapsize)
 {
+    area->heap_container_size = AREA_HEAPCNT;
     if (bh_init(&area->index) != 0 ||
-        mh_init(&area->heap_container, AREA_HEAPCNT) != 0)
+        mh_init2(&area->heap_container, AREA_HEAPCNT) != 0)
             return (1);
     area->heap_size = heapsize;
     return (0);
@@ -15,10 +16,13 @@ t_memheap     *sar_add_chunk(t_subarea *area)
     t_memheap   *newheap;
     if ((node.content = mh_reserv_chunk(&area->heap_container, sizeof(t_memheap))) == NULL)
     {
-        //TODO expand map
-        return (NULL);
+        if (mh_growdown(&area->heap_container, (area->heap_container_size *= 2)) == NULL)
+            return (NULL);
+        node.content = mh_reserv_chunk(&area->heap_container, sizeof(t_memheap));
     }
-        bh_dump(&area->index);
+    if (node.content == NULL)
+        return (NULL);
+    bh_dump(&area->index);
     
     //printf("COntent %p\n", node.content);
     newheap = (t_memheap *)node.content;

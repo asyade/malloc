@@ -15,13 +15,14 @@
 
 
 # define AREA_DEFAULT   
-# define AREA_HEAPCNT   1024 * 64
+# define AREA_HEAPCNT   4096
 
 # define MAX_AREA       4// Nbr of cpu core
 
 typedef struct      s_subarea
 {
     t_memheap       heap_container;
+    size_t          heap_container_size;
     t_bh            index;
     size_t          heap_size;
 }                   t_subarea;
