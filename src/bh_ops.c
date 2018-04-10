@@ -47,7 +47,11 @@ t_bhnode            *bh_find(t_bh *heap, size_t value)
 size_t               bh_insert(t_bh *heap, t_bhnode *node)
 {
     if (bh_ensure_buffer(heap, sizeof(t_bhnode)) == -1)
+    {
+        printf("Can't ensure buffer");
         return (-1);
+    }
+    printf("%zu\n", heap->heap_size);
     return bh_filter_up(heap, *node, heap->heap_size++);
 }
 

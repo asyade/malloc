@@ -13,9 +13,13 @@ t_area      *area()
     return (&area);
 }
 
+#include<stdio.h>
 void        free_(void *ptr)
 {
-    ar_free_chunk(area(), ptr);
+    if (ar_free_chunk(area(), ptr) != 0)
+    {
+        printf("Cant free %p\n", ptr);
+    }
 }
 
 void        *malloc_(size_t size)
@@ -28,5 +32,6 @@ void        *realloc(void *ptr, size_t size);
 #include <stdio.h>
 void show_alloc_mem()
 {
-    printf("TINY : 0x%X\n", &area()->subarea[0].heap_container);//todo
+    printf("TINY : 0x%p\n", &area()->subarea[0].heap_container);//todo
+    
 }

@@ -4,7 +4,7 @@ int         sar_init(t_subarea *area, size_t heapsize)
 {
     if (bh_init(&area->index) != 0 ||
         mh_init(&area->heap_container, AREA_HEAPCNT) != 0)
-    return (1);
+            return (1);
     area->heap_size = heapsize;
     return (0);
 }
@@ -18,6 +18,8 @@ t_memheap     *sar_add_chunk(t_subarea *area)
         //TODO expand map
         return (NULL);
     }
+        bh_dump(&area->index);
+    
     //printf("COntent %p\n", node.content);
     newheap = (t_memheap *)node.content;
     if (mh_init(newheap, area->heap_size) != 0)
@@ -25,6 +27,7 @@ t_memheap     *sar_add_chunk(t_subarea *area)
     node.value.min = (size_t)newheap->buffer;
     node.value.max = (size_t)newheap->buffer + newheap->buffer_size;
     bh_insert(&area->index, &node);
+    bh_dump(&area->index);
     //printf("New map\n");
     return (t_memheap *)node.content;
 }
@@ -54,6 +57,7 @@ void        *sar_get_chunk(t_subarea *area, size_t size)
     return (mh_reserv_chunk(newheap, size));
 }
 
+#include<stdio.h>
 int         sar_free_chunk(t_subarea *area, void *ptr)
 {
     t_bhnode    *node;
@@ -61,6 +65,6 @@ int         sar_free_chunk(t_subarea *area, void *ptr)
 
     if ((node = bh_find(&area->index, (size_t)ptr)) == NULL)
         return (1);
-    //printf("[%p-%p] for %p\n", node->value.min, node->value.max, ptr);
+    printf("[%lX-%lX] for %p\n", node->value.min, node->value.max, ptr);
     return mh_free_chunk(node->content, ptr);
 }

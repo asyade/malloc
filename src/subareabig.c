@@ -4,8 +4,7 @@ int         sarb_init(t_subarea *area)
 {
     if (bh_init(&area->index) != 0 ||
         mh_init(&area->heap_container, AREA_HEAPCNT) != 0)
-    return (1);
-    area->heap_size = -1;
+        return (1);
     return (0);
 }
 
@@ -27,7 +26,10 @@ void        *sarb_get_chunk(t_subarea *area, size_t size)
     node.value.min = (size_t)newheap->buffer;
     node.value.max = (size_t)newheap->buffer + newheap->buffer_size;
     if (retval != NULL)
+    {
+        printf("insert\n");
         bh_insert(&area->index, &node);
+    }
     return (retval);
 }
 
@@ -39,8 +41,10 @@ int         sarb_free_chunk(t_subarea *area, void *ptr)
 
     if ((node = bh_find(&area->index, (size_t)ptr)) == NULL)
     {
+        bh_dump(&area->index);
+        printf("big not found");
         return (1);
     }
-    //printf("[%p-%p] for %p\n", node->value.min, node->value.max, ptr);
-    mh_free(node->content);
+    printf("[%lx-%lx] for %p\n", node->value.min, node->value.max, ptr);
+    return (mh_free(node->content));
 }

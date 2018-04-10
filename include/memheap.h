@@ -53,11 +53,6 @@ void                *mh_reserv_chunk(t_memheap *arena, size_t size);
 
 int                 mh_free_chunk(t_memheap *arena, void *ptr);
 
-// Return aligned size, example
-// get_size_align(X, 16) done 
-// x = 12 return 16
-// x = 23 return 32
-
 size_t              get_size_align(size_t size, size_t alignement);
 
 void                bh_dump(t_bh *heap);

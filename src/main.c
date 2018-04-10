@@ -1,7 +1,86 @@
 #include "malloc.h"
 #include <stdio.h>
 #include<stdlib.h>
+#include "bhp.h"
 #include<time.h>
+
+int main() {
+    t_subarea area;
+    sar_init(&area, 4096*1024);
+    sar_get_chunk(&area, 1024);
+}
+
+/*int main()
+{
+    t_bh heap;
+    t_bhnode node;
+
+    bh_init(&heap);
+
+    node.content = 0x010;
+    node.value.min = 10;
+    node.value.max = 100;
+    bh_insert(&heap, &node);
+    node.content = 0x020;
+    node.value.min = 100;
+    node.value.max = 1000;
+    bh_insert(&heap, &node);
+    node.content = 0x40;
+    node.value.min = 200;
+    node.value.max = 2000;
+    bh_insert(&heap, &node);
+    node.content = 0x5;
+    node.value.min = 55;
+    node.value.max = 55;
+    bh_insert(&heap, &node);
+    node.content = 0x5;
+    node.value.min = 35;
+    node.value.max = 35;
+    bh_insert(&heap, &node);
+    node.content = 0x5;
+    node.value.min = 49;
+    node.value.max = 49;
+    bh_insert(&heap, &node);
+    node.content = 0x5;
+    node.value.min = 29;
+    node.value.max = 29;
+    bh_insert(&heap, &node);
+    bh_dump(&heap);
+    node.content = 0x5;
+    node.value.min = 19;
+    node.value.max = 19;
+    bh_insert(&heap, &node);
+    node.content = 0x5;
+    node.value.min = 55;
+    node.value.max = 55;
+    bh_insert(&heap, &node);
+    node.content = 0x5;
+    node.value.min = 35;
+    node.value.max = 35;
+    bh_insert(&heap, &node);
+    node.content = 0x5;
+    node.value.min = 49;
+    node.value.max = 49;
+    bh_insert(&heap, &node);
+    node.content = 0x5;
+    node.value.min = 29;
+    node.value.max = 29;
+    bh_insert(&heap, &node);
+    bh_dump(&heap);
+    node.content = 0x5;
+    node.value.min = 19;
+    node.value.max = 19;
+    bh_insert(&heap, &node);
+    node.content = 0x5;
+    node.value.min = 55;
+    node.value.max = 55;
+    bh_insert(&heap, &node);
+    node.content = 0x5;
+    node.value.min = 35;
+    node.value.max = 35;
+    bh_insert(&heap, &node);
+    bh_dump(&heap);
+}*/
 
 /*int main() {
     t_memheap heap;
@@ -21,20 +100,20 @@
     
 }
 }*/
-int main() {
+/*int main() {
 
     void    *addr[12500];
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 2; i++)
     {
-       addr[i++] = malloc_(4096);
-       addr[i] = malloc_(128);
+       addr[i] = malloc_(10);
+       printf("%p\n", addr[i]);
     }
     show_alloc_mem();
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 2; i++)
     {
         free_(addr[i]);
     }
-}
+}*/
 
 /*    
     for (int i = 0; i < 10 ; i ++) {

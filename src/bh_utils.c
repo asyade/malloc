@@ -18,6 +18,7 @@ void                bh_dump(t_bh *heap)
     x = 1;
     z = 1;
     printf("---- BEGIN DUMP ----\n");    
+    printf("Heap size : %zu\n", heap->heap_size);
     while (i < heap->heap_size)
     {
         x = z;
