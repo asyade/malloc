@@ -17,20 +17,20 @@ void                bh_dump(t_bh *heap)
     i = 0;
     x = 1;
     z = 1;
-    printf("---- BEGIN DUMP ----\n");    
-    printf("Heap size : %zu\n", heap->heap_size);
+    //printf("---- BEGIN DUMP ----\n");    
+    //printf("Heap size : %zu\n", heap->heap_size);
     while (i < heap->heap_size)
     {
         x = z;
         z = x * 2;
         while (x-- && i < heap->heap_size)
         {
-            printf("[%p-%p], ", (void*)heap->buffer[i].value.min, (void*)heap->buffer[i].value.max);
+            //printf("[%p-%p], ", (void*)heap->buffer[i].value.min, (void*)heap->buffer[i].value.max);
             i++;
         }
-        printf("\n");
+        //printf("\n");
     }
-    printf("---- END DUMP ----\n");    
+    //printf("---- END DUMP ----\n");    
 }
 
 void                bh_filter(t_bh *heap, t_bhnode node, size_t cursor)

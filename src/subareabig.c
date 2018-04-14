@@ -17,17 +17,18 @@ void        *sarb_get_chunk(t_subarea *area, size_t size)
     size = get_size_align(size, getpagesize());
     if ((node.content = mh_reserv_chunk(&area->heap_container, sizeof(t_memheap))) == NULL)
     {
-        //TODO expand map
-        return (NULL);
+        if (mh_growdown(&area->heap_container, (area->heap_container_size *= 2)) == NULL)
+            return (NULL);
+        node.content = mh_reserv_chunk(&area->heap_container, sizeof(t_memheap));
     }
-    //printf("COntent %p\n", node.content);
+    ////printf("COntent %p\n", node.content);
     newheap = (t_memheap *)node.content;
     retval = mh_init3(newheap, size);
     node.value.min = (size_t)newheap->buffer;
     node.value.max = (size_t)newheap->buffer + newheap->buffer_size;
     if (retval != NULL)
     {
-        printf("insert\n");
+        //printf("insert\n");
         bh_insert(&area->index, &node);
     }
     return (retval);
@@ -41,10 +42,9 @@ int         sarb_free_chunk(t_subarea *area, void *ptr)
 
     if ((node = bh_find(&area->index, (size_t)ptr)) == NULL)
     {
-        bh_dump(&area->index);
-        printf("big not found");
+        //printf("big not found");
         return (1);
     }
-    printf("[%lx-%lx] for %p\n", node->value.min, node->value.max, ptr);
+    //printf("[%lx-%lx] for big %p\n", node->value.min, node->value.max, ptr);
     return (mh_free(node->content));
 }

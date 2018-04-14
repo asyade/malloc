@@ -7,14 +7,13 @@
 
 # define AREA_MAX_ALLOC_SIZE    (1024 * 1024 * 64)
 
-# define AREA_HEAP_SIZE_SMALL   16
+# define AREA_HEAP_SIZE_SMALL   16//TODO CHECK IF it can contain more than 100 alloc
 # define AREA_HEAP_SIZE_MEDIUM  64
 # define AREA_HEAP_SIZE_LARGE   16//TODO
 
 # define AREA_SUB_COUNT         3
 
 
-# define AREA_DEFAULT   
 # define AREA_HEAPCNT   4096
 
 # define MAX_AREA       4// Nbr of cpu core

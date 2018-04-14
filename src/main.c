@@ -4,22 +4,56 @@
 #include "bhp.h"
 #include<time.h>
 
-#define LEN 1000
+#define LEN 10
 
 int main() {
-    t_subarea area;
-    sar_init(&area, 4096);
-
-    void   *arr[LEN];
-    for (int i = 0; i < LEN; i++)
+    char *buffer = malloc_(LEN);
+    if (buffer == NULL)
     {
-        arr[i] = sar_get_chunk(&area, 1024);
+        printf("Can't allocate buffer\n");
     }
-    for (int i = 0; i < LEN; i++)
-    {
-        sar_free_chunk(&area, arr[i]);
-    }
+  //  memset(buffer, 42, LEN);
+  //  write(1, buffer, LEN);
 }
+
+/*
+int main()
+{
+    char *str = malloc_(20);
+    strcpy(str, "123456789");
+    //printf("%s\n", str);
+    str = realloc_(str, 20);
+    //printf("%s\n", str);
+    strcpy(str, "1234567890123456789");
+    //printf("%s\n", str);
+}
+*/
+/*
+int main() {
+    t_subarea area;
+
+    sar_init(&area, 4096);
+    void *ptr = sar_get_chunk(&area, 4096);
+    //printf("%p\n", ptr);
+    sar_free_chunk(&area, ptr);
+}
+*/
+
+/*
+int main() {
+        void   *arr[LEN];
+        for (int i = 0; i < LEN; i++) {
+        for (int i = 0; i < LEN; i++)
+        {
+            //printf("%p\n", (arr[i] = malloc_(i)));
+        }
+        for (int i = 0; i < LEN; i++)
+        {
+            free_(arr[i]);
+        }
+        }
+}
+*/
 
 /*int main()
 {
@@ -101,12 +135,12 @@ int main() {
     void    *addr[10];
     for (int i = 0; i < 3; i++)
     {
-        printf("%p\n", (addr[i] =  mh_reserv_chunk(&heap, 1024)));
+        //printf("%p\n", (addr[i] =  mh_reserv_chunk(&heap, 1024)));
     }
     for (int i = 0; i < 3; i++)
     {
        if ( mh_free_chunk(&heap, addr[i]) != 0)
-        printf("can't freed");
+        //printf("can't freed");
     }    
     
 }
@@ -117,7 +151,7 @@ int main() {
     for (int i = 0; i < 2; i++)
     {
        addr[i] = malloc_(10);
-       printf("%p\n", addr[i]);
+       //printf("%p\n", addr[i]);
     }
     show_alloc_mem();
     for (int i = 0; i < 2; i++)
@@ -134,13 +168,13 @@ int main() {
     for (int i = 0; i < 12500; i++)
     {
         if ((addr[i] = sar_get_chunk(&area, 4096)) == NULL)
-            printf("Can't alloc\n");
+            //printf("Can't alloc\n");
     }
 
     for (int i = 0; i < 12500; i++)
     {
         if (sar_free_chunk(&area, addr[i]) != 0)
-            printf("Can't free %zu\n", addr[i]);
+            //printf("Can't free %zu\n", addr[i]);
     }
    
     }
@@ -154,7 +188,7 @@ int main(int ac, char **av)
 
     if (mh_init(&heap) == -1)
     {
-        printf("Can't init heap\n");
+        //printf("Can't init heap\n");
         return 1;
     }
 
@@ -182,22 +216,22 @@ int main(int ac, char **av)
     mh_remove(&heap, 1);
 
     for (int i = 0; i < heap.heap_size; i++) {
-        printf("%d, ", heap.buffer[i].value);
+        //printf("%d, ", heap.buffer[i].value);
     }
-    printf("\n");
+    //printf("\n");
 int x = 0;
     for (int i = 0; i < arrlen; i++) {
     if (mh_find(&heap, arr[i]) != NULL) {
-        printf("OULOULOU %d\n", arr[i]);
+        //printf("OULOULOU %d\n", arr[i]);
         x++;
     }
     }
 
     if (x != arrlen-1) {
-        printf("KO\n");
+        //printf("KO\n");
 
     }
-    else printf("OK\n");
+    else //printf("OK\n");
 
 }
 

@@ -11,6 +11,7 @@ typedef struct      s_memheap
     size_t          buffer_size;
     size_t          buffer_avail;
     void            *buffer;
+    size_t          rc;    
 }                   t_memheap;
 
 typedef struct      s_memchunk

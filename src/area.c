@@ -24,13 +24,13 @@ int     ar_which(size_t size)
         (t_value) {128, 1024},
         (t_value) {1024, AREA_MAX_ALLOC_SIZE}
     };
+    int i = -1;
+
     size = get_size_align(size, AR_ALIGN);
-    int i = 0;
-    while (i < AREA_SUB_COUNT)
+    while (i++ < AREA_SUB_COUNT)
     {
         if (size >= limits[i].min && size <= limits[i].max)
             return i;
-        i++;
     }
     return (-1);
 }
@@ -49,13 +49,9 @@ void    *ar_get_chunk(t_area *area, size_t size)
 
 int      ar_free_chunk(t_area *area, void *ptr)
 {//Todo find a better way
-    int i;
-
-    i = 0;
-    while (i < AREA_SUB_COUNT - 1)
-    {
-        if (sar_free_chunk(&area->subarea[i++], ptr) == 0)
-            return (0);
-    }
+    if (sar_free_chunk(&area->subarea[0], ptr) == 0)
+        return (0);
+    if (sar_free_chunk(&area->subarea[1], ptr) == 0)
+        return (0);
     return (sarb_free_chunk(&area->subarea[2], ptr));
 }
