@@ -4,20 +4,24 @@
 #include "bhp.h"
 #include<time.h>
 
-#define LEN 10
+
+
+#define LEN 50000
 
 int main() {
-    char *buffer = malloc_(LEN);
-    if (buffer == NULL)
+    
+    for (int i = 0; i < 10; i++)
     {
-        printf("Can't allocate buffer\n");
+        char *buffer = malloc(LEN);
+        if (buffer == NULL){write(1, "ERROR\n", 6);}
+        memset(buffer, 42, LEN);
+        buffer[LEN - 1] = '\0';
+        write(1, buffer, strlen(buffer));
+        free(buffer);
     }
-  //  memset(buffer, 42, LEN);
-  //  write(1, buffer, LEN);
 }
-
 /*
-int main()
+int main(
 {
     char *str = malloc_(20);
     strcpy(str, "123456789");

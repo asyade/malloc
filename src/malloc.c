@@ -16,13 +16,10 @@ t_area      *area()
 
 void        free(void *ptr)
 {
-    if (ar_free_chunk(area(), ptr) != 0)
-    {
-        //printf("Cant free %p\n", ptr);
-    }
+    mh_free_chunk(ptr);    
 }
 
-void        *malloc_(size_t size)
+void        *malloc(size_t size)
 {
     return (ar_get_chunk(area(), size));
 }
@@ -30,14 +27,16 @@ void        *malloc_(size_t size)
 
 void        *realloc(void *ptr, size_t size)
 {
-    void *new = ar_get_chunk(area(), size);//TODO un vrais realloc
-    memcpy(new, ptr, size);
-    ar_free_chunk(area(), ptr);
-    return (new);
+    return (ar_get_chunk(area(), size));
 }
 
-void show_alloc_mem()
+void *calloc(size_t nmemb, size_t size)
 {
-    //printf("TINY : 0x%p\n", &area()->subarea[0].heap_container);//todo
-    
+    void    *ptr;
+
+    if (nmemb == 0 || size == 0)
+        return (NULL);
+    ptr = malloc(nmemb * size);    
+    bzero(ptr, nmemb * size);
+    return (ptr);
 }

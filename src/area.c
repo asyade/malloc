@@ -22,7 +22,7 @@ int     ar_which(size_t size)
     static t_value limits[AREA_SUB_COUNT] = {
         (t_value) {0, 128},
         (t_value) {128, 1024},
-        (t_value) {1024, AREA_MAX_ALLOC_SIZE}
+        (t_value) {1024, -1}
     };
     int i = -1;
 
@@ -45,13 +45,4 @@ void    *ar_get_chunk(t_area *area, size_t size)
     if (i == 2)
         return sarb_get_chunk(&area->subarea[i], size);
     return sar_get_chunk(&area->subarea[i], size);
-}
-
-int      ar_free_chunk(t_area *area, void *ptr)
-{//Todo find a better way
-    if (sar_free_chunk(&area->subarea[0], ptr) == 0)
-        return (0);
-    if (sar_free_chunk(&area->subarea[1], ptr) == 0)
-        return (0);
-    return (sarb_free_chunk(&area->subarea[2], ptr));
 }
