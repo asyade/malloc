@@ -6,7 +6,7 @@ void    total_delta(size_t delta)
     static size_t   total_used = 0;
 
     total_used += delta;
-    //printf("total used %zu->%zu\n", total_used - delta , total_used);
+    printf("total used %zu->%zu\n", total_used - delta , total_used);
 }
 
 int                 mh_init(t_memheap *area, size_t size)
