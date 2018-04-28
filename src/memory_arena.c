@@ -25,7 +25,7 @@ t_mem_arena     *init_arena(size_t buffer_min_size)
     chk->next = NULL;
     chk->prev = NULL;
     chk->arena = arena;
-    printf("%zu avail %zu\n", arena->buffer_avail, sizeof(t_mem_arena));
+    printf("%zu avail %zu of page %d\n", arena->buffer_avail, sizeof(t_mem_arena), getpagesize());
     return (arena);
 }
 
@@ -44,16 +44,24 @@ t_expstrat       get_max_avail(t_mem_chunk *chunk, size_t size)
 t_expstrat       chunk_get_strat(t_mem_chunk *chunk, size_t size)
 {
     if ((chunk->status == USED || chunk->status == MAY_USED) &&
-        chunk->next == NULL && (size_t)(chunk+2) + chunk->size + size <= chunk->arena->max)
-            return APPEND;
+        chunk->next == NULL && chunk->arena->buffer_avail >= size + sizeof(t_mem_chunk))
+    {
+        printf("appendcfdf\n");
+        return (chunk->status == MAY_USED ? APPEND | ALTERNATELY : APPEND);
+    }
     else if (chunk->status == USED)
         return (NONE);
     // If no next that means it's the last or first element so we can expande it to the arena size
     if (chunk->next == NULL)
-        if ((size_t)chunk + size <= chunk->arena->max)
+        if ((size_t)(chunk + 1) + size <= chunk->arena->max)
+    {
+      if (chunk->status == MAY_USED) printf("expande alternative") ;else  printf("expande\n");
             return (chunk->status == MAY_USED ? EXPANDE | ALTERNATELY : EXPANDE);
+    }
     if (chunk->size >= size)
+    {
         return (chunk->status & MAY_USED ? DEF | ALTERNATELY : DEF);
+    }
     return get_max_avail(chunk, size);    
 }
 
@@ -63,34 +71,52 @@ t_expstrat       chunk_get_strat(t_mem_chunk *chunk, size_t size)
 */
 t_mem_chunk     *chunk_finalize(t_mem_chunk *chunk, size_t size)
 {
+    t_mem_chunk *tmp;
+
     chunk->size = size;
-    chunk->arena->buffer_avail -= size + sizeof(t_mem_chunk);
+    if (chunk->status == MAY_USED)
+        chunk->arena->buffer_cache -= chunk->size + sizeof(t_mem_chunk);
+    else
+        chunk->arena->buffer_avail -= size + sizeof(t_mem_chunk);
     chunk->status = USED;
-    if (chunk->next == NULL && (size_t)(chunk + 1) + (size * 2) <= chunk->arena->max)
+    if (chunk->next == NULL && (size_t)(chunk + 2) + (size * 2) <= chunk->arena->max)
     {
         chunk->next = (t_mem_chunk *)((size_t)(chunk + 1) + size);
         if ((size_t)(chunk->next + 1) + size > chunk->arena->max) {
             printf("PANIC: invalide next\n");
         }
         chunk->next->size = size;
+        chunk->arena->buffer_avail -= size;
         chunk->arena->buffer_cache += chunk->next->size + sizeof(t_mem_chunk);
         chunk->next->arena = chunk->arena;
         chunk->next->prev = chunk;
         chunk->next->next = NULL;
-        chunk->next->status = MAY_USED;
+        chunk->next->status = MAY_USED;//NEED TO BE MAY USED
         printf("%zu octet ready for realloc at %p\n", size, chunk->next);        
     }
-    else if ((!chunk->next && (size_t)(chunk + 1) + chunk->size < chunk->arena->max) || (size_t)chunk->next > (size_t)(chunk + 1) + size)
+    else if ((!chunk->next && (size_t)(chunk + 1) + chunk->size < chunk->arena->max) || (chunk->next && (size_t)chunk->next > (size_t)(chunk + 1) + size))
     {
-        printf("Spliting %p to avoid fragmentation\n", chunk);
+        tmp = chunk->next;
+        chunk->next = (t_mem_chunk *)((size_t)(chunk + 1) + size);
+        printf("Diff %zu\n", chunk->arena->max - (size_t)(chunk + 1) + size);
+        chunk->next->prev = chunk;
+        chunk->next->next = tmp;
+        chunk->next->arena = chunk->arena;
+        if (chunk->next->next) {
+            chunk->next->size = (size_t)chunk->next->next - (size_t)(chunk->next + 1);
+        }
+        chunk->status = MAY_USED;
+        chunk->arena->buffer_cache += chunk->next->size + sizeof(t_mem_chunk);
+        printf("%p cell extruded of %p\n", chunk->next, chunk);
     }
-    printf("%p finalized avail: %zu, cache: %zu\n", chunk, chunk->arena->buffer_avail, chunk->arena->buffer_cache);
+    printf("%p of size %zu finalized avail: %zu, cache: %zu\n", chunk, chunk->size, chunk->arena->buffer_avail, chunk->arena->buffer_cache);
     return (chunk);
 }
 
 void            arena_free_chunk(t_mem_chunk *chunk)
 {
-    chunk->arena->buffer_avail += chunk->size;
+    printf("free %p\n", chunk);
+    chunk->arena->buffer_avail += chunk->size + sizeof(t_mem_chunk);
     if (chunk->next && (chunk->next->status == FREE || chunk->next->status == MAY_USED))
     {
         printf("fusion %p with %p (it's right neighbors)\n", chunk, chunk->next);
@@ -129,6 +155,7 @@ t_mem_chunk     *arena_fill_chunk(t_mem_chunk *chunk, size_t size, t_expstrat *s
         return (chunk_finalize(chunk, size));
     if (*strat & APPEND)
         return (chunk_append(chunk, size));
+    printf("Unkonw strat\n");
     return (NULL);
 }
 
@@ -150,6 +177,7 @@ t_mem_chunk     *arena_get_chunk(size_t size, t_mem_arena *arena)
 
     size = SIZE_ALIGN(size, MEM_ARENA_AL);
     current = arena->buffer;
+    alternative = NULL;
     step = 0;
     while (current)
     {
@@ -159,12 +187,9 @@ t_mem_chunk     *arena_get_chunk(size_t size, t_mem_arena *arena)
             {
                 if (strat & ALTERNATELY)
                 {
-                    if (arena->buffer_size - arena->buffer_avail + arena->buffer_cache >= arena->buffer_size)
-                    {
-                        printf("Arena is full use alternative\n");
-                        if ((ret = arena_fill_chunk(current, size, &strat)) != NULL)
-                            return (ret);                   
-                    }
+                    if (arena->buffer_size - arena->buffer_avail + arena->buffer_cache >= arena->buffer_size &&
+                    (alternative && (ret = arena_fill_chunk(alternative, size, &strat)) != NULL))
+                        return (ret);                   
                     else
                     {
                         alternative = current;

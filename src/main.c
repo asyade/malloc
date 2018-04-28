@@ -11,7 +11,11 @@
 
 int main()
 {
-    t_mem_arena *arena = init_arena((4096 * PTR_COUNT) + (sizeof(t_mem_chunk) * PTR_COUNT));
+   t_mem_arena *arena = init_arena(1+sizeof(t_mem_chunk));
+    arena_get_chunk(4056-sizeof(t_mem_chunk), arena);
+   
+   //(1 * PTR_COUNT) + (sizeof(t_mem_chunk) * PTR_COUNT));
+  /*  t_mem_arena *arena = init_arena((1 * PTR_COUNT) + (sizeof(t_mem_chunk) * PTR_COUNT));
     if (!arena)
     {
         printf("Can't init arena");
@@ -20,11 +24,11 @@ int main()
     t_mem_chunk *ptrs[PTR_COUNT];
     for (int i = 0; i < PTR_COUNT; i++)
     {
-        ptrs[i] = arena_get_chunk(4096, arena);
+        ptrs[i] = arena_get_chunk(1, arena);
         if (ptrs[i] != NULL) 
         {
-            memset(ptrs[i] + 1, 42, 4096);
-            write(2, ptrs[i] + 1, 4096);
+            memset(ptrs[i] + 1, 42, 1);
+            write(2, ptrs[i] + 1, 1);
             printf("-------------------\n");
         }
         else {
@@ -32,11 +36,15 @@ int main()
         }
     }
 
-    arena_free_chunk(ptrs[1]);
+    arena_free_chunk(ptrs[0]);
     arena_free_chunk(ptrs[6]);
-    //printf("%p and %p freed\n", ptrs[5], ptrs[4]);
-    arena_get_chunk(4096, arena);
-
+    //printf("%p and1freed\n", ptrs[5], ptrs[4]);
+    arena_get_chunk(1, arena);
+    arena_get_chunk(1, arena);
+    arena_get_chunk(1, arena);
+    arena_get_chunk(1, arena);
+    arena_get_chunk(1, arena);
+    arena_get_chunk(1, arena);*/
     
 }
 /*
