@@ -1,13 +1,42 @@
-#include "malloc.h"
 #include <stdio.h>
 #include<stdlib.h>
-#include "bhp.h"
 #include<time.h>
-
+#include<unistd.h>
+#include "memory_arena.h"
 
 
 #define LEN 50000
 
+#define PTR_COUNT 10
+
+int main()
+{
+    t_mem_arena *arena = init_arena(4096 * PTR_COUNT + (sizeof(t_mem_chunk) * PTR_COUNT));
+    if (!arena)
+    {
+        printf("Can't init arena");
+        return (1);
+    }
+    t_mem_chunk *ptrs[PTR_COUNT];
+    for (int i = 0; i < PTR_COUNT; i++)
+    {
+        ptrs[i] = arena_get_chunk(4096, arena);
+        if (ptrs[i] != NULL) 
+        {
+            memset(ptrs[i] + 1, 42, 4096);
+            write(2, ptrs[i] + 1, 4096);
+            printf("-------------------\n");
+        }
+        else {
+            printf("Can't alloc !\n");
+        }
+    }
+
+
+
+
+}
+/*
 int main() {
     
     for (int i = 0; i < 10; i++)
@@ -19,7 +48,7 @@ int main() {
         write(1, buffer, strlen(buffer));
         free(buffer);
     }
-}
+}*/
 /*
 int main(
 {
