@@ -11,7 +11,7 @@
 
 int main()
 {
-    t_mem_arena *arena = init_arena(4096 * PTR_COUNT + (sizeof(t_mem_chunk) * PTR_COUNT));
+    t_mem_arena *arena = init_arena((4096 * PTR_COUNT) + (sizeof(t_mem_chunk) * PTR_COUNT));
     if (!arena)
     {
         printf("Can't init arena");
@@ -32,9 +32,12 @@ int main()
         }
     }
 
+    arena_free_chunk(ptrs[1]);
+    arena_free_chunk(ptrs[6]);
+    //printf("%p and %p freed\n", ptrs[5], ptrs[4]);
+    arena_get_chunk(4096, arena);
 
-
-
+    
 }
 /*
 int main() {

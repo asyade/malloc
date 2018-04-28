@@ -31,6 +31,8 @@ typedef enum    e_expstrat
 typedef struct          s_mem_arena
 {
     void                *buffer;    
+    size_t              buffer_avail;
+    size_t              buffer_cache;
     size_t              buffer_size;
     size_t              max;
 }                       t_mem_arena;
@@ -47,5 +49,6 @@ typedef struct          s_mem_chunk
 
 t_mem_arena     *init_arena(size_t buffer_min_size);
 t_mem_chunk     *arena_get_chunk(size_t size, t_mem_arena *arena);
+void            arena_free_chunk(t_mem_chunk *chunk);
 
 #endif
