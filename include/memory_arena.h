@@ -66,10 +66,11 @@ t_mem_chunk     *chunk_append(t_mem_chunk *chunk, size_t size, t_expstrat strat)
 
 t_mem_chunk     *arena_expande_chunk(t_mem_chunk *chunk, size_t new_size);
 
-void            arena_free_chunk(t_mem_chunk *chunk);
+int             arena_free_chunk(t_mem_chunk *chunk);
 void            chunk_try_join_prev(t_mem_chunk *chunk);
 void            chunk_try_join_next(t_mem_chunk *chunk);
 
 t_mem_arena     *init_arena(size_t buffer_min_size);
+void            destroy_arena(t_mem_arena *arena);
 
 #endif
