@@ -68,7 +68,7 @@ t_mem_chunk     *chunk_finalize(t_mem_chunk *chunk, size_t size)
         printf("%zu octet ready for realloc at %p\n", chunk->next->size, chunk->next);        
     }
     else if (chunk->next && (size_t)chunk->next - (MEM_ARENA_AL + sizeof(t_mem_chunk)) > (size_t)(chunk + 1) + size)
-    {
+    {//@@@@@@@@IMPORTANT ici on ajoute MEM_ARENA_AL alors que si chunk ne remplis pas tout sons offset on a une perte de data definitve il faut ajouter le reste a size
         tmp = chunk->next;
         chunk->next = (t_mem_chunk *)((size_t)(chunk + 1) + size);
         chunk->next->prev = chunk;
@@ -86,18 +86,17 @@ t_mem_chunk     *chunk_finalize(t_mem_chunk *chunk, size_t size)
 
 void            arena_free_chunk(t_mem_chunk *chunk)
 {
-    printf("free %p\n", chunk);
-    if (chunk->next && (chunk->next->status == FREE || chunk->next->status == MAY_USED))
+    if (chunk->next && chunk->next->status != USED)
     {
         printf("fusion %p with %p (it's right neighbors)\n", chunk, chunk->next);
-        chunk->size += chunk->next->size;
+        chunk->size += chunk->next->size + sizeof(t_mem_chunk);
         chunk->next = chunk->next->next;
         if (chunk->next)
             chunk->next->prev = chunk;
     }
 
-    if (chunk->prev && (chunk->prev-> status == FREE || chunk->prev->status == MAY_USED))
-    {//important verifier qu'on ne fragmente pas a gauche
+    if (chunk->prev && chunk->prev->status != USED)
+    {
         printf("fusion %p with %p (it's left neighbors)\n", chunk, chunk->prev);
         chunk->prev->size += chunk->size + sizeof(t_mem_chunk);
         chunk->prev->next = chunk->next;
@@ -111,7 +110,7 @@ void            arena_free_chunk(t_mem_chunk *chunk)
 /*
 ** Assuming we have size space left on our right create a new node at the right of chunk and finalize it
 */
-t_mem_chunk     *chunk_append(t_mem_chunk *chunk, size_t size)
+t_mem_chunk     *chunk_append(t_mem_chunk *chunk, size_t size)///TODO remove useless
 {
     chunk->next = (t_mem_chunk *)((size_t)(chunk + 1) + chunk->size);
     chunk->next->next = NULL;
@@ -163,35 +162,25 @@ t_mem_chunk     *arena_get_chunk(size_t size, t_mem_arena *arena)
 {
     t_mem_chunk *ret;
     t_mem_chunk *alternative;
+    t_mem_chunk *current;
     t_expstrat  strat_alternative;
     t_expstrat  strat;
-    int         step;
-
-    t_mem_chunk *current;
 
     size = SIZE_ALIGN(size, MEM_ARENA_AL);
     current = arena->buffer;
     alternative = NULL;
-    step = 0;
     while (current)
     {
-        if (step == 0)
+        if ((strat = chunk_get_strat(current, size)) != 0)
         {
-            if ((strat = chunk_get_strat(current, size)) != 0)
+            if (strat & ALTERNATELY)//FAT COMPLEXITY TODO trouver un moyens d'utiliser l'alternative sans tester tout les possibilitee avant
             {
-                if (strat & ALTERNATELY)//FAT COMPLEXITY
-                {
-                        alternative = current;
-                        strat_alternative = strat;
-                }
-                else if ((ret = arena_fill_chunk(current, size, &strat)) != NULL)
-                    return (ret);
+                alternative = current;
+                strat_alternative = strat;
             }
-            else
-                step = 1;
+            else if ((ret = arena_fill_chunk(current, size, &strat)) != NULL)
+                return (ret);
         }
-        if (step == 1 && current->status == USED)
-            step = 0;
         current = current->next;
     }
     return (alternative ? arena_fill_chunk(alternative, size, &strat_alternative) : NULL);

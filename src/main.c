@@ -40,17 +40,13 @@ int main()
     
     for (int i = 0; i < PTR_COUNT; i ++)
     {
-        if (arena_get_chunk(1024, arena) == NULL) printf("Error\n");
-    }
-    for (int i = 0; i < PTR_COUNT; i ++)
-    {
         arena_free_chunk(ptrs[i]);
     }
                 printf("-------------------\n");
             printf("-------------------\n");
             printf("-------------------\n");
     
-    for (int i = 0; i < PTR_COUNT/2; i ++)
+ /*   for (int i = 0; i < PTR_COUNT/2; i ++)
     {
         ptrs[i] = arena_get_chunk(2000, arena);
         if (ptrs[i] != NULL) 
@@ -62,8 +58,8 @@ int main()
         else {
             printf("Can't alloc !\n");
         }
-    }
-       if(!arena_get_chunk(200, arena)) printf("NANN\n");
+    }*/
+  //     if(!arena_get_chunk(200, arena)) printf("NANN\n");
     
 
 }
