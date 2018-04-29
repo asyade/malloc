@@ -32,10 +32,14 @@ void        free(void *ptr)
         if (arena->next == NULL)
         {
             destroy_arena(arena);
+            pthread_mutex_unlock(&malloc_mutex);                
             return ;
         }
         if (arena->next == arena->prev && arena->next == arena)
+        {
+            pthread_mutex_unlock(&malloc_mutex);
             return ;
+        }
         arena->next->prev = arena->prev;
         arena->prev->next = arena->next;
         destroy_arena(chk->arena);
@@ -82,7 +86,6 @@ void        *malloc(size_t size)
     if (!(area = init_arena(SMALL_HEAP_BUFFER)))
     {
         pthread_mutex_unlock(&malloc_mutex);
-
         return (NULL);
     }
     area->next = get_small_heap(NULL);
@@ -101,15 +104,21 @@ void        *realloc(void *ptr, size_t size)
     t_mem_chunk *chk;
     t_mem_chunk *new;
 
-    pthread_mutex_lock(&malloc_mutex);
     if (size == 0 || ptr == NULL)
         return (NULL);
+    pthread_mutex_lock(&malloc_mutex);
     chk = DPTR_TO_CHK(ptr);
     if ((chk = arena_expande_chunk(chk, size)) != NULL)
+    {
+        pthread_mutex_unlock(&malloc_mutex);         
         return (CHK_TO_DPTR(chk));
+    }
     chk = DPTR_TO_CHK(ptr);
     if ((new = malloc(size)) == NULL)
+    {
+        pthread_mutex_unlock(&malloc_mutex);            
         return (NULL);//todo voir si on free ou pas en cas d'echeque
+    }
     memcpy(new, ptr, chk->user_size);
     free(ptr);
     pthread_mutex_unlock(&malloc_mutex);    
