@@ -18,21 +18,17 @@ typedef enum    e_mem_status
 
 typedef enum    e_expstrat
 {
-    NONE           =0x0 ,//(1<<0),
-    DEF            =0x1 ,//(1<<1),
-    EXPANDE        =0x2 ,//(1<<2),
-    APPEND         =0x4 ,//(1<<3),
-    LEFT           =0x8 ,//(1<<4),
-    RIGHT          =0x10,//(1<<5),
-    TWICE          =0x20,//(1<<6),
-    ALTERNATELY    =0x40 //(1<<7)
+    NONE           = 0x0 ,
+    DEF            = 0x1 ,
+    EXPANDE        = 0x2 ,
+    APPEND         = 0x4 ,
+    SPLIT          = 0x10,
+    ALTERNATELY    = 0x40
 }               t_expstrat;
 
 typedef struct          s_mem_arena
 {
     void                *buffer;    
-    size_t              buffer_avail;
-    size_t              buffer_cache;
     size_t              buffer_size;
     size_t              max;
 }                       t_mem_arena;
@@ -50,5 +46,6 @@ typedef struct          s_mem_chunk
 t_mem_arena     *init_arena(size_t buffer_min_size);
 t_mem_chunk     *arena_get_chunk(size_t size, t_mem_arena *arena);
 void            arena_free_chunk(t_mem_chunk *chunk);
+t_mem_chunk     *arena_expande_chunk(t_mem_chunk *chunk, size_t new_size);
 
 #endif

@@ -7,16 +7,15 @@
 
 #define LEN 50000
 
-#define PTR_COUNT 10
+#define PTR_COUNT 15
 
 int main()
 {
-   t_mem_arena *arena = init_arena(1+sizeof(t_mem_chunk));
-    arena_get_chunk(4056-sizeof(t_mem_chunk), arena);
-   
+
    //(1 * PTR_COUNT) + (sizeof(t_mem_chunk) * PTR_COUNT));
-  /*  t_mem_arena *arena = init_arena((1 * PTR_COUNT) + (sizeof(t_mem_chunk) * PTR_COUNT));
-    if (!arena)
+    t_mem_arena *arena = init_arena((1024 * PTR_COUNT) + (sizeof(t_mem_chunk) * PTR_COUNT));
+
+   if (!arena)
     {
         printf("Can't init arena");
         return (1);
@@ -24,28 +23,49 @@ int main()
     t_mem_chunk *ptrs[PTR_COUNT];
     for (int i = 0; i < PTR_COUNT; i++)
     {
-        ptrs[i] = arena_get_chunk(1, arena);
+        ptrs[i] = arena_get_chunk(1024, arena);
         if (ptrs[i] != NULL) 
         {
-            memset(ptrs[i] + 1, 42, 1);
-            write(2, ptrs[i] + 1, 1);
+            memset(ptrs[i] + 1, 42, 1024);
+            write(2, ptrs[i] + 1, 1024);
             printf("-------------------\n");
         }
         else {
             printf("Can't alloc !\n");
         }
     }
-
-    arena_free_chunk(ptrs[0]);
-    arena_free_chunk(ptrs[6]);
-    //printf("%p and1freed\n", ptrs[5], ptrs[4]);
-    arena_get_chunk(1, arena);
-    arena_get_chunk(1, arena);
-    arena_get_chunk(1, arena);
-    arena_get_chunk(1, arena);
-    arena_get_chunk(1, arena);
-    arena_get_chunk(1, arena);*/
+            printf("-------------------\n");
+            printf("-------------------\n");
+            printf("-------------------\n");
     
+    for (int i = 0; i < PTR_COUNT; i ++)
+    {
+        if (arena_get_chunk(1024, arena) == NULL) printf("Error\n");
+    }
+    for (int i = 0; i < PTR_COUNT; i ++)
+    {
+        arena_free_chunk(ptrs[i]);
+    }
+                printf("-------------------\n");
+            printf("-------------------\n");
+            printf("-------------------\n");
+    
+    for (int i = 0; i < PTR_COUNT/2; i ++)
+    {
+        ptrs[i] = arena_get_chunk(2000, arena);
+        if (ptrs[i] != NULL) 
+        {
+            memset(ptrs[i] + 1, 42, 1024);
+            write(2, ptrs[i] + 1, 1024);
+            printf("-------------------\n");
+        }
+        else {
+            printf("Can't alloc !\n");
+        }
+    }
+       if(!arena_get_chunk(200, arena)) printf("NANN\n");
+    
+
 }
 /*
 int main() {
