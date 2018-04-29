@@ -1,7 +1,16 @@
 #ifndef FT_MALLOC_H
 # define FT_MALLOC_H
 
-# include "area.h"
+# include "memory_arena.h"
+# include "bheap.h"
+
+# include <stdio.h>
+
+# define SMALL_HEAP_BUFFER 1024*1024*16// 1024*1024*4
+# define MED_HEAP_BUFFER  1024*1024*16
+
+void        *xmalloc(size_t size);
+void        xfree(void *ptr);
 
 /*extern void        free(void *ptr);
 extern void        *malloc_(size_t size);

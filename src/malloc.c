@@ -1,42 +1,44 @@
 #include "malloc.h"
-#include "area.h"
 
-t_area      *area()
+t_mem_arena        *get_small_heap(t_mem_arena *new)
 {
-    static int      area_init = 0;
-    static t_area   area;
+    static t_mem_arena     *arena = NULL;
 
-    if (area_init == 0)
+    if (new != NULL)
+        arena = new;
+    else if (arena == NULL)
     {
-        ar_init(&area);
-        area_init = 1;
+        if (!(arena = init_arena(SMALL_HEAP_BUFFER)))
+            return (NULL);
+        arena->next = arena;
+        arena->prev = arena;
+        arena->root = 1;
     }
-    return (&area);
+    return (arena);
 }
 
-void        free(void *ptr)
+void        xfree(void *ptr)
 {
-    mh_free_chunk(ptr);    
+    arena_free_chunk(DPTR_TO_CHK(ptr));
 }
 
-void        *malloc(size_t size)
+void        *xmalloc(size_t size)
 {
-    return (ar_get_chunk(area(), size));
-}
+    t_mem_chunk *tmp;
+    t_mem_arena *area = get_small_heap(NULL);
 
-
-void        *realloc(void *ptr, size_t size)
-{
-    return (ar_get_chunk(area(), size));
-}
-
-void *calloc(size_t nmemb, size_t size)
-{
-    void    *ptr;
-
-    if (nmemb == 0 || size == 0)
-        return (NULL);
-    ptr = malloc(nmemb * size);    
-    bzero(ptr, nmemb * size);
-    return (ptr);
+    size = SIZE_ALIGN(size, MEM_ARENA_AL);
+    while (1)
+    {
+        if (area->buffer_size - area->buffer_used > size)
+        {
+            if((tmp = arena_get_chunk(size, area)))
+                return (CHK_TO_DPTR(tmp));
+        }
+        area = area->next;
+        if (area->root == 1)
+            break ;
+    }
+    printf("No heap found");
+    return (NULL);
 }
