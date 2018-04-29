@@ -52,6 +52,7 @@ t_expstrat       chunk_get_strat(t_mem_chunk *chunk, size_t size)
 t_mem_chunk     *chunk_finalize(t_mem_chunk *chunk, size_t size)
 {
     t_mem_chunk *tmp;
+    size_t      diff;
 
     chunk->size = size;
     chunk->status = USED;
@@ -67,18 +68,27 @@ t_mem_chunk     *chunk_finalize(t_mem_chunk *chunk, size_t size)
         chunk->next->status = MAY_USED;//NEED TO BE MAY USED
         printf("%zu octet ready for realloc at %p\n", chunk->next->size, chunk->next);        
     }
-    else if (chunk->next && (size_t)chunk->next - (MEM_ARENA_AL + sizeof(t_mem_chunk)) > (size_t)(chunk + 1) + size)
+    else if (chunk->next)
     {//@@@@@@@@IMPORTANT ici on ajoute MEM_ARENA_AL alors que si chunk ne remplis pas tout sons offset on a une perte de data definitve il faut ajouter le reste a size
-        tmp = chunk->next;
-        chunk->next = (t_mem_chunk *)((size_t)(chunk + 1) + size);
-        chunk->next->prev = chunk;
-        chunk->next->next = tmp;
-        chunk->next->arena = chunk->arena;
-        if (chunk->next->next) {
-            chunk->next->size = (size_t)chunk->next->next - (size_t)(chunk->next + 1);
+        diff = (size_t)(chunk + 1) + size - (size_t)chunk->next;
+        if (diff > MEM_ARENA_AL + sizeof(t_mem_chunk))
+        {
+            tmp = chunk->next;
+            chunk->next = (t_mem_chunk *)((size_t)(chunk + 1) + size);
+            chunk->next->prev = chunk;
+            chunk->next->next = tmp;
+            chunk->next->arena = chunk->arena;
+            if (chunk->next->next) {
+                chunk->next->size = (size_t)chunk->next->next - (size_t)(chunk->next + 1);
+            }
+            chunk->status = MAY_USED;
+            printf("%p cell extruded of %p\n", chunk->next, chunk);
         }
-        chunk->status = MAY_USED;
-        printf("%p cell extruded of %p\n", chunk->next, chunk);
+        else if (diff > 0)
+        {
+            chunk->size = diff;
+            printf("%p expanded to %zu to fill up empty space\n", chunk, diff);
+        }
     }
     printf("%p finalized\n", chunk);
     return (chunk);
