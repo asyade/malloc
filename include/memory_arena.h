@@ -63,6 +63,7 @@ void    debugline(char *fname, int nbr, char *fn);
 void    debugarena(t_mem_arena *arena);
 void    debugalloc(t_mem_chunk *chk);
 
+void            arena_alloc_delta(t_mem_arena *arena, long long int delta);
 t_mem_chunk     *arena_get_chunk(size_t size, t_mem_arena *arena);
 t_expstrat      chunk_get_strat(t_mem_chunk *chunk, size_t size);
 t_mem_chunk     *arena_process_strat(t_mem_chunk *chunk, size_t size, t_expstrat strat);

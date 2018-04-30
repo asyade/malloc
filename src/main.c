@@ -52,7 +52,7 @@ void        dump_chunk(t_mem_chunk *chunk)
             lcol = chunk->real_size > chunk->user_size ? KGRN : KYEL;
         if (chunk->real_size < chunk->user_size)
             lcol = KCYN;
-        printf("[%s%x\x1B[0m]" ,lcol, chunk);
+        printf("[%s%lx\x1B[0m]" ,(char *)lcol, (unsigned long int)chunk);
         chunk = chunk->next;
     }
 }
@@ -127,5 +127,5 @@ int m2ain(int ac, char **av)
         dump_arena(DPTR_TO_CHK(ptr[0])->arena);
         
     }*/
-    
+    return (0);   
 }
