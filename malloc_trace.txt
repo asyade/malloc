@@ -1,25 +1,1514 @@
+src/malloc.c:54 in fn malloc
 src/memory_arena.c:94 in fn arena_get_chunk
 src/memory_arena.c:164 in fn chunk_fill
-7FAB4A900030 IS USED USER 560 PREV 16781208 REAL 16781208
+7F1223638030 IS USED USER 16 PREV 16781208 REAL 16781208
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638030 IS USED USER 128 PREV 16781208 REAL 16781208
+src/malloc.c:54 in fn malloc
 src/memory_arena.c:94 in fn arena_get_chunk
 src/memory_arena.c:170 in fn chunk_append
 src/memory_arena.c:164 in fn chunk_fill
-7FAB4A900298 IS USED USER 128 PREV 16780592 REAL 16780592
+7F12236380E8 IS USED USER 16 PREV 16781024 REAL 16781024
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638130 IS USED USER 784 PREV 16780952 REAL 16780952
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638478 IS USED USER 112 PREV 16780112 REAL 16780112
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638520 IS USED USER 960 PREV 16779944 REAL 16779944
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638918 IS USED USER 224 PREV 16778928 REAL 16778928
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638A30 IS USED USER 432 PREV 16778648 REAL 16778648
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638C18 IS USED USER 112 PREV 16778160 REAL 16778160
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638CC0 IS USED USER 96 PREV 16777992 REAL 16777992
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638D58 IS USED USER 128 PREV 16777840 REAL 16777840
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638E10 IS USED USER 176 PREV 16777656 REAL 16777656
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638EF8 IS USED USER 112 PREV 16777424 REAL 16777424
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223638FA0 IS USED USER 80 PREV 16777256 REAL 16777256
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223639028 IS USED USER 192 PREV 16777120 REAL 16777120
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223639120 IS USED USER 16 PREV 16776872 REAL 16776872
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223639168 IS USED USER 16 PREV 16776800 REAL 16776800
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F12236391B0 IS USED USER 16 PREV 16776728 REAL 16776728
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F12236391F8 IS USED USER 16 PREV 16776656 REAL 16776656
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223639240 IS USED USER 16 PREV 16776584 REAL 16776584
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223639288 IS USED USER 16 PREV 16776512 REAL 16776512
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F12236392D0 IS USED USER 16 PREV 16776440 REAL 16776440
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223639318 IS USED USER 16 PREV 16776368 REAL 16776368
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223639360 IS USED USER 16 PREV 16776296 REAL 16776296
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F12236393A8 IS USED USER 16 PREV 16776224 REAL 16776224
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F12236393F0 IS USED USER 16 PREV 16776152 REAL 16776152
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223639438 IS USED USER 16 PREV 16776080 REAL 16776080
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223639480 IS USED USER 16 PREV 16776008 REAL 16776008
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F12236394C8 IS USED USER 48 PREV 16775936 REAL 16775936
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1223639530 IS USED USER 16 PREV 16775832 REAL 16775832
+src/malloc.c:54 in fn malloc
 src/memory_arena.c:94 in fn arena_get_chunk
 src/memory_arena.c:164 in fn chunk_fill
-7FAB4C9CB030 IS USED USER 1024 PREV 3992 REAL 3992
-src/memory_arena.c:193 in fn arena_free_chunk
-src/memory_arena.c:208 in fn chunk_try_join_next
-src/memory_arena.c:199 in fn arena_free_chunk
-7FAB4A900298 IS FREE USER 128 PREV 16780592 REAL 16780592
-src/memory_arena.c:219 in fn chunk_try_join_prev
-src/memory_arena.c:193 in fn arena_free_chunk
-src/memory_arena.c:208 in fn chunk_try_join_next
-src/memory_arena.c:199 in fn arena_free_chunk
-7FAB4C9CB030 IS FREE USER 1024 PREV 3992 REAL 3992
-src/memory_arena.c:219 in fn chunk_try_join_prev
-src/memory_arena.c:193 in fn arena_free_chunk
-src/memory_arena.c:208 in fn chunk_try_join_next
-src/memory_arena.c:199 in fn arena_free_chunk
-7FAB4A900030 IS FREE USER 560 PREV 16781208 REAL 16781208
-src/memory_arena.c:219 in fn chunk_try_join_prev
+7F1224E44030 IS USED USER 4096 PREV 12184 REAL 12184
+src/malloc.c:107 in fn realloc
+src/memory_arena.c:234 in fn arena_expande_chunk
+src/memory_arena.c:237 in fn arena_expande_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:164 in fn chunk_fill
+7F1224E43030 IS USED USER 1024 PREV 3992 REAL 3992
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/memory_arena.c:209 in fn chunk_try_join_next
+rc/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA530 IS USED USER 16 PREV 16775832 REAL 16775832
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA578 IS USED USER 64 PREV 16775760 REAL 16775760
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA5F0 IS USED USER 64 PREV 16775640 REAL 16775640
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA668 IS USED USER 128 PREV 16775520 REAL 16775520
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEE99A030 IS USED USER 19200 PREV 40856 REAL 40856
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA720 IS USED USER 32 PREV 16775336 REAL 16775336
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA778 IS USED USER 16 PREV 16775248 REAL 16775248
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEE989030 IS USED USER 32816 PREV 69528 REAL 69528
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA7C0 IS USED USER 16 PREV 16775176 REAL 16775176
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA808 IS USED USER 16 PREV 16775104 REAL 16775104
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA850 IS USED USER 32 PREV 16775032 REAL 16775032
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA8A8 IS USED USER 16 PREV 16774944 REAL 16774944
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA8F0 IS USED USER 16 PREV 16774872 REAL 16774872
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA938 IS USED USER 16 PREV 16774800 REAL 16774800
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA980 IS USED USER 16 PREV 16774728 REAL 16774728
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DA9C8 IS USED USER 16 PREV 16774656 REAL 16774656
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DAA10 IS USED USER 16 PREV 16774584 REAL 16774584
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DAA58 IS USED USER 16 PREV 16774512 REAL 16774512
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DAAA0 IS USED USER 16 PREV 16774440 REAL 16774440
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DAAE8 IS USED USER 16 PREV 16774368 REAL 16774368
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DAB30 IS USED USER 16 PREV 16774296 REAL 16774296
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DAB78 IS USED USER 32 PREV 16774224 REAL 16774224
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DABD0 IS USED USER 16 PREV 16774136 REAL 16774136
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DAC18 IS USED USER 368 PREV 16774064 REAL 16774064
+src/malloc.c:107 in fn realloc
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DADC0 IS USED USER 64 PREV 16773640 REAL 16773640
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DADC0 IS USED USER 560 PREV 16773640 REAL 16773640
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEE986030 IS USED USER 4096 PREV 12184 REAL 12184
+src/malloc.c:107 in fn realloc
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DADC0 IS USED USER 16 PREV 16773640 REAL 16773640
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DAE08 IS USED USER 64 PREV 16773568 REAL 16773568
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DAE80 IS USED USER 176 PREV 16773448 REAL 16773448
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DAF68 IS USED USER 64 PREV 16773216 REAL 16773216
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DAFE0 IS USED USER 112 PREV 16773096 REAL 16773096
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB088 IS USED USER 64 PREV 16772928 REAL 16772928
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB100 IS USED USER 80 PREV 16772808 REAL 16772808
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB188 IS USED USER 48 PREV 16772672 REAL 16772672
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB1F0 IS USED USER 64 PREV 16772568 REAL 16772568
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB268 IS USED USER 64 PREV 16772448 REAL 16772448
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB2E0 IS USED USER 64 PREV 16772328 REAL 16772328
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB358 IS USED USER 64 PREV 16772208 REAL 16772208
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB358 IS USED USER 64 PREV 16772208 REAL 16772208
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB3D0 IS USED USER 80 PREV 16772088 REAL 16772088
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB458 IS USED USER 64 PREV 16771952 REAL 16771952
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB458 IS USED USER 64 PREV 16771952 REAL 16771952
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB458 IS USED USER 64 PREV 16771952 REAL 16771952
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB458 IS USED USER 64 PREV 16771952 REAL 16771952
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB458 IS USED USER 64 PREV 16771952 REAL 16771952
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB4D0 IS USED USER 80 PREV 16771832 REAL 16771832
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB558 IS USED USER 48 PREV 16771696 REAL 16771696
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB558 IS USED USER 64 PREV 16771696 REAL 16771696
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB5D0 IS USED USER 80 PREV 16771576 REAL 16771576
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB658 IS USED USER 64 PREV 16771440 REAL 16771440
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB658 IS USED USER 64 PREV 16771440 REAL 16771440
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB658 IS USED USER 64 PREV 16771440 REAL 16771440
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB658 IS USED USER 64 PREV 16771440 REAL 16771440
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB658 IS USED USER 48 PREV 16771440 REAL 16771440
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB658 IS USED USER 64 PREV 16771440 REAL 16771440
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB6D0 IS USED USER 112 PREV 16771320 REAL 16771320
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB778 IS USED USER 64 PREV 16771152 REAL 16771152
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB778 IS USED USER 64 PREV 16771152 REAL 16771152
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB778 IS USED USER 64 PREV 16771152 REAL 16771152
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB778 IS USED USER 64 PREV 16771152 REAL 16771152
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB778 IS USED USER 64 PREV 16771152 REAL 16771152
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB778 IS USED USER 64 PREV 16771152 REAL 16771152
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB778 IS USED USER 64 PREV 16771152 REAL 16771152
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB778 IS USED USER 64 PREV 16771152 REAL 16771152
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB778 IS USED USER 64 PREV 16771152 REAL 16771152
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB778 IS USED USER 64 PREV 16771152 REAL 16771152
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB778 IS USED USER 64 PREV 16771152 REAL 16771152
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB7F0 IS USED USER 112 PREV 16771032 REAL 16771032
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB898 IS USED USER 64 PREV 16770864 REAL 16770864
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB898 IS USED USER 64 PREV 16770864 REAL 16770864
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB910 IS USED USER 80 PREV 16770744 REAL 16770744
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB998 IS USED USER 48 PREV 16770608 REAL 16770608
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DB998 IS USED USER 64 PREV 16770608 REAL 16770608
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBA10 IS USED USER 80 PREV 16770488 REAL 16770488
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBA98 IS USED USER 64 PREV 16770352 REAL 16770352
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBA98 IS USED USER 64 PREV 16770352 REAL 16770352
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBA98 IS USED USER 64 PREV 16770352 REAL 16770352
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBA98 IS USED USER 64 PREV 16770352 REAL 16770352
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBA98 IS USED USER 48 PREV 16770352 REAL 16770352
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBA98 IS USED USER 64 PREV 16770352 REAL 16770352
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBB10 IS USED USER 112 PREV 16770232 REAL 16770232
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBBB8 IS USED USER 64 PREV 16770064 REAL 16770064
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBC30 IS USED USER 112 PREV 16769944 REAL 16769944
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBCD8 IS USED USER 64 PREV 16769776 REAL 16769776
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBCD8 IS USED USER 64 PREV 16769776 REAL 16769776
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBCD8 IS USED USER 48 PREV 16769776 REAL 16769776
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBCD8 IS USED USER 80 PREV 16769776 REAL 16769776
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBD60 IS USED USER 112 PREV 16769640 REAL 16769640
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 80 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 48 PREV 16769472 REAL 16769472
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE08 IS USED USER 80 PREV 16769472 REAL 16769472
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBE90 IS USED USER 176 PREV 16769336 REAL 16769336
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 80 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 80 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 80 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 80 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DBF78 IS USED USER 208 PREV 16769104 REAL 16769104
+src/malloc.c:134 in fn calloc
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DC080 IS USED USER 16 PREV 16768840 REAL 16768840
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEE934030 IS USED USER 10128 PREV 20376 REAL 20376
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DC080 IS USED USER 32 PREV 16768840 REAL 16768840
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DC0D8 IS USED USER 32 PREV 16768752 REAL 16768752
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DC130 IS USED USER 32 PREV 16768664 REAL 16768664
+src/memory_arena.c:209 in fn chunk_try_join_next
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DC188 IS USED USER 32 PREV 16768576 REAL 16768576
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DC1E0 IS USED USER 16 PREV 16768488 REAL 16768488
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DC228 IS USED USER 96 PREV 16768416 REAL 16768416
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7F1AEC8DC2C0 IS USED USER 32 PREV 16768264 REAL 16768264
+FCF57187CD8 IS USED USER 64 PREV 16769776 REAL 16769776
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187CD8 IS USED USER 64 PREV 16769776 REAL 16769776
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187CD8 IS USED USER 48 PREV 16769776 REAL 16769776
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187CD8 IS USED USER 80 PREV 16769776 REAL 16769776
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187D60 IS USED USER 112 PREV 16769640 REAL 16769640
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 80 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 64 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 48 PREV 16769472 REAL 16769472
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E08 IS USED USER 80 PREV 16769472 REAL 16769472
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187E90 IS USED USER 176 PREV 16769336 REAL 16769336
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 80 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 80 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 80 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 80 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 64 PREV 16769104 REAL 16769104
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57187F78 IS USED USER 208 PREV 16769104 REAL 16769104
+src/malloc.c:134 in fn calloc
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57188080 IS USED USER 16 PREV 16768840 REAL 16768840
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:164 in fn chunk_fill
+7FCF591E0030 IS USED USER 10128 PREV 20376 REAL 20376
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57188080 IS USED USER 32 PREV 16768840 REAL 16768840
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF571880D8 IS USED USER 32 PREV 16768752 REAL 16768752
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57188130 IS USED USER 32 PREV 16768664 REAL 16768664
+src/memory_arena.c:211 in fn chunk_try_join_next
+src/memory_arena.c:222 in fn chunk_try_join_prev
+src/memory_arena.c:228 in fn chunk_try_join_prev
+src/memory_arena.c:230 in fn chunk_try_join_prev
+src/memory_arena.c:234 in fn chunk_try_join_prev
+src/memory_arena.c:237 in fn chunk_try_join_prev
+src/memory_arena.c:202 in fn arena_free_chunk
+src/memory_arena.c:205 in fn arena_free_chunk
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57188188 IS USED USER 32 PREV 16768576 REAL 16768576
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF571881E0 IS USED USER 16 PREV 16768488 REAL 16768488
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF57188228 IS USED USER 96 PREV 16768416 REAL 16768416
+src/malloc.c:54 in fn malloc
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FCF571882C0 IS USED USER 32 PREV 16768264 REAL 16768264

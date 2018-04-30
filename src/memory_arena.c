@@ -190,15 +190,16 @@ t_mem_chunk     *chunk_append(t_mem_chunk *chunk, size_t size, t_expstrat strat)
 */
 int            arena_free_chunk(t_mem_chunk *chunk)
 {
-    DEBUG_LINE();    
+    t_mem_arena *arena;
+
+    arena = chunk->arena;
+    arena_alloc_delta(arena, -chunk->user_size);
     if (chunk->status != USED)
         return (0);
     chunk->status = FREE;
-    arena_alloc_delta(chunk->arena, -chunk->user_size);
     chunk_try_join_next(chunk);
-    DEBUG_ALLOC(chunk);
     chunk_try_join_prev(chunk);
-    if (chunk->arena->buffer_used == 0)
+    if (arena->buffer_used == 0)
         return (-1);
     return (1);
 }
@@ -216,7 +217,6 @@ void            chunk_try_join_next(t_mem_chunk *chunk)
 
 void            chunk_try_join_prev(t_mem_chunk *chunk)
 {
-    DEBUG_LINE();    
     if (!chunk->prev)
     {        
         return ;
@@ -224,7 +224,9 @@ void            chunk_try_join_prev(t_mem_chunk *chunk)
     chunk->prev->real_size += chunk->real_size + sizeof(t_mem_chunk);
     chunk->prev->next = chunk->next;
     if (chunk->next)
+    {
         chunk->next->prev = chunk->prev;
+    }
 }
 
 t_mem_chunk     *arena_expande_chunk(t_mem_chunk *chunk, size_t size)

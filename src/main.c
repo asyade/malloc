@@ -8,16 +8,24 @@
 #define LEN 50000
 
 #define PTR_COUNT 10
-/*
+
 int main()
 {
 
     void    *ptr[3] = {malloc(560), malloc(128), malloc(1024)};
     
-    free(ptr[0]);
+    memset(ptr[0], 42, 560);
+    memset(ptr[1], 42, 128);
+    memset(ptr[2], 42, 1024);
     free(ptr[1]);
     free(ptr[2]);
-}*/
+    free(ptr[0]);
+malloc(10);
+
+    write(1, ptr[0], 560);
+    write(1, ptr[1], 128);
+    write(1, ptr[2], 1024);
+}
 /*
 for (int retry = 0; retry < 1; retry++)
 {

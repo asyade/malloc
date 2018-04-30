@@ -24,12 +24,14 @@ void        free(void *ptr)
     t_mem_chunk     *chk;
     t_mem_arena     *arena;
 
+    if (ptr == NULL)
+        return ;
     chk = DPTR_TO_CHK(ptr);
     pthread_mutex_lock(&malloc_mutex);    
     arena = chk->arena;
     if (arena_free_chunk(chk) < 0)
     {
-        if (arena->next == NULL)
+       /* if (arena->next == NULL)
         {
             destroy_arena(arena);
             pthread_mutex_unlock(&malloc_mutex);                
@@ -42,13 +44,14 @@ void        free(void *ptr)
         }
         arena->next->prev = arena->prev;
         arena->prev->next = arena->next;
-        destroy_arena(chk->arena);
+        destroy_arena(chk->arena);*/
     }
     pthread_mutex_unlock(&malloc_mutex);    
 }
 
 void        *malloc(size_t size)
 {
+    DEBUG_LINE();    
     t_mem_chunk *tmp;
     t_mem_arena *area;
 
@@ -101,6 +104,7 @@ void        *malloc(size_t size)
 
 void        *realloc(void *ptr, size_t size)
 {
+    DEBUG_LINE();    
     t_mem_chunk *chk;
     t_mem_chunk *new;
 
@@ -127,6 +131,7 @@ void        *realloc(void *ptr, size_t size)
 
 void        *calloc(size_t nmemb, size_t size)
 {
+    DEBUG_LINE();    
     void        *ret;
     if (size == 0 || nmemb == 0)
         return (NULL);
@@ -139,6 +144,7 @@ void        *calloc(size_t nmemb, size_t size)
 
 void         *reallocarray(void *ptr, size_t nmemb, size_t size)
 {
+    DEBUG_LINE();    
     size_t  old_size;
 
     if (ptr == NULL || nmemb == 0 || size == 0)
