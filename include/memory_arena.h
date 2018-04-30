@@ -5,6 +5,7 @@
 # include <sys/mman.h>
 # include <unistd.h>
 # include <limits.h>
+# include "libft.h"
 
 # define MMAP_NULL ((void *)-1)
 # define MEM_ARENA_AL     16
@@ -14,7 +15,11 @@
 # define CHK_TO_DPTR(chk)((void *)(chk + 1))
 # define CHK_AVAIL(chk) (chk->real_size - chk->user_size)
 
-# define DEBUG_LINE() (printf("@ %s:%d in function `%s`\n",  __FILE__, __LINE__ ,__FUNCTION__))
+void    debugline(char *fname, int nbr, char *fn);
+
+#define DEBUG_LINE()(debugline((char *)__FILE__, __LINE__, (char *)__FUNCTION__))
+#define DEBUG_ALLOC(chk) DEBUG_LINE(); debugalloc(chk);
+//# define DEBUG_LINE() (printf("@ %s:%d in function `%s`\n",  __FILE__, __LINE__ ,__FUNCTION__))
 
 typedef enum    e_mem_status
 {

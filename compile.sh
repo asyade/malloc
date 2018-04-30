@@ -1,5 +1,5 @@
 echo GENERATING OBJ
-gcc  -I./libft src/*.c -I./include/ -fPIC -c
+gcc  -I./libft src/*.c libft/*.c -I./include/ -fPIC -c
 echo OBJ GENERATED
 rm -rf ./obj/*
 mv *.o ./obj

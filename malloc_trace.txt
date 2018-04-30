@@ -1,0 +1,25 @@
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:164 in fn chunk_fill
+7FAB4A900030 IS USED USER 560 PREV 16781208 REAL 16781208
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:170 in fn chunk_append
+src/memory_arena.c:164 in fn chunk_fill
+7FAB4A900298 IS USED USER 128 PREV 16780592 REAL 16780592
+src/memory_arena.c:94 in fn arena_get_chunk
+src/memory_arena.c:164 in fn chunk_fill
+7FAB4C9CB030 IS USED USER 1024 PREV 3992 REAL 3992
+src/memory_arena.c:193 in fn arena_free_chunk
+src/memory_arena.c:208 in fn chunk_try_join_next
+src/memory_arena.c:199 in fn arena_free_chunk
+7FAB4A900298 IS FREE USER 128 PREV 16780592 REAL 16780592
+src/memory_arena.c:219 in fn chunk_try_join_prev
+src/memory_arena.c:193 in fn arena_free_chunk
+src/memory_arena.c:208 in fn chunk_try_join_next
+src/memory_arena.c:199 in fn arena_free_chunk
+7FAB4C9CB030 IS FREE USER 1024 PREV 3992 REAL 3992
+src/memory_arena.c:219 in fn chunk_try_join_prev
+src/memory_arena.c:193 in fn arena_free_chunk
+src/memory_arena.c:208 in fn chunk_try_join_next
+src/memory_arena.c:199 in fn arena_free_chunk
+7FAB4A900030 IS FREE USER 560 PREV 16781208 REAL 16781208
+src/memory_arena.c:219 in fn chunk_try_join_prev
