@@ -21,6 +21,7 @@ t_mem_arena        *get_small_heap(t_mem_arena *new)
 
 void        free(void *ptr)
 {
+    DEBUG_LINE();
     t_mem_chunk     *chk;
     t_mem_arena     *arena;
 
@@ -31,7 +32,8 @@ void        free(void *ptr)
     arena = chk->arena;
     if (arena_free_chunk(chk) < 0)
     {
-       /* if (arena->next == NULL)
+        DEBUG_ARENA(arena);    
+        if (arena->next == NULL)
         {
             destroy_arena(arena);
             pthread_mutex_unlock(&malloc_mutex);                
@@ -44,9 +46,12 @@ void        free(void *ptr)
         }
         arena->next->prev = arena->prev;
         arena->prev->next = arena->next;
-        destroy_arena(chk->arena);*/
+        destroy_arena(chk->arena);
     }
-    pthread_mutex_unlock(&malloc_mutex);    
+    else {
+        DEBUG_ARENA(arena);                
+    }
+    pthread_mutex_unlock(&malloc_mutex);
 }
 
 void        *malloc(size_t size)
@@ -78,6 +83,7 @@ void        *malloc(size_t size)
                     area->root = 1;
                     get_small_heap(area);
                 }
+                DEBUG_ARENA(area);
                 pthread_mutex_unlock(&malloc_mutex);                
                 return (CHK_TO_DPTR(tmp));
             }
@@ -110,7 +116,7 @@ void        *realloc(void *ptr, size_t size)
 
     if (size == 0 || ptr == NULL)
         return (NULL);
-    pthread_mutex_lock(&malloc_mutex);
+   /* pthread_mutex_lock(&malloc_mutex);
     chk = DPTR_TO_CHK(ptr);
     if ((chk = arena_expande_chunk(chk, size)) != NULL)
     {
@@ -118,14 +124,13 @@ void        *realloc(void *ptr, size_t size)
         return (CHK_TO_DPTR(chk));
     }
     chk = DPTR_TO_CHK(ptr);
+    pthread_mutex_unlock(&malloc_mutex);*/            
     if ((new = malloc(size)) == NULL)
     {
-        pthread_mutex_unlock(&malloc_mutex);            
         return (NULL);//todo voir si on free ou pas en cas d'echeque
     }
     memcpy(new, ptr, chk->user_size);
     free(ptr);
-    pthread_mutex_unlock(&malloc_mutex);    
     return (CHK_TO_DPTR(new));
 }
 

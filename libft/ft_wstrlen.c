@@ -20,7 +20,7 @@ void assert_eq(int eq, int a,int b, char *str, int line)
     ft_putstr(str);
     ft_putstr(":");
     ft_putnbr(line);
-    ft_putchar(':1\n');
+    ft_putchar('\n');
 }
 
 size_t	ft_wstrlen(wchar_t *str)

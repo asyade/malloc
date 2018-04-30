@@ -35,7 +35,6 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-
 void				ft_perror(char *str, int flags);
 void				ft_errset(char *name);
 void				ft_bzero(void *s, size_t n);
@@ -52,6 +51,7 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_isupper(int c);
 int					ft_islower(int c);
+void				ft_strrev(char *s);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_isalpha(int c);
