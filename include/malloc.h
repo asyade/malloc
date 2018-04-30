@@ -2,15 +2,16 @@
 # define MALLOC_H
 
 # include "memory_arena.h"
-# include "bheap.h"
 # include <stdlib.h>
 # include <pthread.h>
 
 
 # include <stdio.h>
 
-# define SMALL_HEAP_BUFFER 1024*1024*16// 1024*1024*4
+# define SMALL_HEAP_BUFFER 1024*1024*4
 # define MED_HEAP_BUFFER  1024*1024*16
+
+# define MALLOC_SAFE    1
 
 # define BIG_HEAP_MIN   1024
 

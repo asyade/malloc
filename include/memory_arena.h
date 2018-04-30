@@ -15,9 +15,9 @@
 # define CHK_TO_DPTR(chk)((void *)(chk + 1))
 # define CHK_AVAIL(chk) (chk->real_size - chk->user_size)
 
-#define DEBUG_LINE()(debugline((char *)__FILE__, __LINE__, (char *)__FUNCTION__))
-#define DEBUG_ALLOC(chk) debugalloc(chk);
-#define DEBUG_ARENA(chk) debugarena(chk);
+#define DEBUG_LINE()     ;//(debugline((char *)__FILE__, __LINE__, (char *)__FUNCTION__))
+#define DEBUG_ALLOC(chk) ;//debugalloc(chk);
+#define DEBUG_ARENA(chk) ;//debugarena(chk);
 //# define DEBUG_LINE() (printf("@ %s:%d in function `%s`\n",  __FILE__, __LINE__ ,__FUNCTION__))
 
 typedef enum    e_mem_status
@@ -29,9 +29,7 @@ typedef enum    e_mem_status
 typedef enum    e_expstrat
 {
     NONE           = 0x0,
-    APPEND_LARGE   = 0x1,
-    APPEND_FILL    = 0x2,
-    FILL_LARGE     = 0x4,
+    APPEND    = 0x2,
     FILL           = 0x8,
     ALTERNATELY    = 0x40
 }               t_expstrat;
@@ -55,12 +53,10 @@ typedef struct          s_mem_chunk
 {
     t_mem_status        status;
     size_t              user_size;
-    size_t              prev_size;
     size_t              real_size;
     t_mem_arena         *arena;
     struct s_mem_chunk  *next;
     struct s_mem_chunk  *prev;
-    char                padding[8];    
 }                       t_mem_chunk;
 
 void    debugline(char *fname, int nbr, char *fn);
@@ -70,8 +66,8 @@ void    debugalloc(t_mem_chunk *chk);
 t_mem_chunk     *arena_get_chunk(size_t size, t_mem_arena *arena);
 t_expstrat      chunk_get_strat(t_mem_chunk *chunk, size_t size);
 t_mem_chunk     *arena_process_strat(t_mem_chunk *chunk, size_t size, t_expstrat strat);
-t_mem_chunk     *chunk_fill(t_mem_chunk *chunk, size_t size, t_expstrat strat);
-t_mem_chunk     *chunk_append(t_mem_chunk *chunk, size_t size, t_expstrat strat);
+t_mem_chunk     *chunk_fill(t_mem_chunk *chunk, size_t size);
+t_mem_chunk     *chunk_append(t_mem_chunk *chunk, size_t size);
 
 t_mem_chunk     *arena_expande_chunk(t_mem_chunk *chunk, size_t new_size);
 

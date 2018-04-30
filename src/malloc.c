@@ -19,20 +19,33 @@ t_mem_arena        *get_small_heap(t_mem_arena *new)
     return (arena);
 }
 
+int        ptr_is_valide(void *ptr)
+{
+    t_mem_chunk *chk;
+
+    chk = DPTR_TO_CHK(ptr);
+    if (!ptr || (size_t)ptr % MEM_ARENA_AL)
+        return (0);
+    if ((size_t)chk->next % MEM_ARENA_AL || (size_t)chk->prev % MEM_ARENA_AL)
+        return (0);
+    if (chk->next == NULL && chk->prev == NULL)
+        return (0);
+    return (1);
+}
+
 void        free(void *ptr)
 {
     DEBUG_LINE();
     t_mem_chunk     *chk;
     t_mem_arena     *arena;
 
-    if (ptr == NULL)
+    if (!ptr_is_valide(ptr))
         return ;
     chk = DPTR_TO_CHK(ptr);
     pthread_mutex_lock(&malloc_mutex);    
     arena = chk->arena;
     if (arena_free_chunk(chk) < 0)
     {
-        DEBUG_ARENA(arena);    
         if (arena->next == NULL)
         {
             destroy_arena(arena);
@@ -47,9 +60,6 @@ void        free(void *ptr)
         arena->next->prev = arena->prev;
         arena->prev->next = arena->next;
         destroy_arena(chk->arena);
-    }
-    else {
-        DEBUG_ARENA(arena);                
     }
     pthread_mutex_unlock(&malloc_mutex);
 }
@@ -114,9 +124,9 @@ void        *realloc(void *ptr, size_t size)
     t_mem_chunk *chk;
     t_mem_chunk *new;
 
-    if (size == 0 || ptr == NULL)
+    if (size == 0 || !ptr_is_valide(ptr))
         return (NULL);
-   /* pthread_mutex_lock(&malloc_mutex);
+    pthread_mutex_lock(&malloc_mutex);
     chk = DPTR_TO_CHK(ptr);
     if ((chk = arena_expande_chunk(chk, size)) != NULL)
     {
@@ -124,14 +134,14 @@ void        *realloc(void *ptr, size_t size)
         return (CHK_TO_DPTR(chk));
     }
     chk = DPTR_TO_CHK(ptr);
-    pthread_mutex_unlock(&malloc_mutex);*/            
+    pthread_mutex_unlock(&malloc_mutex);            
     if ((new = malloc(size)) == NULL)
     {
         return (NULL);//todo voir si on free ou pas en cas d'echeque
     }
     memcpy(new, ptr, chk->user_size);
     free(ptr);
-    return (CHK_TO_DPTR(new));
+    return (new);
 }
 
 void        *calloc(size_t nmemb, size_t size)

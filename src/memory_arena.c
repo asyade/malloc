@@ -28,12 +28,12 @@ void    debugalloc(t_mem_chunk *chk)
     int fd = get_errstd();
 
     ft_putnbrbase_fd((size_t)chk, "0123456789ABCDEF", fd);
-    ft_putstr_fd(" IS ", fd);
-    ft_putstr_fd(chk->status == FREE ? "FREE":"USED",fd);
+    ft_putstr_fd(" PREV ", fd);
+    ft_putnbrbase_fd((size_t)chk->prev, "0123456789ABCDEF", fd);    
+    ft_putstr_fd(" NEXT ", fd);
+    ft_putnbrbase_fd((size_t)chk->next, "0123456789ABCDEF", fd);    
     ft_putstr_fd(" USER ", fd);
     ft_putnbrbase_fd(chk->user_size, "0123456789", fd);
-    ft_putstr_fd(" PREV ", fd);
-    ft_putnbrbase_fd(chk->prev_size, "0123456789", fd);
     ft_putstr_fd(" REAL ", fd);
     ft_putnbrbase_fd(chk->real_size, "0123456789", fd);
     ft_putendl_fd("", fd);
@@ -74,7 +74,6 @@ t_mem_arena     *init_arena(size_t buffer_min_size)
     chk = arena->buffer;
     chk->status = FREE;
     chk->user_size = 0;
-    chk->prev_size = 0;
     chk->real_size = arena->buffer_size - sizeof(t_mem_chunk);
     chk->next = NULL;
     chk->prev = NULL;
@@ -133,6 +132,7 @@ t_mem_chunk     *arena_get_chunk(size_t size, t_mem_arena *arena)
         }
         current = current->next;
     }
+    DEBUG_LINE();    
     return (alternative_chunk ? arena_process_strat(alternative_chunk, size, alternative_strat) : NULL);
 }
 
@@ -140,62 +140,67 @@ t_expstrat       chunk_get_strat(t_mem_chunk *chunk, size_t size)
 {
     if (chunk->status == USED)
     {
-        if (chunk->real_size >= chunk->prev_size + size + sizeof(t_mem_chunk) + MEM_ARENA_AL)
-            return APPEND_LARGE;
-        if (chunk->real_size >= chunk->prev_size + size + sizeof(t_mem_chunk))
-            return APPEND_FILL;
-        if (chunk->real_size >= chunk->user_size + size + sizeof(t_mem_chunk) + MEM_ARENA_AL)
-            return APPEND_LARGE | ALTERNATELY;
-        if (chunk->real_size >= chunk->user_size + size + sizeof(t_mem_chunk))
-            return APPEND_FILL | ALTERNATELY;
-        else
-            return NONE;
+        if (chunk->real_size >= chunk->user_size * 2 + (size * 2) + sizeof(t_mem_chunk))
+            return (APPEND);
+        if (chunk->real_size >= chunk->user_size * 2 + size + sizeof(t_mem_chunk))
+            return (APPEND | ALTERNATELY);
+        else if (chunk->real_size >= chunk->user_size + size + sizeof(t_mem_chunk))
+            return APPEND | ALTERNATELY;
+        return NONE;
     }
-    if (chunk->real_size >= size + sizeof(t_mem_chunk) + MEM_ARENA_AL)
-        return (FILL_LARGE);
-    else if (chunk->real_size >= size + sizeof(t_mem_chunk))
+    else if (chunk->real_size >= size + sizeof(t_mem_chunk) + MEM_ARENA_AL ||
+            chunk->real_size >= size + sizeof(t_mem_chunk))
         return (FILL);
     return NONE;
 }
 
 t_mem_chunk     *arena_process_strat(t_mem_chunk *chunk, size_t size, t_expstrat strat)
 {
-    if (strat & (APPEND_LARGE | APPEND_FILL))
-        return chunk_append(chunk, size, strat);
-    if (strat & (FILL | FILL_LARGE))
-        return chunk_fill(chunk, size, strat);
+    if (strat & APPEND)
+    {
+        DEBUG_LINE();
+        return chunk_append(chunk, size);
+    }
+    if (strat & FILL)
+    {
+        DEBUG_LINE();
+        return chunk_fill(chunk, size);
+    }
     return (NULL);
 }
 
-t_mem_chunk     *chunk_fill(t_mem_chunk *chunk, size_t size, t_expstrat strat)
+t_mem_chunk     *chunk_fill(t_mem_chunk *chunk, size_t size)
 {
     chunk->user_size = size;
-    if (strat & FILL_LARGE)
-        chunk->prev_size = chunk->real_size;// (chunk->real_size >= size * 2 + sizeof(t_mem_chunk)) ? size * 2 + sizeof(t_mem_chunk) : chunk->real_size;
-    else
-        chunk->prev_size = chunk->user_size;
     chunk->status = USED;
     arena_alloc_delta(chunk->arena, chunk->user_size);
     DEBUG_ALLOC(chunk);
     return (chunk);
 }
 
-t_mem_chunk     *chunk_append(t_mem_chunk *chunk, size_t size, t_expstrat strat)
+t_mem_chunk     *chunk_append(t_mem_chunk *chunk, size_t size)
 {
+    DEBUG_ALLOC(chunk);
     t_mem_chunk *new;
-    if (strat & ALTERNATELY)
+    if (chunk->real_size < chunk->user_size * 2 + sizeof(t_mem_chunk) + size)
+    {
+        DEBUG_LINE();
         new = (t_mem_chunk *)((size_t)(chunk + 1) + chunk->user_size);
+    }
     else
-        new = (t_mem_chunk *)((size_t)(chunk + 1) + chunk->prev_size);
+        new = (t_mem_chunk *)((size_t)(chunk + 1) + chunk->user_size * 2);
     new->real_size = chunk->real_size - (((size_t)new - (size_t)chunk));//+ sizeof(t_mem_chunk));
     chunk->real_size -= new->real_size + sizeof(t_mem_chunk);
     new->prev = chunk;
     new->arena = chunk->arena;
-    if (chunk->next)
-        chunk->next->prev = new;    
     new->next = chunk->next;
+    if (new->next)
+    {
+        DEBUG_LINE();            
+        new->next->prev = new;    
+    }
     chunk->next = new;
-    return chunk_fill(new, size, strat & APPEND_LARGE ? FILL_LARGE : FILL);
+    return chunk_fill(new, size);
 }
 
 /*
@@ -207,12 +212,13 @@ int            arena_free_chunk(t_mem_chunk *chunk)
     t_mem_arena *arena;
 
     arena = chunk->arena;
-    arena_alloc_delta(arena, -chunk->user_size);
-    if (chunk->status != USED)
+    if (chunk->status == FREE || chunk->arena == NULL)
         return (0);
+    arena_alloc_delta(arena, -chunk->user_size);
     chunk->status = FREE;
     chunk_try_join_next(chunk);
     chunk_try_join_prev(chunk);
+    DEBUG_LINE();        
     if (arena->buffer_used == 0)
         return (-1);
     return (1);
@@ -226,34 +232,41 @@ void            chunk_try_join_next(t_mem_chunk *chunk)
     chunk->next = chunk->next->next;
     if (chunk->next)
         chunk->next->prev = chunk;
+    DEBUG_LINE();    
+    DEBUG_ALLOC(chunk);
 }
 
 void            chunk_try_join_prev(t_mem_chunk *chunk)
 {
     if (!chunk->prev)
-    {        
         return ;
-    }
     chunk->prev->real_size += chunk->real_size + sizeof(t_mem_chunk);
     chunk->prev->next = chunk->next;
     if (chunk->next)
     {
         chunk->next->prev = chunk->prev;
     }
+    DEBUG_LINE();
+    DEBUG_ALLOC(chunk);    
 }
 
 t_mem_chunk     *arena_expande_chunk(t_mem_chunk *chunk, size_t size)
 {
     size = SIZE_ALIGN(size, MEM_ARENA_AL);
-    if (chunk->real_size >= size) {
+    if (chunk->real_size >= size)
+    {
+        DEBUG_LINE();
+        arena_alloc_delta(chunk->arena, -chunk->user_size);
         chunk->user_size = size;
-        if (chunk->user_size > chunk->prev_size)
-            chunk->prev_size = chunk->user_size;
+        arena_alloc_delta(chunk->arena, chunk->user_size);        
         return (chunk);
     }
     if (chunk->prev && chunk->prev->status == FREE && chunk->prev->real_size + chunk->real_size + sizeof(t_mem_chunk) >= size)
     {
+        DEBUG_LINE();        
+        arena_alloc_delta(chunk->arena, -chunk->user_size);        
         chunk->prev->real_size += chunk->real_size + sizeof(t_mem_chunk);
+        arena_alloc_delta(chunk->arena, -chunk->prev->real_size);        
         chunk->prev->status = USED;
         chunk->prev->next = chunk->next;
         if (chunk->next)
@@ -261,5 +274,6 @@ t_mem_chunk     *arena_expande_chunk(t_mem_chunk *chunk, size_t size)
         memmove(chunk->prev + 1, chunk + 1, chunk->user_size);
         return (chunk);
     }
+    DEBUG_LINE();    
     return  (NULL);
 }
