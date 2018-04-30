@@ -87,7 +87,7 @@ char *addr;
     print("Bonjours\n"); 
 } 
 
-int main2(int ac, char **av)
+int m2ain(int ac, char **av)
 {
     if (ac > 1)
         srand(atoi(av[1]));

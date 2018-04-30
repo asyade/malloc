@@ -26,8 +26,6 @@ int        ptr_is_valide(void *ptr)
     chk = DPTR_TO_CHK(ptr);
     if (!ptr || (size_t)ptr % MEM_ARENA_AL)
         return (0);
-    if ((size_t)chk->next % MEM_ARENA_AL || (size_t)chk->prev % MEM_ARENA_AL)
-        return (0);
     if (chk->next == NULL && chk->prev == NULL)
         return (0);
     return (1);
@@ -125,7 +123,7 @@ void        *realloc(void *ptr, size_t size)
     t_mem_chunk *new;
 
     if (size == 0 || !ptr_is_valide(ptr))
-        return (NULL);
+        return (ptr);
     pthread_mutex_lock(&malloc_mutex);
     chk = DPTR_TO_CHK(ptr);
     if ((chk = arena_expande_chunk(chk, size)) != NULL)
