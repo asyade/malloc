@@ -84,7 +84,7 @@ char *addr;
     free(NULL); 
     free((void *)addr + 5); 
     if (realloc((void *)addr + 5, 10) == NULL) 
-    print("Bonjours\n"); 
+        print("Bonjours\n"); 
 } 
 
 int m2ain(int ac, char **av)

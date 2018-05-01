@@ -2,7 +2,7 @@
 
 static int  get_errstd()
 {
-    return (1);        
+    return (2);        
 }
 
 void        debugline(char *fname, int nbr, char *fn)

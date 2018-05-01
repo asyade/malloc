@@ -24,16 +24,13 @@ int        ptr_is_valide(void *ptr)
     t_mem_chunk *chk;
 
     chk = DPTR_TO_CHK(ptr);
-    if (!ptr || (size_t)ptr % MEM_ARENA_AL)
-        return (0);
-    if (chk->next == NULL && chk->prev == NULL)
+    if (!ptr || (size_t)ptr % 2)
         return (0);
     return (1);
 }
 
 void        free(void *ptr)
 {
-    DEBUG_LINE();
     t_mem_chunk     *chk;
     t_mem_arena     *arena;
 
@@ -64,7 +61,6 @@ void        free(void *ptr)
 
 void        *malloc(size_t size)
 {
-    DEBUG_LINE();    
     t_mem_chunk *tmp;
     t_mem_arena *area;
 
@@ -74,7 +70,9 @@ void        *malloc(size_t size)
     if (size >= BIG_HEAP_MIN)
     {
         if ((area = init_arena(size * 2)) == NULL || (tmp = arena_get_chunk(size, area)) == NULL)
+        {
             return (NULL);
+        }
         return (CHK_TO_DPTR(tmp));
     }
     pthread_mutex_lock(&malloc_mutex);
@@ -91,7 +89,6 @@ void        *malloc(size_t size)
                     area->root = 1;
                     get_small_heap(area);
                 }
-                DEBUG_ARENA(area);
                 pthread_mutex_unlock(&malloc_mutex);                
                 return (CHK_TO_DPTR(tmp));
             }
@@ -118,10 +115,11 @@ void        *malloc(size_t size)
 
 void        *realloc(void *ptr, size_t size)
 {
-    DEBUG_LINE();    
     t_mem_chunk *chk;
     t_mem_chunk *new;
 
+    if (ptr == NULL)
+        return (malloc(size));
     if (size == 0 || !ptr_is_valide(ptr))
         return (ptr);
     pthread_mutex_lock(&malloc_mutex);
@@ -134,9 +132,7 @@ void        *realloc(void *ptr, size_t size)
     chk = DPTR_TO_CHK(ptr);
     pthread_mutex_unlock(&malloc_mutex);            
     if ((new = malloc(size)) == NULL)
-    {
         return (NULL);//todo voir si on free ou pas en cas d'echeque
-    }
     memcpy(new, ptr, chk->user_size);
     free(ptr);
     return (new);
@@ -144,7 +140,6 @@ void        *realloc(void *ptr, size_t size)
 
 void        *calloc(size_t nmemb, size_t size)
 {
-    DEBUG_LINE();    
     void        *ret;
     if (size == 0 || nmemb == 0)
         return (NULL);
@@ -157,14 +152,19 @@ void        *calloc(size_t nmemb, size_t size)
 
 void         *reallocarray(void *ptr, size_t nmemb, size_t size)
 {
-    DEBUG_LINE();    
-    size_t  old_size;
+    t_mem_chunk *chk;
+    size_t      oldsize;
 
-    if (ptr == NULL || nmemb == 0 || size == 0)
-        return (NULL);
-    old_size = DPTR_TO_CHK(ptr)->user_size;
-    size *= nmemb;
-    ptr = realloc(ptr, size);
-    bzero((void *)((size_t)ptr + old_size), size - old_size);
-    return (ptr);
+    if (size == 0 || !ptr_is_valide(ptr))
+        return (ptr);
+    pthread_mutex_lock(&malloc_mutex);
+    chk = DPTR_TO_CHK(ptr);
+    oldsize = chk->user_size;
+    if ((chk = arena_expande_chunk(chk, size)) != NULL)
+    {
+        pthread_mutex_unlock(&malloc_mutex);
+        bzero((void *)((size_t)(chk + 1) + oldsize), chk->user_size - oldsize);
+        return (CHK_TO_DPTR(chk));
+    }
+    return (NULL);
 }

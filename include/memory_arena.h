@@ -15,9 +15,9 @@
 # define CHK_TO_DPTR(chk)((void *)(chk + 1))
 # define CHK_AVAIL(chk) (chk->real_size - chk->user_size)
 
-#define DEBUG_LINE()     ;//(debugline((char *)__FILE__, __LINE__, (char *)__FUNCTION__))
-#define DEBUG_ALLOC(chk) ;//debugalloc(chk);
-#define DEBUG_ARENA(chk) ;//debugarena(chk);
+#define DEBUG_LINE()     (debugline((char *)__FILE__, __LINE__, (char *)__FUNCTION__))
+#define DEBUG_ALLOC(chk) debugalloc(chk);
+#define DEBUG_ARENA(chk) debugarena(chk);
 //# define DEBUG_LINE() (printf("@ %s:%d in function `%s`\n",  __FILE__, __LINE__ ,__FUNCTION__))
 
 typedef enum    e_mem_status

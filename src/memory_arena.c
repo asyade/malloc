@@ -53,7 +53,6 @@ int            arena_free_chunk(t_mem_chunk *chunk)
     chunk->status = FREE;
     chunk_try_join_next(chunk);
     chunk_try_join_prev(chunk);
-    DEBUG_LINE();        
     if (arena->buffer_used == 0)
         return (-1);
     return (1);

@@ -5,7 +5,6 @@ t_mem_chunk     *arena_expande_chunk(t_mem_chunk *chunk, size_t size)
     size = SIZE_ALIGN(size, MEM_ARENA_AL);
     if (chunk->real_size >= size)
     {
-        DEBUG_LINE();
         arena_alloc_delta(chunk->arena, -chunk->user_size);
         chunk->user_size = size;
         arena_alloc_delta(chunk->arena, chunk->user_size);        
@@ -13,7 +12,6 @@ t_mem_chunk     *arena_expande_chunk(t_mem_chunk *chunk, size_t size)
     }
     if (chunk->prev && chunk->prev->status == FREE && chunk->prev->real_size + chunk->real_size + sizeof(t_mem_chunk) >= size)
     {
-        DEBUG_LINE();        
         arena_alloc_delta(chunk->arena, -chunk->user_size);        
         chunk->prev->real_size += chunk->real_size + sizeof(t_mem_chunk);
         arena_alloc_delta(chunk->arena, -chunk->prev->real_size);        
@@ -24,18 +22,15 @@ t_mem_chunk     *arena_expande_chunk(t_mem_chunk *chunk, size_t size)
         memmove(chunk->prev + 1, chunk + 1, chunk->user_size);
         return (chunk);
     }
-    DEBUG_LINE();    
     return  (NULL);
 }
 
 t_mem_chunk     *chunk_append(t_mem_chunk *chunk, size_t size)
 {
-    DEBUG_ALLOC(chunk);
     t_mem_chunk *new;
     if (chunk->real_size < chunk->user_size * 2 + sizeof(t_mem_chunk) + size)
     {
-        DEBUG_LINE();
-        new = (t_mem_chunk *)((size_t)(chunk + 1) + chunk->user_size);
+        new = (t_mem_chunk *)((size_t)(chunk + 1) + chunk->user_size);//Maybe incrase realloc prevision
     }
     else
         new = (t_mem_chunk *)((size_t)(chunk + 1) + chunk->user_size * 2);
@@ -46,7 +41,6 @@ t_mem_chunk     *chunk_append(t_mem_chunk *chunk, size_t size)
     new->next = chunk->next;
     if (new->next)
     {
-        DEBUG_LINE();            
         new->next->prev = new;    
     }
     chunk->next = new;

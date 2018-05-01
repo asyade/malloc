@@ -28,7 +28,6 @@ t_mem_chunk     *arena_get_chunk(size_t size, t_mem_arena *arena)
         }
         current = current->next;
     }
-    DEBUG_LINE();    
     return (alternative_chunk ? arena_process_strat(alternative_chunk, size, alternative_strat) : NULL);
 }
 
@@ -37,12 +36,10 @@ t_mem_chunk     *arena_process_strat(t_mem_chunk *chunk, size_t size, t_expstrat
 {
     if (strat & APPEND)
     {
-        DEBUG_LINE();
         return chunk_append(chunk, size);
     }
     if (strat & FILL)
     {
-        DEBUG_LINE();
         return chunk_fill(chunk, size);
     }
     return (NULL);
