@@ -5,11 +5,14 @@ NAME = libft_malloc_$(HOSTTYPE).so
 
 CC = gcc
 SRC =	src/malloc.c \
+	src/arena_malloc.c \
+	src/arena_free.c \
+	src/arena_realloc.c \
 	src/memory_arena_alloc.c \
 	src/memory_arena.c \
 	src/memory_arena_debug.c \
 	src/memory_arena_ops.c \
-	src/memory_arena_utils.c
+	src/memory_arena_utils.c 
 OBJ =	$(SRC:.c=.o)
 
 LFT = -L./libft -lft
@@ -29,7 +32,7 @@ $(NAME): $(OBJ)
 
 clean:
 	make -C libft/ clean
-	rm -rf obj
+	rm -f src/*.o
 
 fclean: clean
 	make -C libft/ fclean

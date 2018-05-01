@@ -8,13 +8,25 @@
 
 # include <stdio.h>
 
-# define SMALL_HEAP_BUFFER 1024*1024*4
+# define SMALL_HEAP_BUFFER 1024*1024*8
 # define MED_HEAP_BUFFER  1024*1024*16
 
-# define MALLOC_SAFE    1
+# define MED_HEAP_MIN   1024
+# define BIG_HEAP_MIN   4096
 
-# define BIG_HEAP_MIN   1024
+typedef struct      s_arena
+{
+    pthread_mutex_t lock;
+    t_mem_arena     *small;
+    t_mem_arena     *medium;
+    t_mem_arena     *big;
+}                   t_arena;
 
+int             ptr_is_valide(void *ptr);
+t_area_status   get_heap_type(size_t size);
+void            *arena_malloc(t_arena *arena, size_t size);
+void            *arena_realloc(void *ptr, size_t size);
+void            arena_free(void *ptr);
 
 extern void        free(void *ptr);
 extern void        *malloc_(size_t size);

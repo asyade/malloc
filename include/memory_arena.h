@@ -18,7 +18,6 @@
 #define DEBUG_LINE()     (debugline((char *)__FILE__, __LINE__, (char *)__FUNCTION__))
 #define DEBUG_ALLOC(chk) debugalloc(chk);
 #define DEBUG_ARENA(chk) debugarena(chk);
-//# define DEBUG_LINE() (printf("@ %s:%d in function `%s`\n",  __FILE__, __LINE__ ,__FUNCTION__))
 
 typedef enum    e_mem_status
 {
@@ -28,11 +27,20 @@ typedef enum    e_mem_status
 
 typedef enum    e_expstrat
 {
-    NONE           = 0x0,
-    APPEND    = 0x2,
-    FILL           = 0x8,
-    ALTERNATELY    = 0x40
+    NONE        = 0x0,
+    APPEND    	= 0x2,
+    FILL        = 0x8,
+    ALTERNATELY = 0x40
 }               t_expstrat;
+
+typedef enum	e_area_status
+{
+	EMPT		= 0x0,
+	SMALL 		= 0x1,
+	MED 		= 0x2,
+	BIG 		= 0x4,
+	ROOT		= 0x8
+}				t_area_status;
 
 /*
 ** Il faudra faire un buffer circulaire d'area
@@ -45,8 +53,8 @@ typedef struct          s_mem_arena
     size_t              buffer_used;
     struct s_mem_arena  *next;
     struct s_mem_arena  *prev;
-    int                 root;
-    char                padding[8];
+    t_area_status       status;
+    char				padding[8];
 }                       t_mem_arena;
 
 typedef struct          s_mem_chunk
@@ -76,7 +84,7 @@ int             arena_free_chunk(t_mem_chunk *chunk);
 void            chunk_try_join_prev(t_mem_chunk *chunk);
 void            chunk_try_join_next(t_mem_chunk *chunk);
 
-t_mem_arena     *init_arena(size_t buffer_min_size);
+t_mem_arena     *init_arena(size_t buffer_min_size, t_area_status st);
 void            destroy_arena(t_mem_arena *arena);
 
 #endif

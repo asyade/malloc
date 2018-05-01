@@ -1,6 +1,6 @@
 #include "memory_arena.h"
 
-t_mem_arena     *init_arena(size_t buffer_min_size)
+t_mem_arena     *init_arena(size_t buffer_min_size, t_area_status st)
 {
     size_t      size;
     t_mem_chunk *chk;
@@ -10,7 +10,8 @@ t_mem_arena     *init_arena(size_t buffer_min_size)
     size = SIZE_ALIGN(size, getpagesize());
     arena = mmap(NULL, size, PROT_WRITE | PROT_READ, MAP_ANONYMOUS | MAP_PRIVATE, 0, 0);
     if (arena == MMAP_NULL)
-        return (NULL);  
+        return (NULL);
+    arena->status = st;
     arena->buffer_size = size - sizeof(t_mem_arena);
     arena->buffer = arena + 1;
     arena->next = NULL;
