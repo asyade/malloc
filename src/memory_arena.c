@@ -8,16 +8,13 @@ t_mem_arena     *init_arena(size_t buffer_min_size)
 
     size = buffer_min_size + sizeof(t_mem_arena);
     size = SIZE_ALIGN(size, getpagesize());
-    
     arena = mmap(NULL, size, PROT_WRITE | PROT_READ, MAP_ANONYMOUS | MAP_PRIVATE, 0, 0);
     if (arena == MMAP_NULL)
-        return (NULL);
-    
+        return (NULL);  
     arena->buffer_size = size - sizeof(t_mem_arena);
     arena->buffer = arena + 1;
     arena->next = NULL;
     arena->prev = NULL;
-    
     chk = arena->buffer;
     chk->status = FREE;
     chk->user_size = 0;

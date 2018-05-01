@@ -25,9 +25,7 @@ void            chunk_try_join_prev(t_mem_chunk *chunk)
     chunk->prev->real_size += chunk->real_size + sizeof(t_mem_chunk);
     chunk->prev->next = chunk->next;
     if (chunk->next)
-    {
         chunk->next->prev = chunk->prev;
-    }
 }
 
 void            chunk_try_join_next(t_mem_chunk *chunk)
