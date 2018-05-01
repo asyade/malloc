@@ -2,7 +2,7 @@ CC = gcc
 
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -fPIC -Wall -Wextra -Werror
 
 SRC = ft_atoi.c \
 		ft_putnstr.c \
@@ -104,7 +104,7 @@ SRC = ft_atoi.c \
 
 OBJ = $(SRC:.c=.o)
 
-LIBS = -I ./
+LIBS = -I ./include/
 
 all: $(NAME)
 
