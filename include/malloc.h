@@ -22,11 +22,15 @@ typedef struct      s_arena
     t_mem_arena     *big;
 }                   t_arena;
 
+
+extern void        show_alloc_mem();
+void        dump_arena(t_arena *arena);
+
 int             ptr_is_valide(void *ptr);
 t_area_status   get_heap_type(size_t size);
 void            *arena_malloc(t_arena *arena, size_t size);
 void            *arena_realloc(void *ptr, size_t size);
-void            arena_free(void *ptr);
+void            arena_free(void *ptr, t_arena *arena);
 
 extern void        free(void *ptr);
 extern void        *malloc_(size_t size);

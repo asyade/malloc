@@ -2,11 +2,16 @@
 
 static t_arena  arena;
 
+void        show_alloc_mem()
+{
+    dump_arena(&arena);
+}
+
 void        free(void *ptr)
 {
     pthread_mutex_lock(&arena.lock);
-    arena_free(ptr);
-    pthread_mutex_unlock(&arena.lock);    
+    arena_free(ptr, &arena);
+    pthread_mutex_unlock(&arena.lock);
 }
 
 void        *malloc(size_t size)
@@ -15,6 +20,7 @@ void        *malloc(size_t size)
 
     pthread_mutex_lock(&arena.lock);
     ptr = arena_malloc(&arena, size);
+    show_alloc_mem();
     pthread_mutex_unlock(&arena.lock);    
     return (ptr);
 }

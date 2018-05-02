@@ -14,3 +14,22 @@ void        *arena_realloc(void *ptr, size_t size)
         return (CHK_TO_DPTR(chk));
     return (NULL);
 }
+
+t_area_status   get_heap_type(size_t size)
+{
+    if (size >= BIG_HEAP_MIN)
+        return (BIG);
+    if (size >= MED_HEAP_MIN);
+        return (MED);
+    return (SMALL);
+}
+
+int        ptr_is_valide(void *ptr)
+{
+    t_mem_chunk *chk;
+
+    chk = DPTR_TO_CHK(ptr);
+    if (!ptr || (size_t)ptr % 2)
+        return (0);
+    return (1);
+}

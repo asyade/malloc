@@ -1,24 +1,5 @@
 #include "malloc.h"
 
-t_area_status   get_heap_type(size_t size)
-{
-    if (size >= BIG_HEAP_MIN)
-        return (BIG);
-    if (size >= MED_HEAP_BUFFER)
-        return (MED);
-    return (SMALL);
-}
-
-int        ptr_is_valide(void *ptr)
-{
-    t_mem_chunk *chk;
-
-    chk = DPTR_TO_CHK(ptr);
-    if (!ptr || (size_t)ptr % 2)
-        return (0);
-    return (1);
-}
-
 void    *arena_malloc_big(t_arena *arena, size_t size)
 {
     t_mem_chunk *tmp;
@@ -26,8 +7,16 @@ void    *arena_malloc_big(t_arena *arena, size_t size)
 
     size = SIZE_ALIGN(size, getpagesize());
     if ((area = init_arena(size * 2, BIG)) == NULL || (tmp = arena_get_chunk(size, area)) == NULL)
-    {
         return (NULL);
+    area->next = NULL;
+    area->prev = NULL;
+    if (arena->big == NULL)
+        arena->big = area;
+    else
+    {
+        arena->big->prev = area;
+        area->next = arena->big;
+        arena->big = area;
     }
     return (CHK_TO_DPTR(tmp));
 }
@@ -80,6 +69,7 @@ void    *arena_malloc(t_arena *arena, size_t size)
     {
         if (arena->medium == NULL)
         {
+            
             arena->medium = init_arena(MED_HEAP_BUFFER, MED | ROOT);
             arena->medium->next = arena->medium;
             arena->medium->prev = arena->medium;

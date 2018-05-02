@@ -28,6 +28,13 @@ $(NAME): $(OBJ)
 %.o : %.c
 	$(CC) $< -c -fPIC $(INCLUDES) $(LIBS) -o $@
 
+debug : $(OBJ)
+	make -C libft/
+	$(CC) $(OBJ) $(LFT) -g3 -shared -fPIC -Wl,-soname,$(NAME) -o $(NAME)
+
+%.o : %.c
+	$(CC) $< -c -fPIC -g3 $(INCLUDES) $(LIBS) -o $@
+
 .PHONY: clean fclean
 
 clean:

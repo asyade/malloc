@@ -57,7 +57,7 @@ void        dump_chunk(t_mem_chunk *chunk)
     }
 }
 
-void        dump_arena(t_mem_arena *arena)
+void        dump_arena2(t_mem_arena *arena)
 {
     t_mem_arena *tmp;
     tmp = arena;
@@ -76,7 +76,7 @@ void print(char *s)
 write(1, s, strlen(s)); 
 } 
 
-int main() 
+int madin() 
 { 
 char *addr; 
 
@@ -87,7 +87,7 @@ char *addr;
         print("Bonjours\n"); 
 } 
 
-int m2ain(int ac, char **av)
+int main(int ac, char **av)
 {
     if (ac > 1)
         srand(atoi(av[1]));
@@ -102,9 +102,9 @@ int m2ain(int ac, char **av)
     {
         ptr[i] = malloc(rand_rang(10, 200));
         memset(ptr[i], 42, DPTR_TO_CHK(ptr[i])->user_size);
-        dump_arena(DPTR_TO_CHK(ptr[0])->arena);
+        dump_arena2(DPTR_TO_CHK(ptr[0])->arena);
     }
-    dump_arena(DPTR_TO_CHK(ptr[0])->arena);
+    dump_arena2(DPTR_TO_CHK(ptr[0])->arena);
     //randomize_array(ptr, PTR_COUNT);
     /*for (int i = 0; i < PTR_COUNT / 2; i++)
         free(ptr[i]);
@@ -116,7 +116,7 @@ int m2ain(int ac, char **av)
     for (int i = 6; i < PTR_COUNT; i++)
     {
         ptr[i] = realloc(ptr[i], DPTR_TO_CHK(ptr[i])->user_size * 2);
-        dump_arena(DPTR_TO_CHK(ptr[0])->arena);
+        dump_arena2(DPTR_TO_CHK(ptr[0])->arena);
         memset(ptr[i], 42, DPTR_TO_CHK(ptr[i])->user_size);
     }
     /*randomize_array(ptr, PTR_COUNT);
@@ -124,8 +124,9 @@ int m2ain(int ac, char **av)
     for(int i = 0; i < PTR_COUNT; i++)
     {
         free(ptr[i]);
-        dump_arena(DPTR_TO_CHK(ptr[0])->arena);
+        dump_arena2(DPTR_TO_CHK(ptr[0])->arena);
         
     }*/
+    dump();
     return (0);   
 }
