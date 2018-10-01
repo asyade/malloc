@@ -1,54 +1,72 @@
 #include "malloc.h"
+#include <pthread.h>
+#include "libr.h"
 
-static t_arena  arena;
+static pthread_mutex_t arena;
 
-void        show_alloc_mem()
+void show_alloc_mem()
 {
-    dump_arena(&arena);
 }
 
-void        free(void *ptr)
+void free(void *ptr)
 {
-    pthread_mutex_lock(&arena.lock);
-    arena_free(ptr, &arena);
-    pthread_mutex_unlock(&arena.lock);
+    //ft_putfmt("free %p\n", ptr);
+    if (ptr == NULL)
+        return;
+    pthread_mutex_lock(&arena);
+    mmemalloc_free(ptr);
+    pthread_mutex_unlock(&arena);
 }
 
-void        *malloc(size_t size)
+void *malloc(size_t size)
 {
-    void    *ptr;
+    void *ptr;
 
-    pthread_mutex_lock(&arena.lock);
-    ptr = arena_malloc(&arena, size);
-    show_alloc_mem();
-    pthread_mutex_unlock(&arena.lock);    
+    //ft_putfmt("malloc %u\n", size);
+    pthread_mutex_lock(&arena);
+    ptr = mmemalloc_alloc(size);
+    pthread_mutex_unlock(&arena);
     return (ptr);
 }
 
-void        *realloc(void *ptr, size_t size)
+void *realloc(void *ptr, size_t size)
 {
-   void     *tmp;
+    void *tmp;
+    int res;
 
-    pthread_mutex_lock(&arena.lock);
-    tmp = arena_realloc(ptr, size);
-    pthread_mutex_unlock(&arena.lock);    
-    if (tmp)
-        return (tmp);
-    if (!(tmp = malloc(size)))
+    //ft_putfmt("realloc %p of size %u\n", ptr, size);
+    if (ptr == NULL)
+    {
+        //ft_putfmt("Malloc");
+        return (malloc(size));
+    }
+    if (size == 0)
+    {
+        free(ptr);
         return (NULL);
-    if (!ptr)
+    }
+    pthread_mutex_lock(&arena);
+    res = mmemalloc_expande(ptr, size);
+    pthread_mutex_unlock(&arena);
+    if (res == 1 || res == -1)
+    {
+        if (res == -1 || (tmp = malloc(size)) == NULL)
+        {
+            free(ptr);
+            return (NULL);
+        }
+        ft_memcpy(tmp, ptr, ((t_memmagic *)ptr - 1)->size);
+        free(ptr);
         return (tmp);
-    if (size > DPTR_TO_CHK(ptr)->user_size)
-        memcpy(tmp, ptr, size - DPTR_TO_CHK(ptr)->user_size);
+    }
     else
-        memcpy(tmp, ptr, size);    
-    free(ptr);
-    return (tmp);
+        return (ptr);
 }
 
-void        *calloc(size_t nmemb, size_t size)
+void *calloc(size_t nmemb, size_t size)
 {
-    void        *ret;
+    //ft_putfmt("calloc %u %u\n", nmemb, size);
+    void *ret;
     if (size == 0 || nmemb == 0)
         return (NULL);
     size = size * nmemb;
@@ -58,12 +76,8 @@ void        *calloc(size_t nmemb, size_t size)
     return (ret);
 }
 
-void         *reallocarray(void *ptr, size_t nmemb, size_t size)
+void *reallocarray(void *ptr, size_t nmemb, size_t size)
 {
-    if (size == 0 || !ptr_is_valide(ptr))
-        return (ptr);
-    pthread_mutex_lock(&arena.lock);
-    ptr = arena_realloc(ptr, size);
-    pthread_mutex_unlock(&arena.lock);    
-    return (ptr);
+    //ft_putfmt("reallocarry %p %u %u\n", ptr, nmemb, size);
+    return (realloc(ptr, nmemb * size));
 }
