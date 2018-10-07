@@ -16,17 +16,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C ../libr/
-	$(CC) $(OBJ) $(LFT) -shared -fPIC -Wl,-soname,$(NAME) -o $(NAME)
+	$(CC) $(OBJ) $(LFT) -shared -fPIC -Wl,-install_name,$(NAME) -o $(NAME)
 
 %.o : %.c
 	$(CC) $< -c -fPIC $(INCLUDES) $(LIBS) -o $@
-
-debug : $(OBJ)
-	make -C ../libr/
-	$(CC) $(OBJ) $(LFT) -g3 -shared -fPIC -Wl,-soname,$(NAME) -o $(NAME)
-
-%.o : %.c
-	$(CC) $< -c -fPIC -g3 $(INCLUDES) $(LIBS) -o $@
 
 .PHONY: clean fclean
 

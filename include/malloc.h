@@ -1,7 +1,7 @@
 #ifndef MALLOC_H
-#define MALLOC_H
+# define MALLOC_H
 
-#include "string.h"
+# include "string.h"
 
 extern void free(void *ptr);
 extern void *malloc_(size_t size);
