@@ -8,7 +8,7 @@ void show_alloc_mem()
 {
 }
 
-void free(void *ptr)
+extern void free(void *ptr)
 {
     //ft_putfmt("free %p\n", ptr);
     if (ptr == NULL)

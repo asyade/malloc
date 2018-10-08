@@ -4,19 +4,35 @@ endif
 NAME = libft_malloc_$(HOSTTYPE).so
 
 CC = gcc
-SRC =	src/malloc.c
+SRC = src/malloc.c \
+./src/binary_heap.c \
+./src/binary_heap_fn2.c \
+./src/rlib_fn_mem.c \
+./src/rlib_fn_str.c \
+./src/rlib_fn_str2.c \
+./src/rlib_fn_str3.c \
+./src/rlib.c \
+./src/memory_chunk.c \
+./src/memory_allocator.c \
+./src/memory_allocator_fn2.c \
+./src/memory_allocator_fn3.c \
+./src/memory_allocator_ctor.c \
+./src/memory_allocator_utils.c \
+./src/memalloc_errno.c \
+./src/thread_safe_allocator.c \
+./src/managed_memory_allocator.c \
+./src/managed_memory_allocator_fn2.c \
+./src/managed_memory_allocator_fn3.c \
 
 OBJ =	$(SRC:.c=.o)
 
-LFT = -L../libr ../libr/libr
-LIBS = $(LFT) -pthread
-INCLUDES= -I./include -I../libr/include
+LIBS = -pthread
+INCLUDES= -I./include 
 
-all: $(NAME)
+all: $(NAME) 
 
 $(NAME): $(OBJ)
-	make -C ../libr/
-	$(CC) $(OBJ) $(LFT) -shared -fPIC -Wl,-install_name,$(NAME) -o $(NAME)
+	$(CC) $(OBJ)  -shared -fPIC -Wl,-install_name,$(NAME) -o $(NAME)
 
 %.o : %.c
 	$(CC) $< -c -fPIC $(INCLUDES) $(LIBS) -o $@
@@ -24,11 +40,9 @@ $(NAME): $(OBJ)
 .PHONY: clean fclean
 
 clean:
-	make -C ../libr/ clean
 	rm -f src/*.o
 
 fclean: clean
-	make -C ../libr/ fclean
 	rm -f libft_malloc_*.so
 
 re: fclean all
