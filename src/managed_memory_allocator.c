@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 16:34:12 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/07 18:28:43 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/08 20:30:50 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void				mmemalloc_free(void *ptr)
 
 	heap = mmemalloc_heap();
 	if ((allocator = find_allocator_by_addr(ptr, 0)) == NULL)
-		memalloc_panic(E_OVERFLOW);
+		return (void)memalloc_panic(E_OVERFLOW);
 	if (allocator->range.min == (size_t)-1)
-		mmemalloc_free_big(heap, allocator);
+		return (void)mmemalloc_free_big(heap, allocator);
 	else if (memalloc_free(allocator, ptr) < 0)
-		memalloc_panic(E_OVERFLOW);
+		return (void)memalloc_panic(E_OVERFLOW);
 	else if (allocator->used_entries->size != 0)
 		return ;
 	else if ((allocator->range.min == SM_MIN && small_page_count(0) > 1))

@@ -8,76 +8,97 @@ void show_alloc_mem()
 {
 }
 
-extern void free(void *ptr)
+static pthread_mutex_t lock;
+
+void take_lock()
 {
-    //ft_putfmt("free %p\n", ptr);
-    if (ptr == NULL)
-        return;
-    pthread_mutex_lock(&arena);
-    mmemalloc_free(ptr);
-    pthread_mutex_unlock(&arena);
+	static int initialized = 0;
+
+	if (!initialized)
+	{
+		initialized = 1;
+		pthread_mutex_init(&lock, NULL);
+	}
+//	pthread_mutex_lock(&lock);
 }
 
-void *malloc(size_t size)
+void *free_lock(void *ret)
 {
-    void *ptr;
-
-    //ft_putfmt("malloc %u\n", size);
-    pthread_mutex_lock(&arena);
-    ptr = mmemalloc_alloc(size);
-    pthread_mutex_unlock(&arena);
-    return (ptr);
+//	pthread_mutex_unlock(&lock);
+	return (ret);
 }
 
-void *realloc(void *ptr, size_t size)
+void        free(void *ptr)
 {
-    void *tmp;
-    int res;
-
-    //ft_putfmt("realloc %p of size %u\n", ptr, size);
-    if (ptr == NULL)
-    {
-        //ft_putfmt("Malloc");
-        return (malloc(size));
-    }
-    if (size == 0)
-    {
-        free(ptr);
-        return (NULL);
-    }
-    pthread_mutex_lock(&arena);
-    res = mmemalloc_expande(ptr, size);
-    pthread_mutex_unlock(&arena);
-    if (res == 1 || res == -1)
-    {
-        if (res == -1 || (tmp = malloc(size)) == NULL)
-        {
-            free(ptr);
-            return (NULL);
-        }
-        ft_memcpy(tmp, ptr, ((t_memmagic *)ptr - 1)->size);
-        free(ptr);
-        return (tmp);
-    }
-    else
-        return (ptr);
+	if (ptr == NULL)
+		return ;
+	take_lock();
+	mmemalloc_free(ptr);
+	free_lock(NULL);
 }
-
-void *calloc(size_t nmemb, size_t size)
+void        *malloc(size_t size)
 {
-    //ft_putfmt("calloc %u %u\n", nmemb, size);
-    void *ret;
-    if (size == 0 || nmemb == 0)
-        return (NULL);
-    size = size * nmemb;
-    if ((ret = malloc(size)) == NULL)
-        return (NULL);
-    bzero(ret, size);
-    return (ret);
+	take_lock();
+	if (size == 0)
+		size = 128;
+	void *ptr = mmemalloc_alloc(size);
+	return (free_lock(ptr));
 }
-
-void *reallocarray(void *ptr, size_t nmemb, size_t size)
+void		*realloc(void *ptr, size_t size)
 {
-    //ft_putfmt("reallocarry %p %u %u\n", ptr, nmemb, size);
-    return (realloc(ptr, nmemb * size));
+	ft_putfmt("Realloc(%x, %u)\n", ptr, size);
+	void	*new;
+	int		res;
+
+	take_lock();
+	if (ptr != NULL && size == 0)
+	{
+		ptr = mmemalloc_alloc(32);
+		mmemalloc_free(ptr);
+		return (ptr);
+	}
+	else if (ptr == NULL)
+		return free_lock(mmemalloc_alloc(size > 0 ? size : 32));
+	if ((res = mmemalloc_expande(ptr, size)) == 0)
+	{
+		ft_putfmt("Nothing todo\n");
+		return (free_lock(ptr));
+	}
+	if (res < 0)
+	{
+		ft_putfmt("Something wrong\n");
+		return (mmemalloc_alloc(size > 0 ? size : 32));//Have to check
+	}
+	if ((new = mmemalloc_alloc(size)) == NULL)
+		return (free_lock(NULL));//TODO free ?
+	ft_putfmt("Realloc ret %p\n", ptr);
+	return (free_lock(ft_memcpy(new, ptr, ((t_memmagic *)ptr - 1)->size)));
+}
+void		*reallocf(void *ptr, size_t size)
+{
+	void	*new;
+
+	if ((new = realloc(ptr, size)) == NULL)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	return (ptr);
+}
+void		*calloc(size_t nmemb, size_t size)
+{
+	void	*ptr;
+
+	if ((ptr = malloc(nmemb * size)) == NULL)
+		return (NULL);
+	ft_memset(ptr, size, 0);
+	return (ptr);
+}
+void        *valloc(size_t size)
+{
+	return (malloc(size));
+}
+void         *reallocarray(void *ptr, size_t nmemb, size_t size)
+{
+	return (realloc(ptr, nmemb * size));
 }

@@ -32,10 +32,10 @@ INCLUDES= -I./include
 all: $(NAME) 
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ)  -shared -fPIC -Wl,-install_name,$(NAME) -o $(NAME)
+	$(CC) $(OBJ) -dynamic -shared -o $(NAME) -g3
 
-%.o : %.c
-	$(CC) $< -c -fPIC $(INCLUDES) $(LIBS) -o $@
+%.o : %.c Makefile ./include/libr.h ./include/malloc.h
+	$(CC) $< -c  $(INCLUDES) $(LIBS) -o $@ -g3
 
 .PHONY: clean fclean
 

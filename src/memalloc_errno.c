@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 16:44:54 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/01 17:41:15 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/08 22:34:41 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,24 @@ int				memalloc_seterr(int code)
 	return (errcode(code, 1));
 }
 
+int				main_called(int called)
+{
+	static int i = 0;
+
+	if (called)
+		i = 1;
+	return (i);
+}
+
+void __attribute__ ((constructor (999))) premain(void)
+{
+	main_called(1);
+}
+
 void			memalloc_panic(int code)
 {
-	ft_putfmt("Memory arena corupted exit, (error: %d)", code);
-	raise(5);
+	if (main_called(0) == 0)
+		return ;
+	ft_putfmt("Memory arena corrupted exit, (error: %d)\n", code);
+	raise(1);
 }
