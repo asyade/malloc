@@ -5,6 +5,7 @@ NAME = libft_malloc_$(HOSTTYPE).so
 
 CC = gcc
 SRC = src/malloc.c \
+./src/malloc_fn2.c \
 ./src/binary_heap.c \
 ./src/binary_heap_fn2.c \
 ./src/rlib_fn_mem.c \

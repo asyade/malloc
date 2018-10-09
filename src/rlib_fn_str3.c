@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 18:33:46 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/07 18:33:52 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/09 03:14:38 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,13 @@ size_t				ft_strlen(char *str)
 		len++;
 	}
 	return (len);
+}
+
+int					main_called(int called)
+{
+	static int i = 0;
+
+	if (called)
+		i = 1;
+	return (i);
 }

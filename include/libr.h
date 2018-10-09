@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 15:45:18 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/09 01:59:05 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/09 03:14:46 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int				ft_memcmp(void *a, void *b, size_t n);
 # define BH_NOTFOUND ((size_t)-1)
 # define BHN ((size_t)-1)
 # define SV size_t[]
-# define MXE memalloc_expande_insert
+# define MXE memalloc_ei
 # define TMA t_memalloc
 # define TMM t_memmagic
 # define BH_PARENT(index) ((((index)-1) / 2))
@@ -131,6 +131,8 @@ int				mchunk_free(t_memchunk *chunk);
 # define EMPTY_PTR(allocator) (((t_mementry *)((allocator)->empty_entries + 1)))
 # define USED_PTR(allocator) (((t_mementry *)((allocator)->used_entries + 1)))
 # define CMMM check_mem_magic
+# define FMM fill_mem_magic
+# define PTMT pthread_mutex_t
 
 typedef enum	e_alloc_stat
 {
@@ -207,17 +209,20 @@ int				try_join_empty_entries(t_memalloc *a, size_t index, void *d);
 # define AEE(a) a->empty_entries
 # define STM sizeof(t_mementry)
 # define STMM sizeof(t_memmagic)
+# define premain __attribute__ ((constructor(999))) premain
 
 t_bheap			*mmemalloc_heap(void);
 int				memallocator_cmpf(void *aa, void *bb);
 int				big_page_count(int delta);
 int				small_page_count(int delta);
-
+int				main_called(int called);
 void			*safe_memalloc_alloc(t_memalloc *a, size_t s, int r);
 int				safe_memalloc_free(t_memalloc *allocator, void *ptr);
 int				safe_memalloc_expande(t_memalloc *a, void *p, size_t n);
 void			*mmemalloc_alloc(size_t size);
 void			mmemalloc_free(void *ptr);
 int				mmemalloc_expande(void *ptr, size_t new_size);
+void			take_lock(void);
+void			*free_lock(void *ret);
 
 #endif

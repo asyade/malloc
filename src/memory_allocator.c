@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 17:34:09 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/09 01:30:23 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/09 02:53:35 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void			*memalloc_alloc(t_memalloc *a, size_t size)
 	size_t		index;
 	t_mementry	entry;
 	void		*ret;
-	
+
 	size = SIZE_ALIGN((size + (2 * sizeof(t_memmagic))));
 	if ((index = find_empty_entry(a->empty_entries, size)) == BH_NOTFOUND)
 		return (NULL);
