@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 03:08:19 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/09 03:18:36 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/09 05:02:05 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void			take_lock(void)
 
 void			*free_lock(void *ret)
 {
+	dump_alloc_mem();
+
 	pthread_mutex_unlock(&g_lock);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 16:44:54 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/09 03:14:58 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/09 05:07:26 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,16 @@ void			premain(void)
 	main_called(1);
 }
 
+void			dump_alloc_mem()
+{
+	
+}
+
 void			memalloc_panic(int code)
 {
 	if (main_called(0) == 0)
 		return ;
 	ft_putfmt("Memory arena corrupted exit, (error: %d)\n", code);
 	exit(1);
-	raise(1);
+	
 }
