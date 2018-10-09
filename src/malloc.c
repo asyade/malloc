@@ -46,7 +46,6 @@ void        *malloc(size_t size)
 }
 void		*realloc(void *ptr, size_t size)
 {
-	ft_putfmt("Realloc(%x, %u)\n", ptr, size);
 	void	*new;
 	int		res;
 
@@ -60,18 +59,11 @@ void		*realloc(void *ptr, size_t size)
 	else if (ptr == NULL)
 		return free_lock(mmemalloc_alloc(size > 0 ? size : 32));
 	if ((res = mmemalloc_expande(ptr, size)) == 0)
-	{
-		ft_putfmt("Nothing todo\n");
 		return (free_lock(ptr));
-	}
 	if (res < 0)
-	{
-		ft_putfmt("Something wrong\n");
 		return (mmemalloc_alloc(size > 0 ? size : 32));//Have to check
-	}
 	if ((new = mmemalloc_alloc(size)) == NULL)
 		return (free_lock(NULL));//TODO free ?
-	ft_putfmt("Realloc ret %p\n", ptr);
 	return (free_lock(ft_memcpy(new, ptr, ((t_memmagic *)ptr - 1)->size)));
 }
 void		*reallocf(void *ptr, size_t size)
@@ -88,10 +80,12 @@ void		*reallocf(void *ptr, size_t size)
 void		*calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
-
 	if ((ptr = malloc(nmemb * size)) == NULL)
 		return (NULL);
-	ft_memset(ptr, size, 0);
+	if (nmemb * size == 0)
+	ft_memset(ptr,0, 128);
+	else 
+	ft_memset(ptr, 0, size * nmemb);
 	return (ptr);
 }
 void        *valloc(size_t size)

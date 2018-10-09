@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 15:45:18 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/08 21:00:01 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/09 01:59:05 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef enum	e_alloc_stat
 {
 	USED = 0x01,
 	FREE = 0x02,
+	FORCE_64 = 0xFFFFFFFFFF,
 }				t_alloc_stat;
 
 # define TALS t_alloc_stat
@@ -166,6 +167,7 @@ typedef struct	s_memalloc
 	t_bheap		*empty_entries;
 	t_bheap		*used_entries;
 	size_t		buffer_size;
+	size_t		align_moi_sa_fdp;
 }				t_memalloc;
 
 int				memalloc_seterr(int code);
