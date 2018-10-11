@@ -43,10 +43,10 @@ int				memalloc_try_expande(t_memalloc *a, void *addr, size_t ns)
 
 	magics[0] = (t_memmagic *)addr - 1;
 	begin = MAGOFF(a, magics[0]);
-	if (begin + magics[0]->size >= a->buffer_size)
-		return (0);
 	if (magics[0]->size >= ns)
 		return (1);
+	if (begin + magics[0]->size >= a->buffer_size)
+		return (0);
 	if (a->range.min == (size_t)-1)
 	{
 		//ft_putfmt("Big heap can't be expanded !\n");

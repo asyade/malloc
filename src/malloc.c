@@ -38,9 +38,11 @@ void			*realloc(void *ptr, size_t size)
 		return (free_lock(NULL));
 	free_lock(NULL);
 	//ft_putfmt("save %p data into %p\n", ptr, new);
+	if (new == ptr)
+		return (new);
 	ft_memcpy(new, ptr, ((t_memmagic *)ptr - 1)->size);
 	//ft_putfmt("free %p replaced by %p\n", ptr, new);
-	free(ptr);
+	//free(ptr);
 	return (new);
 }
 
@@ -53,7 +55,7 @@ void			*reallocf(void *ptr, size_t size)
 		free(ptr);
 		return (NULL);
 	}
-	return (ptr);
+	return (new);
 }
 
 void			*calloc(size_t nmemb, size_t size)

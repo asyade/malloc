@@ -37,6 +37,8 @@ size_t		bheap_insert(t_bheap *h, void *elem)
 
 int			bheap_remove(t_bheap *h, size_t i)
 {
+	if (i == BH_NOTFOUND)
+		return (-1);
 	if (i >= h->size)
 		return (-1);
 	if (i == --h->size)

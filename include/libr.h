@@ -203,8 +203,9 @@ int				try_join_empty_entries(t_memalloc *a, size_t index, void *d);
 # define SM_MAX 128
 # define BG_MIN 128
 # define BG_MAX 1024
-# define SMALL_SZ (SM_MAX * 100)
-# define BIG_SZ (BG_MAX * 100)
+# define ALLOC_PPAGE 100
+# define SMALL_SZ ((SM_MAX + (2*sizeof(t_memmagic))) * ALLOC_PPAGE)
+# define BIG_SZ ((BG_MAX + (2*sizeof(t_memmagic))) * ALLOC_PPAGE)
 # define AUE(a) a->used_entries
 # define AEE(a) a->empty_entries
 # define STM sizeof(t_mementry)
