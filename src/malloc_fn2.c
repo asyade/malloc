@@ -34,8 +34,6 @@ void			take_lock(void)
 
 void			*free_lock(void *ret)
 {
-	dump_alloc_mem();
-
 	pthread_mutex_unlock(&g_lock);
 	return (ret);
 }
@@ -51,8 +49,6 @@ void			free(void *ptr)
 
 void			*malloc(size_t size)
 {
-	void *ptr;
-
 	take_lock();
 	if (size == 0)
 		size = 128;

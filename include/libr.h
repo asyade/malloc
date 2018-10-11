@@ -186,7 +186,7 @@ int				check_mem_magic(TMML *allocator, size_t o, size_t s, int r);
 int				fill_mem_magic(TMML *a, size_t o, size_t s, TALS ss, int r);
 t_memalloc		*memalloc_new(size_t bs, size_t hs, t_szrange range);
 void			memalloc_destroy(t_memalloc *allocator);
-void			*memalloc_alloc(t_memalloc *allocator, size_t size);
+void			*unaligned_memalloc_alloc(t_memalloc *allocator, size_t size);
 int				memalloc_try_expande(t_memalloc *al, void *addr, size_t ns);
 int				memalloc_free(t_memalloc *allocator, void *addr);
 int				try_join_empty_entries(t_memalloc *a, size_t index, void *d);

@@ -44,7 +44,7 @@ t_memalloc			*memalloc_new_range(size_t range)
 		big_page_count(1);
 		return (memalloc_new(BIG_SZ, 4096, (t_szrange){BG_MIN, BG_MAX}));
 	}
-	return (memalloc_new(range, 1024, (t_szrange){-1, -1}));
+	return (memalloc_new(range + sizeof(t_memalloc), 1024, (t_szrange){-1, -1}));
 }
 
 void				*insert_and_alloc(size_t range)
@@ -64,8 +64,13 @@ void				*mmemalloc_alloc(size_t size)
 {
 	void			*ptr;
 
+	size  = SIZE_ALIGN(size + (sizeof(t_memmagic) * 2));
 	if (size > MAX_ALLOC_SIZE)
 		return (NULL);
+	if (size >= BG_MAX)
+	{
+		return (insert_and_alloc(size));
+	}
 	if ((ptr = find_and_alloc(size, 0)) != NULL)
 		return (ptr);
 	return (insert_and_alloc(size));

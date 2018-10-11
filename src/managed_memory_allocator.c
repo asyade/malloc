@@ -22,7 +22,7 @@ t_memalloc			*find_allocator_by_addr(void *ptr, size_t index)
 		return (NULL);
 	al = *((t_memalloc **)(heap + 1) + index);
 	if ((size_t)al < (size_t)ptr &&
-		(size_t)ptr < (size_t)(al + 1) + al->buffer_size)
+		(size_t)ptr < (ALLOC_SPTR(al) + al->buffer_size))
 		return (al);
 	if ((al = find_allocator_by_addr(ptr, BH_LEFT(index))) != NULL)
 		return (al);
@@ -47,6 +47,7 @@ void				mmemalloc_free(void *ptr)
 	heap = mmemalloc_heap();
 	if ((allocator = find_allocator_by_addr(ptr, 0)) == NULL)
 		return (void)memalloc_panic(E_OVERFLOW);
+	//ft_putfmt("For free %x find %x\n", ptr, ALLOC_SPTR(allocator) + sizeof(t_memmagic) );
 	if (allocator->range.min == (size_t)-1)
 		return (void)mmemalloc_free_big(heap, allocator);
 	else if (memalloc_free(allocator, ptr) < 0)

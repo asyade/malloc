@@ -12,58 +12,52 @@
 
 #include "libr.h"
 
-int				memalloc_expande_full(TMA *a, TMM *s, size_t ns, size_t i[2])
+#define MAGOFF(allocator, magic)((size_t)magic - ALLOC_SPTR(allocator))
+
+size_t			join_magics(t_memalloc *a, t_memmagic *magics[2])
 {
-	if (fill_mem_magic(a, (size_t)s - ALLOC_SPTR(a), ns, USED, 1) != 0)
-		return (E_MAGIC);
-	(USED_PTR(a) + i[0])->size = ns;
-	if (bheap_remove(a->empty_entries, i[1]) != 0)
-		return (E_DEL_HEAP);
-	return (0);
-}
+	size_t		offset[2];
+	size_t		drained_hi;
+	size_t		curr_hi;
 
-int				memalloc_ei(t_memalloc *a, TMM *s, TMM *o, size_t i[3])
-{
-		return (memalloc_expande_full(a, s, o, i));
-
-	size_t		new_size;
-
-	new_size = ((size_t)o + o->size) - (size_t)s;
-	if (new_size - i[2] < 256)
-		return (memalloc_expande_full(a, s, o, i));
-	if (FMM(a, ((size_t)s - ALLOC_SPTR(a)) +
-			i[2], new_size - i[2], FREE, 0) != 0)
-		return (-1);
-	//if (FMM(a, ((size_t)s - ALLOC_SPTR(a)), i[2], FREE, 1) != 0)
-//		return (-1);
-	if (bheap_insert(a->empty_entries, &(t_mementry){new_size - i[2],
-			(void *)((size_t)s + i[2])}) == BH_NOTFOUND)
-		return (-2);
-	return (memalloc_expande_full(a, s, i[2], i));
+	offset[0] = MAGOFF(a, magics[0]);
+	offset[1] = MAGOFF(a, magics[1]);
+	//ft_putfmt("Before union : %u-%u-%u-%u\n", offset[0], magics[0]->size + offset[0], offset[1], magics[1]->size + offset[1]);
+	if ((drained_hi = bheap_find(a->empty_entries, &(t_mementry){0, magics[1]}, 0)) == BH_NOTFOUND)
+		return (BH_NOTFOUND);
+	if ((curr_hi = bheap_find(a->used_entries, &(t_mementry){0, magics[0]}, 0)) == BH_NOTFOUND)
+		return (BH_NOTFOUND);
+	if (bheap_remove(a->empty_entries, drained_hi) != 0)
+		return (BH_NOTFOUND);
+	if (fill_mem_magic(a, offset[0], magics[0]->size + magics[1]->size, USED, 1) != 0)
+		return (BH_NOTFOUND);
+	//ft_putfmt("After union : %u-%u\n", offset[0], magics[0]->size + offset[0]);
+	return (curr_hi);
 }
 
 int				memalloc_try_expande(t_memalloc *a, void *addr, size_t ns)
 {
-	return (0);
-	t_memmagic	*so[2];
-	size_t		ss[2];
+	t_memmagic	*magics[2];
+	size_t		begin;
+	size_t		index;
 
-	if (addr == NULL || ns == 0)
-		return (ns == 0 ? 0 : 1);
-	ns += 2 * sizeof(t_memmagic);
-	so[0] = (t_memmagic *)addr - 1;
-	if (check_mem_magic_overflow(a, so[0]) != 0)
-		return (E_OVERFLOW);
-	so[1] = (t_memmagic *)(((size_t)so[0] + so[0]->size));
-	if (check_mem_magic_overflow(a, so[1]) != 0)
+	magics[0] = (t_memmagic *)addr - 1;
+	begin = MAGOFF(a, magics[0]);
+	if (begin + magics[0]->size >= a->buffer_size)
+		return (0);
+	if (magics[0]->size >= ns)
 		return (1);
-	if (CMMM(a, (size_t)so[0] - ALLOC_SPTR(a), so[0]->size, 0) != 0 ||
-		CMMM(a, (size_t)so[1] - ALLOC_SPTR(a), so[1]->size, 0) != 0)
-		return (E_MAGIC);
-	if ((ss[0] = bheap_find(AUE(a), &PTR_AS_ENTRY(a, so[0]), 0)) == BHN ||
-		(ss[1] = bheap_find(AEE(a), &PTR_AS_ENTRY(a, so[1]), 0)) == BHN)
-		return (1);
-	if (so[0]->size >= ns || so[0]->size + so[1]->size < ns)
-		return (so[0]->size >= ns ? 0 : 1);
-		return (MXE(a, so[0], so[1], (SV){ss[0], ss[1], ns}));
+	if (a->range.min == (size_t)-1)
+	{
+		//ft_putfmt("Big heap can't be expanded !\n");
+		return (0);
+	}
+	magics[1] = (t_memmagic *)((size_t)magics[0] + magics[0]->size);
+	if ((index = join_magics(a, magics)) == BH_NOTFOUND)
+	{
+		exit(1);
+		return (E_UNDEF);
+	}
+	(USED_PTR(a) + index)->size = magics[0]->size;
+	return (1);
 }

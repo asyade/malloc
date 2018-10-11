@@ -58,6 +58,7 @@ void			memalloc_destroy(t_memalloc *a)
 		mchunk_free((t_memchunk *)((size_t)a - sizeof(t_memchunk))) != 0)
 	{
 		ft_putfmt("Can't unmap allocator, memory\
-criticaly corupted have to exit");
+criticaly corupted, exit\n");
+		exit(1);
 	}
 }

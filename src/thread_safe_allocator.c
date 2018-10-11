@@ -61,7 +61,7 @@ void			*safe_memalloc_alloc(t_memalloc *a, size_t size, int retry)
 	ptr = NULL;
 	if (a->empty_entries->capacity < a->empty_entries->size + 3 ||
 		a->used_entries->capacity < a->used_entries->size + 2 ||
-		(ptr = memalloc_alloc(a, size)) == NULL)
+		(ptr = unaligned_memalloc_alloc(a, size)) == NULL)
 	{
 		err = memalloc_geterr();
 		if (err == E_INS_EMPTY || err == E_INS_USED)

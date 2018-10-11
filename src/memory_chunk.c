@@ -20,7 +20,7 @@ t_memchunk		*mchunk_alloc(size_t size)
 
 	page_size = getpagesize();
 	size += sizeof(t_memchunk);
-	new_size = ((size / page_size) + size % page_size) * page_size;
+	new_size = ((size / page_size) + (size % page_size != 0)) * page_size;
 	chunk = mmap(NULL, new_size, MMAP_PROT, MMAP_FLAGS, 0, 0);
 	if (chunk == MMAP_NULL)
 		return (NULL);
