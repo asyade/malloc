@@ -40,7 +40,7 @@ void			*realloc(void *ptr, size_t size)
 		return (new);
 	ft_memcpy(new, ptr, ((t_memmagic *)ptr - 1)->size);
 	//ft_putfmt("free %p replaced by %p\n", ptr, new);
-	//free(ptr);
+	free(ptr);
 	return (new);
 }
 
