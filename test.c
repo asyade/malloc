@@ -21,7 +21,7 @@ void random_test(size_t max_ptr, size_t nbr_ops)
     size_t nbr_ptr = 0;
     for (size_t i = 0; i < nbr_ops; i++)
     {
-        switch (random_range(0, 9))
+        switch (random_range(0, 5))
         {
         // Free
         case 2:
@@ -101,7 +101,7 @@ void random_test(size_t max_ptr, size_t nbr_ops)
             size_t to = random_range(4, 20);
             for (size_t i = 0; i < to && nbr_ptr < max_ptr; i++)
             {
-                ptrs[nbr_ptr].size = random_range(12, 128);
+                ptrs[nbr_ptr].size = random_range(12*128, 128*128);
                 ptrs[nbr_ptr].ptr = calloc(ptrs[nbr_ptr].size / 10, 10);
                 if (!ptrs[nbr_ptr].ptr)
                     continue;
@@ -114,7 +114,8 @@ void random_test(size_t max_ptr, size_t nbr_ops)
     ft_putfmt("# DONE #\n");
 }
 
-pthread_t thrads[2];
+#define THREAD_COUNT 3
+pthread_t thrads[16];
 
 void *lt(void *d)
 {
@@ -129,8 +130,10 @@ int main(int ac, char **av)
     //  t_memalloc *allocator = memalloc_new(1024 * 1024, 4096, (t_szrange){1024, 1024});
     //  safe_memalloc_alloc(allocator, 10, 1);
     //   safe_memalloc_alloc(allocator, 10, 1);
-    pthread_create(&thrads[0], NULL, lt, NULL);
-    pthread_create(&thrads[1], NULL, lt, NULL);
-    pthread_join(thrads[0], NULL);
-    pthread_join(thrads[1], NULL);
+    for (int i = 0; i < THREAD_COUNT; i++) {
+        pthread_create(&thrads[i], NULL, lt, NULL);
+    }
+    for (int i = 0; i < THREAD_COUNT; i++) {
+        pthread_join(thrads[i], NULL);
+    }
 }

@@ -44,6 +44,7 @@ int				memalloc_ei(t_memalloc *a, TMM *s, TMM *o, size_t i[3])
 
 int				memalloc_try_expande(t_memalloc *a, void *addr, size_t ns)
 {
+	return (0);
 	t_memmagic	*so[2];
 	size_t		ss[2];
 
@@ -64,8 +65,5 @@ int				memalloc_try_expande(t_memalloc *a, void *addr, size_t ns)
 		return (1);
 	if (so[0]->size >= ns || so[0]->size + so[1]->size < ns)
 		return (so[0]->size >= ns ? 0 : 1);
-	if (so[0]->size + so[1]->size > ns + 1024)
 		return (MXE(a, so[0], so[1], (SV){ss[0], ss[1], ns}));
-	ns = ((size_t)so[1] + so[1]->size) - (size_t)so[0];
-	return (memalloc_expande_full(a, so[0], ns, (size_t[]){ss[0], ss[1]}));
 }
