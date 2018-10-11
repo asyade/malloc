@@ -20,23 +20,21 @@ void			*realloc(void *ptr, size_t size)
 
 	take_lock();
 	if (ptr != NULL && size == 0)
-	{
-		ptr = mmemalloc_alloc(32);
-		mmemalloc_free(ptr);
 		return (free_lock(ptr));
-	}
 	else if (ptr == NULL)
-		return (free_lock(mmemalloc_alloc(size > 0 ? size : 32)));
+		return (free_lock(mmemalloc_alloc(size > 0 ? size : 32+(2 * sizeof(t_memalloc)))));
+	size = SIZE_ALIGN(size + (2 * sizeof(t_memmagic)));
+
 	if ((res = mmemalloc_expande(ptr, size)) == 1)
 		return (free_lock(ptr));
-	else if (res < 0)
+	free_lock(NULL);
+	if (res < 0)
 	{
 		ft_putfmt(CL_RED"ERROR, realloc return -1\n"CL_RESET);
 		return (NULL);
 	}
-	else if ((new = mmemalloc_alloc(size)) == NULL)
-		return (free_lock(NULL));
-	free_lock(NULL);
+	else if ((new = malloc(size)) == NULL)
+		return (NULL);
 	//ft_putfmt("save %p data into %p\n", ptr, new);
 	if (new == ptr)
 		return (new);

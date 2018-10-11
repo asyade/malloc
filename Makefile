@@ -28,7 +28,7 @@ SRC = src/malloc.c \
 OBJ =	$(SRC:.c=.o)
 
 LIBS = -pthread
-INCLUDES= -I./include 
+INCLUDES= -I./include -fPIC
 
 all: $(NAME) 
 

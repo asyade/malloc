@@ -53,6 +53,8 @@ int				memalloc_try_expande(t_memalloc *a, void *addr, size_t ns)
 		return (0);
 	}
 	magics[1] = (t_memmagic *)((size_t)magics[0] + magics[0]->size);
+	if (magics[0]->size + magics[1]->size < ns)
+		return (0);
 	if ((index = join_magics(a, magics)) == BH_NOTFOUND)
 	{
 		exit(1);
