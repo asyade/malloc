@@ -35,6 +35,26 @@ size_t			join_magics(t_memalloc *a, t_memmagic *magics[2])
 	return (curr_hi);
 }
 
+int				memalloc_extrude(t_memalloc *a, t_memmagic *prev, size_t prev_index, size_t prev_size)
+{
+	size_t		prev_offset;
+	size_t		new_sz;
+
+	prev_offset = MAGOFF(a, prev);
+	if (prev->size - prev_size < (sizeof(t_memmagic) * 2) + 32)
+		return (0);
+	new_sz = prev->size - prev_size;
+	if (fill_mem_magic(a, prev_offset, prev_size, USED, 0) != 0)
+		return (E_MAGIC);
+	prev->size = prev_size;
+	(USED_PTR(a) + prev_index)->size = prev_size;
+	if (fill_mem_magic(a, prev_offset + prev_size, new_sz, FREE, 1) != 0)
+		return (E_MAGIC);
+	if (bheap_insert(a->empty_entries, &(t_mementry){new_sz, (t_memmagic *)((size_t)prev + prev->size)}) == BH_NOTFOUND)
+		return (E_INS_EMPTY);
+	return (0);
+}
+
 int				memalloc_try_expande(t_memalloc *a, void *addr, size_t ns)
 {
 	t_memmagic	*magics[2];
@@ -61,5 +81,5 @@ int				memalloc_try_expande(t_memalloc *a, void *addr, size_t ns)
 		return (E_UNDEF);
 	}
 	(USED_PTR(a) + index)->size = magics[0]->size;
-	return (1);
+	return (memalloc_extrude(a, magics[0], index, ns) >= 0 ? 1 : -1);
 }
