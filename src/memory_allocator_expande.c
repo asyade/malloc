@@ -63,9 +63,9 @@ int				memalloc_try_expande(t_memalloc *a, void *addr, size_t ns)
 
 	magics[0] = (t_memmagic *)addr - 1;
 	begin = MAGOFF(a, magics[0]);
-	if (magics[0]->size >= ns - (2 * sizeof(t_memmagic)))
-		return (1);
 	ns = SIZE_ALIGN(ns + (2 * sizeof(t_memmagic)));
+	if (magics[0]->size >= ns)
+		return (1);
 	if (begin + magics[0]->size >= a->buffer_size)
 		return (0);
 	if (a->range.min == (size_t)-1)
@@ -74,13 +74,12 @@ int				memalloc_try_expande(t_memalloc *a, void *addr, size_t ns)
 		return (0);
 	}
 	magics[1] = (t_memmagic *)((size_t)magics[0] + magics[0]->size);
-	if (magics[0]->size + magics[1]->size < ns)
+	if (magics[0]->size + magics[1]->size > a->buffer_size)
+		return (-1);
+	if (magics[0]->size + magics[1]->size < ns || magics[1]->status == USED)
 		return (0);
 	if ((index = join_magics(a, magics)) == BH_NOTFOUND)
-	{
-		exit(1);
 		return (E_UNDEF);
-	}
 	(USED_PTR(a) + index)->size = magics[0]->size;
 	return (memalloc_extrude(a, magics[0], index, ns) >= 0 ? 1 : -1);
 }

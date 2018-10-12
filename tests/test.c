@@ -57,23 +57,28 @@ void random_test(size_t max_ptr, size_t nbr_ops)
         break;
         ///Realloc
         case 5:
-        break ;
-            if (nbr_ptr <= 0)
-                break;
-            size_t new_size = ptrs[0].size * random_range(0, 4);
-            size_t old_size = ptrs[0].size;
-            if (new_size <= old_size) {
-                if (reallocf(ptrs[0].ptr, new_size) != ptrs[0].ptr)
-                {
-                    ft_putfmt("Addr change but size is the same\n");
-                    exit (1);
-                }
-            }
-            else {
+        {
+            size_t r = random_range(10, 20);
+            while (r--)
+            {
+                if (nbr_ptr <= 0)
+                    break;
+                size_t new_size = ptrs[0].size * random_range(2, 4);
+                size_t old_size = ptrs[0].size;
+                if (new_size >= MAX_ALLOC_SIZE)
+                    break ;
+                ptrs[0].size = new_size;
                 ptrs[0].ptr = reallocf(ptrs[0].ptr, new_size);
+                if (ptrs[0].ptr == NULL)
+                {
+                    ft_putfmt("Realloc failed\n");
+                    exit(1);
+                }
+                ft_putfmt(CL_CYAN "EXAPND(%p, %u-%u, real %u)" CL_GREEN " SUCCESS\n" CL_RESET, ptrs[0].ptr, old_size,new_size, ((t_memmagic *)ptrs[0].ptr - 1)->size);
+                ft_memset(ptrs[0].ptr, 42, new_size);
             }
-                ft_putfmt(CL_CYAN "EXAPND(%p, %u-%u, real %u)" CL_GREEN " SUCCESS\n" CL_RESET, ptrs[0].ptr, old_size, ptrs[0].size, new_size);
-            break;
+        }
+        break;
         //Alloc
         case 1:
             if (nbr_ptr >= max_ptr)
@@ -129,7 +134,7 @@ pthread_t thrads[16];
 void *lt(void *d)
 {
     ft_putfmt("begin\n");
-    random_test(1024, 1000);
+    random_test(1024, 1000*4);
     return (d);
 }
 
@@ -146,19 +151,19 @@ void test_threads(int seed)
 
 void test_alloc_limits()
 {
-    size_t fillsize = 4064;
+    size_t fillsize = 4000;
 
     size_t page_before = mmemalloc_heap()->size;
-    void *ptr = malloc(fillsize);
-    if (ptr == NULL)
+    void *ptr =NULL;// malloc(fillsize);
+    // if (ptr == NULL)
+    // {
+        // ft_putfmt("Can't alloc !\n");
+        // exit(1);
+    // }
+    ptr = realloc(ptr, fillsize);// != ptr)
     {
-        ft_putfmt("Can't alloc !\n");
-        exit(1);
-    }
-    if (realloc(ptr, fillsize) != ptr)
-    {
-        ft_putfmt("Realloc change addr but size is the same\n");
-        exit(1);
+    //     ft_putfmt("Realloc change addr but size is the same\n");
+    //     exit(1);
     }
     t_memmagic *magic = (t_memmagic *)ptr - 1;
     if (magic->size != fillsize + (2*sizeof(t_memmagic)))
@@ -166,25 +171,23 @@ void test_alloc_limits()
         ft_putfmt("Allocator use %u instaed of %u\n", magic->size, fillsize);
         exit(1);
     }
-    ft_putfmt("memset\n");
+    ft_putfmt("Realloc test 1 (# means addr has changed): \n");
     ft_memset(ptr, 42, fillsize);
     for (int i = 0; i < 10; i++)
     {
         fillsize += 4096;
+        void *old = ptr;
         ptr = realloc(ptr, fillsize);
-        if ( realloc(ptr, fillsize) != ptr)
-        {
-            ft_putfmt("Realloc change addr but size is the same\n");
-            exit(1);
-        }
         ft_memset(ptr, 42, fillsize);
-        magic = (t_memmagic *)ptr - 1;
-        if (magic->size != fillsize + (2*sizeof(t_memmagic)))
-        {
-            ft_putfmt("Allocator use %u instaed of %u\n", magic->size, fillsize);
-            exit(1);
-        }
+        if (ptr == old)
+            ft_putchar_fd('.', 1);
+        else
+            ft_putchar_fd('#', 1);
+
+        
+       // magic = (t_memmagic *)ptr - 1;
     }
+    ft_putfmt("\n");
     free(ptr);
     if (page_before != mmemalloc_heap()->size) {
         ft_putfmt("Big heap leak !\n");
@@ -215,9 +218,33 @@ void    test_tiny_realloc()
     free(ptr);
 }
 
+void        test_show()
+{
+    #define NBR 4096*128
+    void *ptr[NBR];
+
+    size_t before = mmemalloc_heap()->size;
+
+    for (size_t i = 0; i < NBR; i++)
+    {
+        ptr[i] = malloc(10);
+    }
+    show_alloc_mem();
+    for (size_t i = 0; i < NBR; i++)
+    {
+        free(ptr[i]);
+    }
+    if (mmemalloc_heap()->size - before > 2)
+    {
+        ft_putfmt("Allocator leak ! before %u after %u\n", before, mmemalloc_heap()->size);
+        exit (1);
+    }
+}
+
 int main()
 {
-//    test_tiny_realloc();
- //   test_alloc_limits();
-    test_threads(42);
+    test_tiny_realloc();
+    test_alloc_limits();
+   test_threads(42);
+   test_show();
 }

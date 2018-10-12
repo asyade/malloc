@@ -143,7 +143,6 @@ typedef enum	e_alloc_stat
 {
 	USED = 0x01,
 	FREE = 0x02,
-	FORCE_64 = 0xFFFFFFFFFF,
 }				t_alloc_stat;
 
 # define TALS t_alloc_stat
@@ -153,6 +152,7 @@ typedef enum	e_alloc_stat
 typedef struct	s_memmagic
 {
 	TALS		status;
+	uint32_t	offset;
 	size_t		size;
 }				t_memmagic;
 
@@ -216,6 +216,11 @@ int				try_join_empty_entries(t_memalloc *a, size_t index, void *d);
 # define STM sizeof(t_mementry)
 # define STMM sizeof(t_memmagic)
 # define premain __attribute__ ((constructor(999))) premain
+
+typedef struct	s_allocactor
+{
+	t_memalloc	*allocator;
+}				t_allocator;
 
 t_bheap			*mmemalloc_heap(void);
 int				memallocator_cmpf(void *aa, void *bb);
