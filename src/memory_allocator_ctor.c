@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libr.h"
+#include "malloc.h"
 
 int				entries_cmp(void *aa, void *bb)
 {
@@ -54,6 +55,8 @@ void			memalloc_destroy(t_memalloc *a)
 {
 	if (!a)
 		return ;
+	if (DEBUG_PAGE_DEL)
+		ft_putfmt(DEBUG_PREFIX"\tDeleting %x\n", a);
 	if (mchunk_free((t_memchunk *)((size_t)AEE(a) - sizeof(t_memchunk))) != 0 ||
 		mchunk_free((t_memchunk *)((size_t)a - sizeof(t_memchunk))) != 0)
 	{

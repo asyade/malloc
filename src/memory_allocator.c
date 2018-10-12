@@ -81,7 +81,7 @@ void			*unaligned_memalloc_alloc(t_memalloc *a, size_t size)
 	void		*ret;
 
 	//size = SIZE_ALIGN((size + (2 * sizeof(t_memmagic))));
-	//if (a->range.min == (size_t)-1)
+	if (a->range.min == (size_t)-1)
 		size = a->buffer_size;
 	if ((index = find_empty_entry(a->empty_entries, size)) == BH_NOTFOUND)
 		return (NULL);
@@ -111,6 +111,8 @@ int				memalloc_free(t_memalloc *a, void *addr)
 		&(t_mementry){0, addr}, 0)) == BH_NOTFOUND)
 		return (1);
 	entry = *((t_mementry *)(a->used_entries + 1) + index);
+	if (entry.size != ((t_memmagic *)addr)->size)
+		memalloc_panic(E_MAGIC);
 	if (bheap_remove(a->used_entries, index) != 0)
 		return (E_DEL_HEAP);
 	if ((index = bheap_insert(a->empty_entries, &entry)) == BH_NOTFOUND)

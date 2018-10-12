@@ -43,7 +43,7 @@ void				*ft_memcpy(void *dest, const void *src, size_t n)
 	srcptr = (unsigned char *)src;
 	while (n--)
 	{
-		destptr[n] = srcptr[n];
+		*destptr++ = *srcptr++;
 	}
 	return (dest);
 }

@@ -17,14 +17,13 @@ void			*realloc(void *ptr, size_t size)
 {
 	void		*new;
 	int			res;
+	size_t		old;
 
 	take_lock();
 	if (ptr != NULL && size == 0)
 		return (free_lock(ptr));
 	else if (ptr == NULL)
 		return (free_lock(mmemalloc_alloc(size > 0 ? size : MIN_ALLOC_SIZE)));
-	size = SIZE_ALIGN(size + (2 * sizeof(t_memmagic)));
-
 	if ((res = mmemalloc_expande(ptr, size)) == 1)
 		return (free_lock(ptr));
 	free_lock(NULL);
@@ -33,12 +32,13 @@ void			*realloc(void *ptr, size_t size)
 		ft_putfmt(CL_RED"ERROR, realloc return -1\n"CL_RESET);
 		return (NULL);
 	}
-	else if ((new = malloc(size)) == NULL)
+	old = ((t_memmagic *)ptr - 1)->size - (2 * sizeof(t_memmagic));
+	if ((new = malloc(size)) == NULL)
 		return (NULL);
 	//ft_putfmt("save %p data into %p\n", ptr, new);
 	if (new == ptr)
 		return (new);
-	ft_memcpy(new, ptr, ((t_memmagic *)ptr - 1)->size);
+	ft_memcpy(new, ptr, old < size ? old : size);
 	//ft_putfmt("free %p replaced by %p\n", ptr, new);
 	free(ptr);
 	return (new);

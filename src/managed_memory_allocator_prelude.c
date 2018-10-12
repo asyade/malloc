@@ -33,8 +33,8 @@ int					memallocator_cmpf(void *aa, void *bb)
 	size_t			a;
 	size_t			b;
 
-	a = (size_t)(*(void **)aa);
-	b = (size_t)(*(void **)bb);
+	a = (size_t)((t_allocator *)aa)->allocator;
+	b = (size_t)((t_allocator *)bb)->allocator;
 	if (a == b)
 		return (0);
 	return (a < b) ? -1 : 1;
@@ -49,7 +49,7 @@ t_bheap				*mmemalloc_heap(void)
 	{
 		if ((c = mchunk_alloc(ALLOCATORS_HEAP_SIZE)) == NULL)
 			memalloc_panic(E_NOMEM);
-		heap = bheap_new(c + 1, c->size, sizeof(void *), memallocator_cmpf);
+		heap = bheap_new(c + 1, c->size, sizeof(t_allocator), memallocator_cmpf);
 	}
 	return (heap);
 }

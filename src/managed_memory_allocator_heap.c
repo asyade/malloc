@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libr.h"
+#include "malloc.h"
 
 void				*find_and_alloc(size_t size, size_t index)
 {
@@ -21,10 +22,20 @@ void				*find_and_alloc(size_t size, size_t index)
 	heap = mmemalloc_heap();
 	if (index >= heap->size)
 		return (NULL);
-	node = (t_memalloc *)(heap + 1) + index;
-	if (node->range.min < size && node->range.max > size &&
-		(ptr = safe_memalloc_alloc(node, size, 1)) != NULL)
-		return (ptr);
+	node = ((t_allocator *)(((size_t)(heap + 1)) + (index * sizeof(t_allocator))))->allocator;
+	if (node->range.min < size && node->range.max > size && node->empty_entries->size > 0)
+	{
+		if ((ptr = safe_memalloc_alloc(node, size, 1)) == NULL && DEBUG_PAGE_FAILED)
+			ft_putfmt(DEBUG_PREFIX"\tFailed to insert %u into %x\n",
+						size, node);
+		else if (ptr != NULL)
+		{
+			if (DEBUG_PAGE_USED)
+				ft_putfmt(DEBUG_PREFIX"\tInsered %uo into %x\n",
+						size, node);
+			return (ptr);
+		}
+	}
 	if ((ptr = find_and_alloc(size, BH_LEFT(index))) != NULL)
 		return (ptr);
 	if ((ptr = find_and_alloc(size, BH_RIGHT(index))) != NULL)
@@ -55,8 +66,13 @@ void				*insert_and_alloc(size_t range)
 		return (NULL);
 	if ((allocator = memalloc_new_range(range)) == NULL)
 		return (NULL);
-	if (bheap_insert(mmemalloc_heap(), &allocator) == BH_NOTFOUND)
+	if (bheap_insert(mmemalloc_heap(), &(t_allocator){allocator}) == BH_NOTFOUND)
 		memalloc_panic(E_NOMEM);
+	if (DEBUG_PAGE_INSERT)
+		ft_putfmt(DEBUG_PREFIX"\tNew page insered (%x)\n\t\tsize"
+					" : %u\n\t\trange : %u-%u\n",
+					allocator, allocator->buffer_size,
+					allocator->range.min, allocator->range.max);
 	return (safe_memalloc_alloc(allocator, range, 0));
 }
 

@@ -63,8 +63,9 @@ int				memalloc_try_expande(t_memalloc *a, void *addr, size_t ns)
 
 	magics[0] = (t_memmagic *)addr - 1;
 	begin = MAGOFF(a, magics[0]);
-	if (magics[0]->size >= ns)
+	if (magics[0]->size >= ns - (2 * sizeof(t_memmagic)))
 		return (1);
+	ns = SIZE_ALIGN(ns + (2 * sizeof(t_memmagic)));
 	if (begin + magics[0]->size >= a->buffer_size)
 		return (0);
 	if (a->range.min == (size_t)-1)

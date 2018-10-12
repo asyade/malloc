@@ -58,8 +58,6 @@ void				mmemalloc_free(void *ptr)
 		return (void)memalloc_panic(E_OVERFLOW);
 	else if (allocator->used_entries->size != 0)
 		return ;
-	if (allocator->empty_entries->size != 1)
-		memalloc_panic(E_UNDEF);
 	else if ((allocator->range.min == SM_MIN && small_page_count(0) > 1))
 	{
 		if (bheap_remove(heap, bheap_find(heap, &allocator, 0)) != 0)
