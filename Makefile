@@ -40,6 +40,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) -dynamic -shared -o $(NAME) $(VARFLAG)
+	ln -s $(NAME) libft_malloc.so
 
 %.o : %.c Makefile ./include/libr.h ./include/malloc.h
 	$(CC) $< -c  $(INCLUDES) $(LIBS) -o $@ $(VARFLAG)
@@ -50,6 +51,6 @@ clean:
 	rm -f src/*.o
 
 fclean: clean
-	rm -f libft_malloc_*.so
+	rm -f libft_malloc*.so
 
 re: fclean all

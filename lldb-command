@@ -1,0 +1,3 @@
+env LD_PRELOAD=./libft_malloc_x86_64_Linux.so
+target create vim
+breakpoint set --file memory_allocator_join.c --line 21
