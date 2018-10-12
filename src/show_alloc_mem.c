@@ -33,11 +33,10 @@ void            show_big_alloc_mem(void *allocator)
 
 void			show_alloc_mem()
 {
-	//t_bheap		*heap;
+    t_bheap		*heap;
 
-
-   // heap = mmemalloc_heap();
-    //bheap_iter(heap, show_tiny_alloc_mem, 0);
-   // bheap_iter(heap, show_med_alloc_mem, 0);
-   // bheap_iter(heap, show_big_alloc_mem, 0);
+    heap = mmemalloc_heap();
+    bheap_iter(heap, show_tiny_alloc_mem, 0);
+    bheap_iter(heap, show_med_alloc_mem, 0);
+    bheap_iter(heap, show_big_alloc_mem, 0);
 }

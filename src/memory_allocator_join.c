@@ -25,9 +25,9 @@ int				fill_mem_magic(t_memalloc *a, PLUSA, t_alloc_stat s, int cr)
 	if (of > (size_t)a)
 		return (E_OVERFLOW);
 	magic = (t_memmagic *)(ALLOC_SPTR(a) + of);
-	*magic = (t_memmagic){s, sz};
+	*magic = (t_memmagic){s, of, sz};
 	magic = (t_memmagic *)((ALLOC_SPTR(a) + of + sz) - sizeof(t_memmagic));
-	*magic = (t_memmagic){s, sz};
+	*magic = (t_memmagic){s, of, sz};
 	return (check_mem_magic(a, of, sz, cr));
 }
 
