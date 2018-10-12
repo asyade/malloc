@@ -11,6 +11,8 @@ endif
 
 CC = gcc
 SRC = src/malloc.c \
+./src/show_alloc_mem.c \
+./src/show_alloc_mem2.c \
 ./src/malloc_fn2.c \
 ./src/binary_heap.c \
 ./src/binary_heap_percolate.c \
