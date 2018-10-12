@@ -8,6 +8,7 @@ void            show_allocator(t_memalloc *allocator)
     size_t      b;
     t_mementry  *e;
 
+    i = 0;
     while (i < allocator->used_entries->size)
     {
         e = ((t_mementry *)BH_INDEX(allocator->used_entries, i));
@@ -25,7 +26,7 @@ void            show_tiny_alloc_mem(void *allocator)
     a = ((t_allocator *)allocator)->allocator;
     if (a->range.max != SM_MAX)
         return ;
-    ft_putfmt("TINY : 0x%x\n", (size_t)(a + 1) & SHM_MSK);
+    ft_putfmt("TINY : 0x%x %u %u\n", (size_t)(a + 1) & SHM_MSK ,a->empty_entries->size, a->used_entries->size);
     show_allocator(a);
 }
 

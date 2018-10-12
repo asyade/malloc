@@ -257,19 +257,16 @@ void       test_42()
         exit(1);
     }
     ft_putfmt("begin with %u pages\n", old);
+    show_alloc_mem();
     
 }
 
 int main()
 {
-
-    //test_tiny_realloc();
-    //test_alloc_limits();
+    test_tiny_realloc();
+    test_alloc_limits();
     test_threads(42);
-
     show_alloc_mem();
-    exit(1);
-
     test_show();
-//    test_42();
+    test_42();
 }

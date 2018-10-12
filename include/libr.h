@@ -94,6 +94,7 @@ size_t			bheap_find(t_bheap *heap, void *value, size_t index);
 void    		bheap_iter(t_bheap *heap, t_bheap_iter iter, size_t i);
 
 # define MEMCHUNK_MAGIC 424242
+# define SHM_MSK 0x000FFFFF
 # define MMAP_NULL ((void *)-1)
 # define MMAP_FLAGS MAP_ANONYMOUS | MAP_PRIVATE
 # define MMAP_PROT PROT_WRITE | PROT_READ
