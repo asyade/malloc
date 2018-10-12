@@ -69,6 +69,7 @@ int				ft_memcmp(void *a, void *b, size_t n);
 # define BH_INDEX(hh, ii) (uint8_t *)(((size_t)((hh) + 1) + IH(ii, hh)))
 
 typedef int		(*t_bheap_cmpf)(void *, void *);
+typedef void	(*t_bheap_iter)(void *);
 
 # define BHCMPF t_bheap_cmpf
 
@@ -90,6 +91,7 @@ t_bheap			*bheap_new(void *b, size_t bs, size_t es, t_bheap_cmpf c);
 size_t			bheap_insert(t_bheap *heap, void *elem);
 int				bheap_remove(t_bheap *heap, size_t index);
 size_t			bheap_find(t_bheap *heap, void *value, size_t index);
+void    		bheap_iter(t_bheap *heap, t_bheap_iter iter, size_t i);
 
 # define MEMCHUNK_MAGIC 424242
 # define MMAP_NULL ((void *)-1)

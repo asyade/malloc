@@ -37,16 +37,10 @@ void			premain(void)
 	main_called(1);
 }
 
-void			dump_alloc_mem()
-{
-	
-}
-
 void			memalloc_panic(int code)
 {
 	if (main_called(0) == 0)
 		return ;
 	ft_putfmt("Memory arena corrupted exit, (error: %d)\n", code);
 	exit(1);
-	
 }

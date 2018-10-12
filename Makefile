@@ -3,15 +3,21 @@ HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
 NAME = libft_malloc_$(HOSTTYPE).so
 
+ifeq ($(DEBUG),)
+VARFLAG = -Ofast
+else
+VARFLAG = -g3
+endif
+
 CC = gcc
 SRC = src/malloc.c \
 ./src/malloc_fn2.c \
 ./src/binary_heap.c \
 ./src/binary_heap_percolate.c \
 ./src/rlib_fn_mem.c \
-./src/rlib_fn_str.c \
-./src/rlib_fn_str2.c \
-./src/rlib_fn_str3.c \
+./src/rlib_fn_put.c \
+./src/rlib_fn_fmt.c \
+./src/rlib_prelude.c \
 ./src/rlib.c \
 ./src/memory_chunk.c \
 ./src/memory_allocator.c \
@@ -33,10 +39,10 @@ INCLUDES= -I./include -fPIC
 all: $(NAME) 
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -dynamic -shared -o $(NAME) -g3
+	$(CC) $(OBJ) -dynamic -shared -o $(NAME) $(VARFLAG)
 
 %.o : %.c Makefile ./include/libr.h ./include/malloc.h
-	$(CC) $< -c  $(INCLUDES) $(LIBS) -o $@ -g3
+	$(CC) $< -c  $(INCLUDES) $(LIBS) -o $@ $(VARFLAG)
 
 .PHONY: clean fclean
 
