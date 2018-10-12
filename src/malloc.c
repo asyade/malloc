@@ -22,7 +22,7 @@ void			*realloc(void *ptr, size_t size)
 	if (ptr != NULL && size == 0)
 		return (free_lock(ptr));
 	else if (ptr == NULL)
-		return (free_lock(mmemalloc_alloc(size > 0 ? size : 32+(2 * sizeof(t_memalloc)))));
+		return (free_lock(mmemalloc_alloc(size > 0 ? size : MIN_ALLOC_SIZE)));
 	size = SIZE_ALIGN(size + (2 * sizeof(t_memmagic)));
 
 	if ((res = mmemalloc_expande(ptr, size)) == 1)

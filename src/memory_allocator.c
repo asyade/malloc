@@ -82,7 +82,7 @@ void			*unaligned_memalloc_alloc(t_memalloc *a, size_t size)
 
 	//size = SIZE_ALIGN((size + (2 * sizeof(t_memmagic))));
 	//if (a->range.min == (size_t)-1)
-	//	size = a->buffer_size;
+		size = a->buffer_size;
 	if ((index = find_empty_entry(a->empty_entries, size)) == BH_NOTFOUND)
 		return (NULL);
 	entry = ((t_mementry *)((a->empty_entries) + 1))[index];

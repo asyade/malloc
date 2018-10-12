@@ -118,9 +118,12 @@ int				mchunk_free(t_memchunk *chunk);
 # define E_OVERFLOW -5
 # define E_UNDEF -1
 # define E_DOUBLEFREE -16
+
 # define MAX_ALLOC_SIZE 1024 * 1024 * 18
-# define MIN_ALLOC_SIZE 2
+# define MIN_ALLOC_SIZE (32 + (2 * sizeof(t_memmagic)))
+
 # define ALIGN 16
+ 
 # define ABZ(a)((a)->buffer_size)
 # define ALLOCATOR_MAX(a) ((size_t)(((a) + sizeof(t_memalloc) + ABZ(a))))
 # define SIZE_ALIGN(s) ((((s) / ALIGN) + ((s) % ALIGN ? 1 : 0)) * ALIGN)

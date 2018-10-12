@@ -41,7 +41,7 @@ int				memalloc_extrude(t_memalloc *a, t_memmagic *prev, size_t prev_index, size
 	size_t		new_sz;
 
 	prev_offset = MAGOFF(a, prev);
-	if (prev->size - prev_size < (sizeof(t_memmagic) * 2) + 32)
+	if (prev->size - prev_size < MIN_ALLOC_SIZE)
 		return (0);
 	new_sz = prev->size - prev_size;
 	if (fill_mem_magic(a, prev_offset, prev_size, USED, 0) != 0)

@@ -16,10 +16,6 @@
 
 static PTMT		g_lock;
 
-void			show_alloc_mem(void)
-{
-}
-
 void			take_lock(void)
 {
 	static int	initialized = 0;
@@ -50,7 +46,7 @@ void			free(void *ptr)
 void			*malloc(size_t size)
 {
 	take_lock();
-	if (size == 0)
-		size = 128;
+	if (size < MIN_ALLOC_SIZE)
+		size = MIN_ALLOC_SIZE;
 	return (free_lock(mmemalloc_alloc(size)));
 }
