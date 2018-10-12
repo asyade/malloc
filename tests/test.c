@@ -58,12 +58,12 @@ void random_test(size_t max_ptr, size_t nbr_ops)
         ///Realloc
         case 5:
         {
-            size_t r = random_range(10, 20);
+            size_t r = random_range(1, 20);
             while (r--)
             {
                 if (nbr_ptr <= 0)
                     break;
-                size_t new_size = ptrs[0].size * random_range(2, 4);
+                size_t new_size = ptrs[0].size * random_range(1, 4);
                 size_t old_size = ptrs[0].size;
                 if (new_size >= MAX_ALLOC_SIZE)
                     break ;
@@ -99,7 +99,7 @@ void random_test(size_t max_ptr, size_t nbr_ops)
             {
                 ptrs[nbr_ptr].size = sz;
                 ptrs[nbr_ptr].ptr = malloc(ptrs[nbr_ptr].size);
-                if (realloc(ptrs[nbr_ptr].ptr, sz) != ptrs[nbr_ptr].ptr) {
+                if (reallocf(ptrs[nbr_ptr].ptr, sz) != ptrs[nbr_ptr].ptr) {
                     ft_putfmt("ptr change but size is the same\n");
                     exit(1);
                 }
@@ -125,6 +125,11 @@ void random_test(size_t max_ptr, size_t nbr_ops)
         }
         }
     }
+    while (nbr_ptr--)
+    {
+        free(ptrs[nbr_ptr].ptr);
+    }
+    free(ptrs);
     ft_putfmt("# DONE #\n");
 }
 
@@ -134,7 +139,7 @@ pthread_t thrads[16];
 void *lt(void *d)
 {
     ft_putfmt("begin\n");
-    random_test(1024, 1000*4);
+    random_test(1024, 100);
     return (d);
 }
 
@@ -160,7 +165,7 @@ void test_alloc_limits()
         // ft_putfmt("Can't alloc !\n");
         // exit(1);
     // }
-    ptr = realloc(ptr, fillsize);// != ptr)
+    ptr = reallocf(ptr, fillsize);// != ptr)
     {
     //     ft_putfmt("Realloc change addr but size is the same\n");
     //     exit(1);
@@ -177,7 +182,7 @@ void test_alloc_limits()
     {
         fillsize += 4096;
         void *old = ptr;
-        ptr = realloc(ptr, fillsize);
+        ptr = reallocf(ptr, fillsize);
         ft_memset(ptr, 42, fillsize);
         if (ptr == old)
             ft_putchar_fd('.', 1);
@@ -204,13 +209,13 @@ void    test_tiny_realloc()
         exit(1);
     }
     ft_memset(ptr, 42, 32);
-    if (realloc(ptr, 64) != ptr)
+    if (reallocf(ptr, 64) != ptr)
     {
         ft_putfmt("realloc prediction dosent work !\n");
         exit(1);
     }
     ft_memset((unsigned char *)ptr + 32, 43, 32);
-    if (realloc(ptr, 64) != ptr)
+    if (reallocf(ptr, 64) != ptr)
     {
         ft_putfmt("address change but size is the same\n");
         exit(1);
@@ -220,11 +225,11 @@ void    test_tiny_realloc()
 
 void        test_show()
 {
-    #define NBR 4096*128
+    #define NBR 4096
     void *ptr[NBR];
 
     size_t before = mmemalloc_heap()->size;
-
+    
     for (size_t i = 0; i < NBR; i++)
     {
         ptr[i] = malloc(10);
@@ -241,10 +246,30 @@ void        test_show()
     }
 }
 
+void       test_42()
+{
+    t_bheap     *heap = mmemalloc_heap();
+    size_t      old = heap->size;
+
+    if (old > 2)
+    {
+        ft_putfmt("Allocator leak, begin with %u pages()\n", old);
+        exit(1);
+    }
+    ft_putfmt("begin with %u pages\n", old);
+    
+}
+
 int main()
 {
-    test_tiny_realloc();
-    test_alloc_limits();
-   test_threads(42);
-   test_show();
+
+    //test_tiny_realloc();
+    //test_alloc_limits();
+    test_threads(42);
+
+    show_alloc_mem();
+    exit(1);
+
+    test_show();
+//    test_42();
 }
