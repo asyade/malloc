@@ -23,7 +23,11 @@ t_memalloc			*find_allocator_by_addr(void *ptr, size_t index)
 	al = *((t_memalloc **)(heap + 1) + index);
 	if ((size_t)al < (size_t)ptr &&
 		(size_t)ptr < (ALLOC_SPTR(al) + al->buffer_size))
+	{
+		if ((size_t)al != ((size_t)((t_memmagic *)ptr - 1)) - (((t_memmagic *)ptr - 1)->offset + sizeof(t_memalloc)))
+			memalloc_panic(E_UNDEF);
 		return (al);
+	}
 	if ((al = find_allocator_by_addr(ptr, BH_LEFT(index))) != NULL)
 		return (al);
 	if ((al = find_allocator_by_addr(ptr, BH_RIGHT(index))) != NULL)
