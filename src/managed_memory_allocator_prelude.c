@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   managed_memory_allocator_fn2.c                     :+:      :+:    :+:   */
+/*   managed_memory_allocator_prelude.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 18:24:04 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/08 20:28:32 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/13 18:57:19 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ t_bheap				*mmemalloc_heap(void)
 	{
 		if ((c = mchunk_alloc(ALLOCATORS_HEAP_SIZE)) == NULL)
 			memalloc_panic(E_NOMEM);
-		heap = bheap_new(c + 1, c->size, sizeof(t_allocator), memallocator_cmpf);
+		heap = bheap_new(c + 1, c->size,
+							sizeof(t_allocator), memallocator_cmpf);
 	}
 	return (heap);
 }

@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 03:08:19 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/09 05:02:05 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/13 18:59:08 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void			*free_lock(void *ret)
 
 void			free(void *ptr)
 {
+	if (DEBUG_FNCS)
+		ft_putfmt(DEBUG_PREFIX"\tfree(%x)\n", ptr);
 	if (ptr == NULL)
 		return ;
 	take_lock();
@@ -45,8 +47,18 @@ void			free(void *ptr)
 
 void			*malloc(size_t size)
 {
+	void *ptr;
+
+	if (DEBUG_FNCS)
+		ft_putfmt(DEBUG_PREFIX"\tmalloc(%d)\n", size);
 	take_lock();
 	if (size < MIN_ALLOC_SIZE)
 		size = MIN_ALLOC_SIZE;
-	return (free_lock(mmemalloc_alloc(size)));
+	ptr = free_lock(mmemalloc_alloc(size));
+	if ((size_t)ptr % 16)
+	{
+		ft_putfmt("ptr is not aligned !\n");
+		exit(1);
+	}
+	return (ptr);
 }

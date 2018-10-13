@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 15:45:18 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/09 03:14:46 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/13 19:12:26 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void			ft_putendl(char *str);
 void			ft_putendl_fd(char *str, int fd);
 void			ft_putull_fd(uintmax_t nbr, int fd);
 
-
 # define FMT_BUFFER_SIZE 4096
 # define PUTFMT_BUFFER_SIZE 1024 * 16
+
 void			ft_putfmt(char *fmt, ...);
 
 typedef long int(t_rnd)();
@@ -60,6 +60,7 @@ int				ft_memcmp(void *a, void *b, size_t n);
 # define SV size_t[]
 # define MXE memalloc_ei
 # define TMA t_memalloc
+# define TA t_memalloc
 # define TMM t_memmagic
 # define BH_PARENT(index) ((((index)-1) / 2))
 # define BH_LEFT(index) (((2 * (index)) + 1))
@@ -67,6 +68,7 @@ int				ft_memcmp(void *a, void *b, size_t n);
 
 # define IH(ii, hh)(((ii) * (hh)->elem_size))
 # define BH_INDEX(hh, ii) (uint8_t *)(((size_t)((hh) + 1) + IH(ii, hh)))
+# define ALS(al) (&(t_allocator){al})
 
 typedef int		(*t_bheap_cmpf)(void *, void *);
 typedef void	(*t_bheap_iter)(void *);
@@ -91,7 +93,7 @@ t_bheap			*bheap_new(void *b, size_t bs, size_t es, t_bheap_cmpf c);
 size_t			bheap_insert(t_bheap *heap, void *elem);
 int				bheap_remove(t_bheap *heap, size_t index);
 size_t			bheap_find(t_bheap *heap, void *value, size_t index);
-void    		bheap_iter(t_bheap *heap, t_bheap_iter iter, size_t i);
+void			bheap_iter(t_bheap *heap, t_bheap_iter iter, size_t i);
 
 # define MEMCHUNK_MAGIC 424242
 # define MMAP_NULL ((void *)-1)
@@ -125,19 +127,21 @@ int				mchunk_free(t_memchunk *chunk);
 # define MIN_ALLOC_SIZE (32 + (2 * sizeof(t_memmagic)))
 
 # define ALIGN 16
- 
+
+# define MENT(sz, ad) (&(t_mementry){sz, ad})
 # define ABZ(a)((a)->buffer_size)
 # define ALLOCATOR_MAX(a) ((size_t)(((a) + sizeof(t_memalloc) + ABZ(a))))
 # define SIZE_ALIGN(s) ((((s) / ALIGN) + ((s) % ALIGN ? 1 : 0)) * ALIGN)
 # define SIZE_ALLOC(size) (SIZE_ALIGN((size + sizeof(t_alloc))))
-# define PTR_AS_ENTRY(allocator, ptr) ((t_mementry){0, (void *)((size_t)(ptr))})
 # define ALLOC_VPTR(allocator) (((void *)((allocator) + 1)))
 # define ALLOC_SPTR(allocator) (((size_t)((allocator) + 1)))
 # define EMPTY_PTR(allocator) (((t_mementry *)((allocator)->empty_entries + 1)))
 # define USED_PTR(allocator) (((t_mementry *)((allocator)->used_entries + 1)))
+# define MAGOFF(allocator, magic)((size_t)(magic) - ALLOC_SPTR(allocator))
 # define CMMM check_mem_magic
 # define FMM fill_mem_magic
 # define PTMT pthread_mutex_t
+# define VOIDE void	__attribute__ ((constructor(999)))
 
 typedef enum	e_alloc_stat
 {
@@ -208,14 +212,13 @@ int				try_join_empty_entries(t_memalloc *a, size_t index, void *d);
 # define SM_MAX 128
 # define BG_MIN 128
 # define BG_MAX 1024
-# define ALLOC_PPAGE 100
+# define ALLOC_PPAGE 128
 # define SMALL_SZ ((SM_MAX + (2*sizeof(t_memmagic))) * ALLOC_PPAGE)
 # define BIG_SZ ((BG_MAX + (2*sizeof(t_memmagic))) * ALLOC_PPAGE)
 # define AUE(a) a->used_entries
 # define AEE(a) a->empty_entries
 # define STM sizeof(t_mementry)
 # define STMM sizeof(t_memmagic)
-# define premain __attribute__ ((constructor(999))) premain
 
 typedef struct	s_allocactor
 {

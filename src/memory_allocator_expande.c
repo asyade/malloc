@@ -1,56 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory_allocator_fn3.c                             :+:      :+:    :+:   */
+/*   memory_allocator_expande.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 17:00:20 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/09 05:21:51 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/13 16:34:18 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libr.h"
 
-#define MAGOFF(allocator, magic)((size_t)magic - ALLOC_SPTR(allocator))
-
 size_t			join_magics(t_memalloc *a, t_memmagic *magics[2])
 {
 	size_t		offset[2];
-	size_t		drained_hi;
-	size_t		curr_hi;
+	size_t		dhi;
+	size_t		chi;
 
 	offset[0] = MAGOFF(a, magics[0]);
 	offset[1] = MAGOFF(a, magics[1]);
-	//ft_putfmt("Before union : %u-%u-%u-%u\n", offset[0], magics[0]->size + offset[0], offset[1], magics[1]->size + offset[1]);
-	if ((drained_hi = bheap_find(a->empty_entries, &(t_mementry){0, magics[1]}, 0)) == BH_NOTFOUND)
+	if ((dhi = bheap_find(a->empty_entries, MENT(0, magics[1]), 0)) == BHN)
 		return (BH_NOTFOUND);
-	if ((curr_hi = bheap_find(a->used_entries, &(t_mementry){0, magics[0]}, 0)) == BH_NOTFOUND)
+	if ((chi = bheap_find(a->used_entries, MENT(0, magics[0]), 0)) == BHN)
 		return (BH_NOTFOUND);
-	if (bheap_remove(a->empty_entries, drained_hi) != 0)
+	if (bheap_remove(a->empty_entries, dhi) != 0)
 		return (BH_NOTFOUND);
-	if (fill_mem_magic(a, offset[0], magics[0]->size + magics[1]->size, USED, 1) != 0)
+	dhi = magics[0]->size + magics[1]->size;
+	if (fill_mem_magic(a, offset[0], dhi, USED, 1) != 0)
 		return (BH_NOTFOUND);
-	//ft_putfmt("After union : %u-%u\n", offset[0], magics[0]->size + offset[0]);
-	return (curr_hi);
+	return (chi);
 }
 
-int				memalloc_extrude(t_memalloc *a, t_memmagic *prev, size_t prev_index, size_t prev_size)
+int				memalloc_extrude(TMA *a, TMM *prev, size_t pi, size_t ps)
 {
 	size_t		prev_offset;
 	size_t		new_sz;
 
 	prev_offset = MAGOFF(a, prev);
-	if (prev->size - prev_size < MIN_ALLOC_SIZE)
+	if (prev->size - ps < MIN_ALLOC_SIZE)
 		return (0);
-	new_sz = prev->size - prev_size;
-	if (fill_mem_magic(a, prev_offset, prev_size, USED, 0) != 0)
+	new_sz = prev->size - ps;
+	if (fill_mem_magic(a, prev_offset, ps, USED, 0) != 0)
 		return (E_MAGIC);
-	prev->size = prev_size;
-	(USED_PTR(a) + prev_index)->size = prev_size;
-	if (fill_mem_magic(a, prev_offset + prev_size, new_sz, FREE, 1) != 0)
+	prev->size = ps;
+	(USED_PTR(a) + pi)->size = ps;
+	if (fill_mem_magic(a, prev_offset + ps, new_sz, FREE, 1) != 0)
 		return (E_MAGIC);
-	if (bheap_insert(a->empty_entries, &(t_mementry){new_sz, (t_memmagic *)((size_t)prev + prev->size)}) == BH_NOTFOUND)
+	if (bheap_insert(a->empty_entries,
+						&(t_mementry){new_sz,
+						(t_memmagic *)((size_t)prev + prev->size)}) == BHN)
 		return (E_INS_EMPTY);
 	return (0);
 }
@@ -69,10 +68,7 @@ int				memalloc_try_expande(t_memalloc *a, void *addr, size_t ns)
 	if (begin + magics[0]->size >= a->buffer_size)
 		return (0);
 	if (a->range.min == (size_t)-1)
-	{
-		//ft_putfmt("Big heap can't be expanded !\n");
 		return (0);
-	}
 	magics[1] = (t_memmagic *)((size_t)magics[0] + magics[0]->size);
 	if (magics[0]->size + magics[1]->size > a->buffer_size)
 		return (-1);

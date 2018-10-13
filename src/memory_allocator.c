@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 17:34:09 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/09 02:53:35 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/13 16:21:54 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void			*fill_entry_middel(t_memalloc *a, t_mementry e, size_t size)
 
 	offset = (e.size / 2) - (size / 2);
 	new_size = e.size - (e.size - offset);
-	if (offset % 2)
+	if (offset % ALIGN)
 	{
-		offset++;
+		offset = ((offset / ALIGN) + 1) * ALIGN;
 		new_size = e.size - (e.size - offset);
 	}
 	if ((new_index = bheap_insert(a->empty_entries,
@@ -80,7 +80,6 @@ void			*unaligned_memalloc_alloc(t_memalloc *a, size_t size)
 	t_mementry	entry;
 	void		*ret;
 
-	//size = SIZE_ALIGN((size + (2 * sizeof(t_memmagic))));
 	if (a->range.min == (size_t)-1)
 		size = a->buffer_size;
 	if ((index = find_empty_entry(a->empty_entries, size)) == BH_NOTFOUND)

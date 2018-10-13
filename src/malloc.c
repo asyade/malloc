@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 02:59:18 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/09 03:45:03 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/13 18:57:47 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,24 @@ void			*realloc(void *ptr, size_t size)
 	int			res;
 	size_t		old;
 
+	if (DEBUG_FNCS)
+		ft_putfmt(DEBUG_PREFIX"\trealloc(%x, %u)\n", ptr, size);
 	take_lock();
 	if (ptr != NULL && size == 0)
 		return (free_lock(ptr));
-	else if (ptr == NULL)
+	else if (ptr == NULL || main_called(0) == 0)
 		return (free_lock(mmemalloc_alloc(size > 0 ? size : MIN_ALLOC_SIZE)));
 	if ((res = mmemalloc_expande(ptr, size)) == 1)
 		return (free_lock(ptr));
 	free_lock(NULL);
 	if (res < 0)
-	{
-		ft_putfmt(CL_RED"ERROR, realloc return -1\n"CL_RESET);
 		return (NULL);
-	}
 	old = ((t_memmagic *)ptr - 1)->size - (2 * sizeof(t_memmagic));
 	if ((new = malloc(size)) == NULL)
 		return (NULL);
-	//ft_putfmt("save %p data into %p\n", ptr, new);
 	if (new == ptr)
 		return (new);
 	ft_memcpy(new, ptr, old < size ? old : size);
-	//ft_putfmt("free %p replaced by %p\n", ptr, new);
 	free(ptr);
 	return (new);
 }
