@@ -1,2 +1,0 @@
-export DYLD_INSERT_LIBRARIES=./libft_malloc_x86_64.so
-export DYLD_FORCE_FLAT_NAMESPACE=y

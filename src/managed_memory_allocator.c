@@ -6,7 +6,7 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 16:34:12 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/08 20:30:50 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/13 18:46:42 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_memalloc			*find_allocator_by_addr(void *ptr, size_t index)
 	if ((size_t)al < (size_t)ptr &&
 		(size_t)ptr < (ALLOC_SPTR(al) + al->buffer_size))
 	{
-		if ((size_t)al != ((size_t)((t_memmagic *)ptr - 1)) - (((t_memmagic *)ptr - 1)->offset + sizeof(t_memalloc)))
+		if ((size_t)al != ((size_t)((t_memmagic *)ptr - 1)) -
+				(((t_memmagic *)ptr - 1)->offset + sizeof(t_memalloc)))
 			memalloc_panic(E_UNDEF);
 		return (al);
 	}
@@ -43,34 +44,40 @@ void				mmemalloc_free_big(t_bheap *heap, t_memalloc *allocator)
 	memalloc_destroy(allocator);
 }
 
+void				inner_free(t_memalloc *alloc, int small)
+{
+	memalloc_destroy(alloc);
+	if (small)
+		small_page_count(-1);
+	else
+		big_page_count(-1);
+}
+
 void				mmemalloc_free(void *ptr)
 {
 	t_memalloc		*allocator;
 	t_bheap			*heap;
 
-	//ft_putfmt("F: %x\n", ptr);
 	heap = mmemalloc_heap();
 	if ((allocator = find_allocator_by_addr(ptr, 0)) == NULL)
-		return (void)memalloc_panic(E_OVERFLOW);
+		return ;
 	if (allocator->range.min == (size_t)-1)
 		return (void)mmemalloc_free_big(heap, allocator);
 	else if (memalloc_free(allocator, ptr) < 0)
-		return (void)memalloc_panic(E_OVERFLOW);
+		return ;
 	else if (allocator->used_entries->size != 0)
 		return ;
-	else if ((allocator->range.min == SM_MIN && small_page_count(0) > 1))
+	if ((allocator->range.min == SM_MIN && small_page_count(0) > 1))
 	{
-		if (bheap_remove(heap, bheap_find(heap, &allocator, 0)) != 0)
+		if (bheap_remove(heap, bheap_find(heap, ALS(allocator), 0)) != 0)
 			memalloc_panic(E_DEL_HEAP);
-		memalloc_destroy(allocator);
-		small_page_count(-1);
+		inner_free(allocator, 1);
 	}
 	else if (allocator->range.min == BG_MIN && big_page_count(0) > 1)
 	{
-		if (bheap_remove(heap, bheap_find(heap, &allocator, 0)) != 0)
+		if (bheap_remove(heap, bheap_find(heap, ALS(allocator), 0)) != 0)
 			memalloc_panic(E_DEL_HEAP);
-		memalloc_destroy(allocator);
-		big_page_count(-1);
+		inner_free(allocator, 1);
 	}
 }
 

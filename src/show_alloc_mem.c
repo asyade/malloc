@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   show_alloc_mem.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/13 16:19:47 by acorbeau          #+#    #+#             */
+/*   Updated: 2018/10/13 16:21:23 by acorbeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libr.h"
 #include "malloc.h"
 
@@ -21,7 +33,7 @@ void            show_allocator(t_memalloc *allocator)
 
 void            show_tiny_alloc_mem(void *allocator)
 {
-    t_memalloc *a;
+	t_memalloc	*a;
 
     a = ((t_allocator *)allocator)->allocator;
     if (a->range.max != SM_MAX)
@@ -30,9 +42,9 @@ void            show_tiny_alloc_mem(void *allocator)
     show_allocator(a);
 }
 
-void            show_med_alloc_mem(void *allocator)
+void			show_med_alloc_mem(void *allocator)
 {
-    t_memalloc *a;
+	t_memalloc	*a;
 
     a = ((t_allocator *)allocator)->allocator;
     if (a->range.max != BG_MAX)
@@ -41,9 +53,9 @@ void            show_med_alloc_mem(void *allocator)
     show_allocator(a);
 }
 
-void            show_big_alloc_mem(void *allocator)
+void			show_big_alloc_mem(void *allocator)
 {
-    t_memalloc *a;
+	t_memalloc	*a;
 
     a = ((t_allocator *)allocator)->allocator;
     if (a->range.max != 140737353822224)
@@ -65,9 +77,9 @@ void            show_undef_alloc_mem(void *allocator)
     show_allocator(a);
 }
 
-void			show_alloc_mem()
+void			show_alloc_mem(void)
 {
-    t_bheap		*heap;
+	t_bheap		*heap;
 
     heap = mmemalloc_heap();
     bheap_iter(heap, show_tiny_alloc_mem, 0);

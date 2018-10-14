@@ -6,12 +6,13 @@
 /*   By: acorbeau <acorbeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 16:44:54 by acorbeau          #+#    #+#             */
-/*   Updated: 2018/10/09 05:07:26 by acorbeau         ###   ########.fr       */
+/*   Updated: 2018/10/13 19:11:54 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libr.h"
 #include <signal.h>
+#include "malloc.h"
 
 int				errcode(int val, int set)
 {
@@ -32,7 +33,7 @@ int				memalloc_seterr(int code)
 	return (errcode(code, 1));
 }
 
-void			premain(void)
+VOIDE			premain(void)
 {
 	main_called(1);
 }
