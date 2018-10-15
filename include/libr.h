@@ -185,6 +185,7 @@ typedef struct	s_memalloc
 int				memalloc_seterr(int code);
 int				memalloc_geterr();
 
+t_memalloc		*memalloc_new_noheap(size_t bs);
 int				entries_cmp(void *aa, void *bb);
 void			memalloc_panic(int code);
 size_t			find_empty_entry(t_bheap *heap, size_t size);
@@ -210,12 +211,18 @@ int				try_join_empty_entries(t_memalloc *a, size_t index, void *d);
 # define MC1(hp, sm) ((size_t)(sm) - (size_t)((hp) + 1))
 # define ALLOCATORS_HEAP_SIZE 1024 * 256 * sizeof(void *)
 # define SM_MIN 0
-# define SM_MAX 128
-# define BG_MIN 128
-# define BG_MAX 1024
+# define SM_MAX 512
+# define BG_MIN 512
+# define BG_MAX 4096
 # define ALLOC_PPAGE 128
-# define SMALL_SZ ((SM_MAX + (2*sizeof(t_memmagic))) * ALLOC_PPAGE)
+# define REAL_ALSZ(sz) (sz + (2*sizeof(t_memmagic)))
+# define SMALL_SZ (REAL_ALSZ(SM_MAX) * ALLOC_PPAGE)
 # define BIG_SZ ((BG_MAX + (2*sizeof(t_memmagic))) * ALLOC_PPAGE)
+# define HEAP_NB(e, buff) ((buff / REAL_ALSZ(e)))
+# define HEAP_SZ(e, buff) (STM * (HEAP_NB(e, buff) + 16) + sizeof(t_bheap)) 
+# define SMALL_HEAPSZ (HEAP_SZ(MIN_ALLOC_SIZE, SMALL_SZ))
+# define BIG_HEAPSZ (HEAP_SZ(SM_MIN, BIG_SZ))
+
 # define AUE(a) a->used_entries
 # define AEE(a) a->empty_entries
 # define STM sizeof(t_mementry)

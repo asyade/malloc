@@ -38,7 +38,7 @@ void            show_tiny_alloc_mem(void *allocator)
     a = ((t_allocator *)allocator)->allocator;
     if (a->range.max != SM_MAX)
         return ;
-    ft_putfmt("TINY : 0x%x %u %u\n", (size_t)(a + 1) & SHM_MSK ,a->empty_entries->size, a->used_entries->size);
+    ft_putfmt("TINY : 0x%x\n", (size_t)(a + 1) & SHM_MSK);
     show_allocator(a);
 }
 

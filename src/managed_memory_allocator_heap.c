@@ -44,16 +44,15 @@ t_memalloc			*memalloc_new_range(size_t range)
 	{
 		small_page_count(1);
 		return (memalloc_new(SMALL_SZ + sizeof(t_memalloc),
-					4096, (t_szrange){SM_MIN, SM_MAX}));
+					SMALL_HEAPSZ, (t_szrange){SM_MIN, SM_MAX}));
 	}
 	if (range < 1024)
 	{
 		big_page_count(1);
 		return (memalloc_new(BIG_SZ + sizeof(t_memalloc),
-					4096, (t_szrange){BG_MIN, BG_MAX}));
+					BIG_HEAPSZ, (t_szrange){BG_MIN, BG_MAX}));
 	}
-	return (memalloc_new(range + sizeof(t_memalloc),
-							1024, (t_szrange){-1, -1}));
+	return (memalloc_new_noheap(range));
 }
 
 void				*insert_and_alloc(size_t range)

@@ -59,6 +59,8 @@ void			*safe_memalloc_alloc(t_memalloc *a, size_t size, int retry)
 	int			err;
 
 	ptr = NULL;
+	if (a->range.min == (size_t)-1)
+		return ((void *)((size_t)(a + 1) + sizeof(t_memmagic)));
 	if (a->empty_entries->capacity < a->empty_entries->size + 3 ||
 		a->used_entries->capacity < a->used_entries->size + 2 ||
 		(ptr = unaligned_memalloc_alloc(a, size)) == NULL)

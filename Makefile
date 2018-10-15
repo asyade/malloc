@@ -42,6 +42,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) -dynamic -shared -o $(NAME) $(VARFLAG)
+	rm -rf libft_malloc.so
 	ln -s $(NAME) libft_malloc.so
 
 %.o : %.c Makefile ./include/libr.h ./include/malloc.h

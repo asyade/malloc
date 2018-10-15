@@ -24,9 +24,6 @@ t_memalloc			*find_allocator_by_addr(void *ptr, size_t index)
 	if ((size_t)al < (size_t)ptr &&
 		(size_t)ptr < (ALLOC_SPTR(al) + al->buffer_size))
 	{
-		if ((size_t)al != ((size_t)((t_memmagic *)ptr - 1)) -
-				(((t_memmagic *)ptr - 1)->offset + sizeof(t_memalloc)))
-			memalloc_panic(E_UNDEF);
 		return (al);
 	}
 	if ((al = find_allocator_by_addr(ptr, BH_LEFT(index))) != NULL)
@@ -65,7 +62,7 @@ void				mmemalloc_free(void *ptr)
 		return (void)mmemalloc_free_big(heap, allocator);
 	else if (memalloc_free(allocator, ptr) < 0)
 		return ;
-	else if (allocator->used_entries->size != 0)
+	else if (allocator->used_entries->size > 2)
 		return ;
 	if ((allocator->range.min == SM_MIN && small_page_count(0) > 1))
 	{
