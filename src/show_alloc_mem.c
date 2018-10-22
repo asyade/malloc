@@ -25,8 +25,8 @@ void            show_allocator(t_memalloc *allocator)
     {
         e = ((t_mementry *)BH_INDEX(allocator->used_entries, i));
         a = ((size_t)(e->addr + 1)) & SHM_MSK; 
-        b = ((size_t)(e->addr + 1) + (e->size - (2 * sizeof(t_memmagic)))) & SHM_MSK; 
-        ft_putfmt("0x%x - 0x%x : %d octets\n", a, b, e->size - (2 * sizeof(t_memmagic)));
+        b = ((size_t)(e->addr + 1) + (e->size - (2 * STMM))) & SHM_MSK; 
+        ft_putfmt("0x%x - 0x%x : %d octets\n", a, b, e->size - (2 * STMM));
         i++;
     }
 }
